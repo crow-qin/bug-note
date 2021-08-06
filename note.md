@@ -1020,6 +1020,23 @@ ssh-keygen -t rsa -C email.com
 
 在~/.ssh 文件夹下创建config文件
 
+```txt
+Host github.com // 域名地址的别名
+    HostName github.com // 真实的域名地址
+    IdentityFile C:\Users\qin.huang\.ssh\\my_github // id_rsa的地址
+    PreferredAuthentications publickey
+    User crow // 配置使用用户名
+```
+
+测试
+```cmd
+ssh -T git@github.com
+// git@ 加别名
+```
+如果成功会提示 Hi xxx! You've successfully authenticated,
+
+使用
+原来的真实地址改为别名
 
 =d2--0803=
 ### bug: uniapp uni-popup 弹窗内无法滑动
@@ -1043,4 +1060,17 @@ a: 对于不需要滑动的页面
 ```
 对于需要滑动的页面 滑动部分用scroll-view 等进行模拟，将这个页面固定高度
 在page.json中对应页面增加 disScroll: true
+
+=d4--0805=
+
+### bug: uni小程序 在ios上 textarea的placeholder文字顶部有部分被遮挡
+a: 可能是 disableDefaultPadding="true" auto-height="true" 设置了最小高度
+把 disableDefaultPadding, auto-height min-height 去掉大概可以
+
+=d5--0806=
+### tip：git常用命令
+添加到暂存区: git add .
+提交: git commit -m "提交信息"
+推送: git push origin master(git push 模块 分支名)
+拉取: git pull origin master
 
