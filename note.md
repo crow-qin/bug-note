@@ -993,6 +993,7 @@ MSL是Maximum Segment Lifetime的英文缩写，可译为“最长报文段寿�
 参考：《TCP/IP详解 卷1:协议》
 
 =d5--0730=
+
 ### tip: react hook
 **useCallback**
 把回调函数和依赖数组作为参数传入useCallback
@@ -1074,3 +1075,155 @@ a: 可能是 disableDefaultPadding="true" auto-height="true" 设置了最小高�
 推送: git push origin master(git push 模块 分支名)
 拉取: git pull origin master
 
+## w
+
+=d2--0810=
+
+### bug: vue-cli@4.5.13 创建的vue3 + ts + element 在设置自定义主题时报错
+错误提示 Invalid CSS after "$--colors: map": expected expression (e.g. 1px, bold), was ".deep-merge("
+a: 已经下载node-sass sass-loader，需要下载sass
+```cmd
+npm i sass -D
+```
+=d4--0812=
+
+### tip: svg-sprite-loader 实现icon组件
+1. 下载插件
+2. 写vue.config.js
+```javascript
+{
+  test: /\.svg$/,
+  loader: 'svg-sprite-loader',
+  include: path.resolve(__dirname, './src/assets/icons') // 只带自己人玩
+}
+```
+3. 写icon组件
+```vue
+<template>
+  <svg :class="svgClass">
+    <use :xlink:href="`#${name}`"></use>
+  </svg>
+</template>
+
+<script>
+export default {
+ name: 'icon',
+ props: {
+   name: {
+     type: String,
+     required: true,
+   },
+ },
+}
+</script>
+```
+4. 引入组件
+
+## w
+
+=d1--0816=
+
+### bug: sass 报错 math.div(100, 2) undefined function
+a: math.div 在 sass@1.33.0 才有
+下载大于等于1.33.0版本的sass就可以了
+
+=d2--0817=
+
+### bug: vue3 + ts 报错 cannot convert object to primitive value
+a: 变量名和 组件的ref 命名重复了
+
+=d3--0818=
+### bug: ts 使用js文件报错 Vue typeScript： Could not find a declaration file for module '***'. '***' implicitly has an 'any'...
+
+tsconfig.json文件中在compilerOptions 中添加 "noImplicitAny": false
+```json
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    ...
+    ...
+  }
+}
+```
+
+### bug: 在vue中使用_this = this,报错Unexpected aliasing of 'this' to local variable @typescript-eslint/no-this-alias
+
+a: 原因是 eslint 为了防止this变量和局部变量混淆（大概吧）
+
+解决方法：在.eslintrc.js中的rules添加 "@typescript-eslint/no-this-alias": ["off"]
+
+=d4--0819=
+
+### bug: vue3 + ts 组件通信报警告 Vue warn]: Extraneous non-emits event listeners (comfirm) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the "emits" option.
+
+a: 声明下自定义事件名称即可
+emits: ['comfirm']
+
+=d5--0820=
+
+### bug: vue3+element-plus 设置中文无效
+
+在main.ts设置 无效
+```ts
+// ! element-plus vue3.0
+import element from 'element-plus'
+import 'element-plus/lib/theme-chalk/index.css'
+import 'dayjs/locale/zh-cn' //中文
+import locale from 'element-plus/lib/locale/lang/zh-cn' //中文
+
+createApp(App).use(router).use(element, { locale }).mount('#app')
+
+```
+
+在App.vue设置生效
+```vue
+<template>
+  <el-config-provider :locale="locale">
+    <slot name="app"></slot>
+  </el-config-provider>
+</template>
+<script>
+//引入vue方法
+import { ElConfigProvider } from 'element-plus'
+//中文包
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+//引入自定义方法
+//引入自定义组件
+export default {
+  name: 'ZhProvider',
+  components: {
+    [ElConfigProvider.name]: ElConfigProvider
+  },
+  setup() {
+    let locale = zhCn
+    return {
+      locale
+    }
+  }
+}
+</script>
+```
+
+element-plus的版本在1.0.2-beta.59前的可以用第一种方式设置，之后的需要用第二种
+本文使用的版本为1.0.2-beta.70
+
+## w
+
+=d4--0826=
+
+### tip: vue3 的一些小改变
+
+vue2的 emit('input') 需要改成 emit('update:value')
+input 自定义事件
+```vue
+// vue2
+<child
+  @input="handleInput"/>
+// vue3
+<child
+  @update:value="value"/>
+```
+
+=d5--0827=
+
+### tip: 小程序的体验版和正式版共用一套本地存储
