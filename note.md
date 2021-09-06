@@ -1227,3 +1227,49 @@ input 自定义事件
 =d5--0827=
 
 ### tip: 小程序的体验版和正式版共用一套本地存储
+
+### tip: vue3 的 h函数
+
+h(标签名 | 组件名, { 属性 | props}, 文本 | h函数 | 数组 | 对象)
+
+h函数包含组件时
+```vue
+h( Child, {}, {
+  default: () => h(...),
+  slotName: () => h(...)
+})
+```
+
+=d7--0829
+
+proxy代理
+'/cma': {
+  target: 'https://testing.hulasmart.com',
+  changeOrigin: true
+  pathRewrite: {
+    '^/cma': '/' // 需要rewrite重写的,
+  }
+},
+请求 /cma/lifetouch-cma-api/api/refresh-token 报404
+
+'/lifetouch-cma-api': {
+  target: 'https://testing.hulasmart.com',
+  changeOrigin: true
+},
+请求 /lifetouch-cma-api/api/refresh-token 成功
+
+
+
+获取permission 结构 xxx：[]，
+存入permission 数组
+根据权限遍历route数组 setting另外存储
+根据新的route数组 生成menuList
+
+## w
+
+=d5--0903=
+
+### tip: vue-router4.x match与resolve合并为resolve
+vue-router3.x
+const newRouter = createRouter();
+router.matcher = newRouter.matcher;
