@@ -1389,3 +1389,19 @@ time.subscribe(data => {
   console.log(data[0].timestamp - data[1].timestamp);
 });
 ```
+
+=d5--0910=
+
+### tip: ts 函数声明重载
+函数声明可以多次定义, 这样函数可以根据定义的先后顺序进行匹配
+```ts
+function reverse(x: number): number;
+function reverse(x: string): string;
+function reverse(x: number | string): number | string | void {
+    if (typeof x === 'number') {
+        return Number(x.toString().split('').reverse().join(''));
+    } else if (typeof x === 'string') {
+        return x.split('').reverse().join('');
+    }
+}
+```
