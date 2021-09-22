@@ -231,7 +231,7 @@ function MakeArray(num){
 console.log(MakeArray(100));
 
 //实现方法十一：
-var arr11 = new Array(100).toString().split(',').map(function(item,index){
+var arr11 = new Array(100)  .map(function(item,index){
 return index;
 });
 console.log(arr11);
@@ -1405,3 +1405,40 @@ function reverse(x: number | string): number | string | void {
     }
 }
 ```
+
+## w
+
+=d4--0916=
+
+### tip: vscode 设置eslint格式化代码
+安装 eslint
+setting.json 增加
+```json
+"eslint.nodeEnv": "true", //保存时候自动格式化，不建议设置。
+```
+
+=d5--0917=
+
+### tip: vued的 provide/inject
+a: 父组件修改依赖注入的值 子组件没有获取到更新后的值
+```js
+data () {
+  return {
+    test: '123',
+    test2: {
+      myData:'123'
+    },
+  }
+},
+//父级
+provide: function() {
+  return {
+    test: this.test//非响应
+    test2: this.test2//响应
+  };
+},
+//子
+ inject: ["test"]
+ ```
+
+ 如果还不行，直接用this.$data，或者注入的对象再嵌套一次
