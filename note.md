@@ -1,16 +1,25 @@
 ## w
+
 =d3-1202=
+
 ### 阿里云的云效，第一次拉取代码，会提示输入账号密码
-账号是云效的 username ，密码是私人令牌 
+
+账号是云效的 username ，密码是私人令牌
 第一次拉取没有私人令牌，需要忘记令牌，修改令牌，令牌格式全数字8位以上
 accentrix 云效令牌：1-9
+
 # =2021=
+
 ## w
+
 =d1-0222=
+
 ### tip: vue3.x 弃用了 $listeners
+
 1. vue2.x 语法
 
   在 Vue2 中，你可以使用 this.$attrs 和 this.$listeners 分别访问传递给组件的 attribute 和事件监听器。结合 inheritAttrs: false，开发者可以将这些 attribute 和监听器应用到其它元素，而不是根元素：
+
 ```vue
 <template>
   <label>
@@ -27,6 +36,7 @@ export default {
 2. vue3.x语法
 
   在 Vue 3 的虚拟 DOM 中，事件监听器现在只是以 on 为前缀的 attribute，这样就成了 $attrs 对象的一部分，因此 $listeners 被移除了。
+
 ```vue
 <template>
   <label>
@@ -41,8 +51,10 @@ export default {
 ```
 
 =d3-0224=
+
 ### tip: nvm 下载
-1. 下载地址 https://github.com/coreybutler/nvm-windows/releases
+
+1. 下载地址 <https://github.com/coreybutler/nvm-windows/releases>
 
   下载第三个 nvm-setup.zip
   按要求安装
@@ -56,18 +68,22 @@ export default {
   打开 nvm 的安装目录
   打开 setting.txt
   加入以下内容
+
 ```txt
 arch: 64 
 proxy: none
 node_mirror: http://npm.taobao.org/mirrors/node/
 npm_mirror: https://npm.taobao.org/mirrors/npm/
 ```
+
 4. 安装 node
 
   nvm install 版本号
+
 ```cmd
 nvm install v14.16.0 | nvm install 14.16.0
 ```
+
 tip: 一定要等到下载完再关闭
 Installation complete 代表nodejs安装完成
 
@@ -76,17 +92,23 @@ Installation complete 代表nodejs安装完成
   nvm use 版本号
   nvm 部分命令
   查看已下载 node 版本
+
 ```cmd
 nvm ls
 ```
+
 查看当前版本
+
 ```cmd
 nvm list
 ```
 
 ## w
+
 =d2--0302=
+
 ### tip: vue 的 render 函数
+
 ```javascript
 Vue.component('renderComponent', {
   props: {
@@ -97,6 +119,7 @@ Vue.component('renderComponent', {
   }
 })
 ```
+
 1. h 在 vue 中通常作为 createElement 的别称
 
   **h 函数**
@@ -107,10 +130,13 @@ Vue.component('renderComponent', {
 如果觉得太麻烦可以使用插件 通过 jsx 语法来书写
 
 2. 下载插件
+
 ```cmd
 yarn add -D @vue/babel-plugin-jsx
 ```
+
 在 babel.config.js 配置
+
 ```javascript
 module.exports = {
   // 这是原来的预设，cli 搭建项目就有的
@@ -123,6 +149,7 @@ module.exports = {
 ```
 
 3. 编写代码
+
 ```javascript
 Vue.component('render-component', {
   render() {
@@ -144,6 +171,7 @@ components: {
 ```
 
 构建一个 jsx 文件
+
 ```jsx
 import { defineComponent, ref } from 'vue'
 
@@ -174,24 +202,33 @@ const Demo = defineComponent({
 
 export default Demo
 ```
+
 使用 defineComponent()，可以获得代码提示
 
 =d4--0304=
+
 ### tip: vue-cli4 使用 imports-loader@1.2.0
+
 直接下载的最新版 2.0.0 适用于 webpack5, 使用会报错
 可以将 imports-loader 降级
 
 ## w
+
 =d2--0309=
+
 ### tip: pdfKit 不写 x, y, 文本默认接在上个节点下面
+
 ```javascript
 doc.text('123', {})
 doc.text('345', {})
 ```
 
 ## w
+
 =d5--0319=
+
 ### tip: 快速生成数组
+
 ```javascript
 //实现方法一：循环赋值
 var arr1 = new Array(100);
@@ -238,23 +275,31 @@ console.log(arr11);
 ```
 
 ## w
+
 =d2--0323=
+
 ### tip: vue使用jsx
+
 安装@vue/perset-jsx
 可以使用冒号
 下划线连接修饰符
 ex: vOn:click_once
 
 ## w
+
 =d4-0408=
+
 ### bug: win7下载node-sass失败
+
 安装python2.7
 
 *0524 update*
 [新的失败](#a0524_1)
 
 ### tip: file对象重命名
+
 file是只读文件，重命名需要创建新的对象
+
 ```javascript
 // file 原文件； newFileName 新文件名
 const renameReportFile = new File([ file ], newFileName, {
@@ -263,19 +308,24 @@ const renameReportFile = new File([ file ], newFileName, {
 ```
 
 ## w
+
 =d2--0413=
 cross-env 是一个跨平台设置和使用环境变量的脚本
 
 npm-script
 
 ## w
+
 =d2--0420=
+
 ### tip：git暂存文件
+
 git add -A  提交所有变化
 git add -u  提交被修改(modified)和被删除(deleted)文件，不包括新文件(new)
 git add .  提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件
 
 ## w
+
 =d2--0511=
 
 ### bug: vue-cli3 打包常见问题
@@ -288,6 +338,7 @@ a: 在 route/index.js 修改
 将 history 模式改成 hash 模式
 
 route/index.js
+
 ```javascript
 import { createRouter, createWebHashHistory } from 'vue-router'
 .....
@@ -297,11 +348,15 @@ routes
 })
 export default router
 ```
+
 history模式需要服务器将'404'(无法匹配路径)配置为你的index页面，所以自己做的话还是不要用history模式。
 
 =d3--0512=
+
 ### tip: Nginx 代理本地打包项目
+
 打开 Nginx 安装路径下的 conf/nginx.conf
+
 ```conf
 server {
   listen       8100;
@@ -321,72 +376,95 @@ proxy_pass 代理转发 所有以 localhost 及 8100 端口发送的请求 都�
 即后台项目的地址
 
 修改后重启 Nginx 配置
+
 ```cmd
 nginx -s reload
 ```
 
 如果nginx服务没有启动 先启动再重启配置
+
 ```cmd
 start nginx
 ```
 
 在hosts文件添加上对应的IP和域名
+
 ```hosts
 127.0.0.1 localhost
 127.0.0.1 www.testing.com
 ```
+
 archive.js 用于文件压缩
 
 ### tip: node.js的 fs 常用函数
+
 1. 查询文件是否存在
+
 ```javascript
 fs.access(${文件路径}, fs.constants.F_OK, (err) => {
   if (err) return
   // 文件存在
 })
 ```
+
 2. 删除文件
+
 ```javascript
 fs.unlink(${文件路径}, callback)
 ```
+
 *mysql 常用账号密码*
 mysql root root
 
 ### bug: navicat5.7版本连接mysql8.0以上会报1251错误
+
 q: navicat5.7版本连接mysql8.0以上会报1251错误
 a: 链接加密方式已经改变 需要修改
+
 1. 进入账号
+
 ```javascript
 mysql -u root -p
 ```
+
 2. 输入密码
 3. 修改加密方式
+
 ```cmd
 mysql> alter user 'root'@'localhost' identified by 'password' password expire never;
 ```
+
 4. 修改密码
+
 ```cmd
 mysql> alter user 'root'@'localhost' identified with mysql_native_password by '新密码';
 ```
+
 5. 刷新
+
 ```cmd
 mysql> flush  privileges;
 ```
 
 mysql命令
+
 ```cmd
 net stop mysql
 net start mysql
 ```
 
 =d5--0514=
+
 ### tip: koa2 热更新
+
 1. 下载nodemon
+
 ```cmd
 npm i nodemon -S
 ```
 
 2. 修改package.json
+
 ```json
 "script": {
   "dev": "nodemon bin/www"
@@ -394,12 +472,16 @@ npm i nodemon -S
 ```
 
 下载redis
-菜鸟教程 http://www.runoob.com/redis/redis-install.html
+菜鸟教程 <http://www.runoob.com/redis/redis-install.html>
 
 ## w
+
 =d5--0521=
+
 ### bug: typeScript @types/webpack/index.d.ts报错
+
 a: tsconfig.json 设置
+
 ```json
 "compilerOptions": {
 "skipLibCheck":true
@@ -408,30 +490,41 @@ a: tsconfig.json 设置
 ```
 
 ## w
+
 =d1--0524=
+
 ### <div name="a0524_1">bug: node-sass下载失败</div>
+
 a: 这次是由于 node 版本与 node-sass 版本不兼容，本机 node13.9， 需要安装 node-sass4.13+
 具体版本兼容可以查看 github 上的 node-sass
 
 =d4--0527=
+
 ### tip: rgb灰度化计算
-一般公式: (R * 0.299 + G * 0.587 + B * 0.144)
+
+一般公式: (R *0.299 + G* 0.587 + B *0.144)
 rgb是整数，小数点计算可能会精度丢失
 使用位运算
-(R * 38 + G * 57 + B * 15) >> 7
+(R* 38 + G *57 + B* 15) >> 7
 
 ### tip: vue3 getCurrentInstance方法只在开发环境中使用
 
 ## w
+
 =d1--0705=
-### bug: 小程序的 textarea 设置 auto-height，再设置min-height，ios上的高度与设置的值不一致.
+
+### bug: 小程序的 textarea 设置 auto-height，再设置min-height，ios上的高度与设置的值不一致
+
 a: textarea 设置 :disableDefaultPadding="true"，去掉 iOS 下的默认内边距，2.10.0版本支持了
 
 =d2--0707=
+
 ### bug: ios小程序在scroll-view 上会出现抖动
+
 a: 因为scroll-view 添加了scroll 事件，且直接将滚动条的位置赋值给了scrollTop的变量 目前去掉scroll事件就不会出现
 
 ### tip: 1000桶水，一桶有毒，猪喝水15分钟后有结果，一小时检查完需要多少头猪
+
 00000 - 12444
 5
 00 10 20 30 40
@@ -448,6 +541,7 @@ a: 因为scroll-view 添加了scroll 事件，且直接将滚动条的位置赋�
 =d3--0714=
 
 ### bug: vite + webworker + spark-md5 实现文件切片上传出现的一些问题
+
 1. webworker在引入时需要从根路径开始写
 不然就写在根路径上
 
@@ -458,6 +552,7 @@ a: 因为scroll-view 添加了scroll 事件，且直接将滚动条的位置赋�
 =d3--0715=
 
 ### tip：react 组件
+
 无状态组件: 没有生命周期，没有状态，多用于展示数据，开销很小
 
 *0729 update*
@@ -469,21 +564,28 @@ HOC（高阶组件）：组件返回一个组件
 protobufjs 是一种数据转换，序列化的工具
 
 ## w
+
 =d1--0719=
+
 ### bug: webpack 搭建项目时报错
+
 q: in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance
 a: 入口文件大于244kb 影响项目性能
 webpack.config.js 增加
+
 ```javascript
 performance: { hints: false }
 ```
 
 =d2--0720=
+
 ### tip: react 的 slot
+
 在组件插入标签 组件内部通过this.props.children 来展示
 只有一个时 children为对象 当有多个时children为数组
 
 单个插槽
+
 ```javascript
 // Child
 function Child(props) {
@@ -500,7 +602,9 @@ function Parent() {
   </>
 }
 ```
+
 多个插槽
+
 ```javascript
 // Child
 function Child(props) {
@@ -525,21 +629,26 @@ function Parent() {
 =d5--0723=
 
 ### bug: webpack5.x 使用 webpack-dev-server 无法使用 webpack-dev-server 命令启动服务
+
 webpack5 后不再以 webpack-dev-server 启动服务器
 新的启动命令
+
 ```text
 webpack server
 ```
+
 *0729 update*
 [HMR](#a0729_1)
 
-### tip: webpack1.x ->2.x 中的更改：
+### tip: webpack1.x ->2.x 中的更改
+
 module.loaders 改成了 module.rules
 旧的 loader 配置被更强大的 rules 系统取代，后者允许配置 loader 以及其他更多项。
 为了兼容旧版，module.loaders 语法被保留，旧的属性名依然可以被解析。
 新的命名约定更易于理解并且是升级配置使用 module.rules 的好理由。
 
 ### tip: 了解 webpack 的 module
+
 mudule 是对于不同的模块的处理规则。
 module 的 rules 属性代表不同的处理规则。rules 是一个对象。
 对象的属性有 test、use、exclude、include。
@@ -549,7 +658,8 @@ use 属性是对象数组。数组的话，是从后往前解析。
 
 1是2的简写形式。3是4的简写形式。
 
-1. 
+1.
+
 ```javascript
 module:{
   rules:[
@@ -563,7 +673,8 @@ module:{
 },
 ```
 
-2. 
+2.
+
 ```javascript
 module:{
   rules:[
@@ -575,7 +686,8 @@ module:{
 }
 ```
 
-3. 
+3.
+
 ```javascript
 {
   test: /\.js$/,
@@ -584,7 +696,8 @@ module:{
 },
 ```
 
-4. 
+4.
+
 ```javascript
 {
   test: /\.js$/,
@@ -598,6 +711,7 @@ module:{
   Rule.options是Rule.use[ {options} ]缩写
 
 完整写法
+
 ```javascript
 module: {
   rules:[
@@ -615,27 +729,32 @@ module: {
 ```
 
 ### tip: React 执行 setState后无法获取最新 state 数据，增加回调函数
+
 ```javascript
 setState({}, () => {
   // 获取最新数据
 })
 ```
+
 *0727-update*
 React 的 setState 函数并不是异步，只是在某些操作中没有立即更新
 合成事件: React 为解决跨平台，兼容性问题， 将原生事件重新封装进行代理，如 onClick
 总结: setState 只在合成事件和钩子函数中是“异步”的，在原生事件和setTimeout 中都是同步的。setState 的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形成了所谓的“异步”，当然可以通过第二个参数 setState(partialState, callback) 中的callback拿到更新后的结果。setState 的批量更新优化也是建立在“异步”（合成事件、钩子函数）之上的，在原生事件和 setTimeout 中不会批量更新，在“异步”中如果对同一个值进行多次setState，setState的批量更新策略会对其进行覆盖，取最后一次的执行，如果是同时setState多个不同的值，在更新时会对其进行合并批量更新。
 
-链接：https://zhuanlan.zhihu.com/p/39512941
-
+链接：<https://zhuanlan.zhihu.com/p/39512941>
 
 ## w
+
 =d2--0727=
+
 ### bug: hard-source-webpack-plugin 在 webpack5 中无法使用
+
 a: webpack5 已经内置了模块缓存，不需要再使用此插件
 可以使用 webpack 的 cache
 
 可以给一些 loader 开 cacheDirectory
 cacheDirectory：默认值为 false。当有设置时，指定的目录将用来缓存 loader 的执行结果。之后的 Webpack 构建，将会尝试读取缓存，来避免在每次执行时，可能产生的、高性能消耗的 Babel 重新编译过程。设置空值或者 true 的话，使用默认缓存目录
+
 ```javascript
 ...
 use: [
@@ -650,6 +769,7 @@ use: [
 
 或者使用 cache-loader
 把它放在需要缓存的 loader 前面就行
+
 ```javascript
 loader: ['cache-loader', 'bobel-loader'],
 ```
@@ -658,6 +778,7 @@ loader: ['cache-loader', 'bobel-loader'],
 [HMR](#a0729_1)
 
 ### tip: export default 的弊端
+
 esm: 指 es module, es6 的模块导入导出方法
 
 **esm推荐的两种导入和三种导出方法**
@@ -674,6 +795,7 @@ import { method1, method2 } from './lib';
 
 **tip** webpack 或 babel 会将 esm 转换为 cjs
 **tip** 不建议 export default 一个对象 除非是以配置文件进行导出
+
 ```javascript
 // 错误用法
 // lib.js
@@ -694,18 +816,22 @@ console.log(a)
 
 适用于函数式组件
 **useState**: 初始化state，简化setState
+
 ```javascript
 const [value, setValue] = useState(0)
 setValue(value + 1)
 console.log(value) // 0
 // 和setState一样在生命周期不会立即更新
 ```
+
 **useEffect**: useEffect(()=> { Async Action }, ?[dependencies])  // 第二参数可选
+
 1. 多个 useEffect 的回调 按先后顺序执行
 
 2. useEffect 不带第二参数， 会在每次 render 后执行
 
 3. useEffect 第二参数为空数组，只会在第一次 render 后执行
+
 ```javascript
 useEffect(()=> {
   console.log('mount')
@@ -713,6 +839,7 @@ useEffect(()=> {
 ```
 
 4. useEffect 的第二个参数有依赖项，函数会在在依赖项发生变化时触发
+
 ```javascript
 const [value, setValue] = useState(0)
 useEffect(()=> {
@@ -724,6 +851,7 @@ useEffect(()=> {
 ```
 
 5. useEffect 第一个参数返回一个匿名函数， 相当于 componentUnMount 在组件卸载时触发
+
 ```javascript
 useEffect(() => {
   return () => {
@@ -731,10 +859,12 @@ useEffect(() => {
   }
 }, [])
 ```
+
 **useContext**
 跨组件共享数据的钩子函数
 const myContext = useContext(context)
 *content是React.createContext() 返回的对象*
+
 ```javascript
 const MyContext = React.createContext()
 // 父
@@ -772,6 +902,7 @@ return (
   </div>
 )}
 ```
+
 *0729 update*
 
 useMemo:
@@ -803,9 +934,11 @@ module.exports = {
   }
 }
 ```
+
 那个模块需要热重载就在那个模块写
 一般在入口文件中写，不用考虑太多
 index.js
+
 ```javascript
 if(module.hot) {
   module.hot.accept()
@@ -995,6 +1128,7 @@ MSL是Maximum Segment Lifetime的英文缩写，可译为“最长报文段寿�
 =d5--0730=
 
 ### tip: react hook
+
 **useCallback**
 把回调函数和依赖数组作为参数传入useCallback
 会返回该函数的memorized值，该函数仅在依赖数组发生变化才会改变
@@ -1006,12 +1140,17 @@ const usecallback = useCallback(()=> {
 ```
 
 ## w
+
 =d1--0802=
+
 ### tip: 创建多个git sshkey
+
 创建key
+
 ```cmd
 ssh-keygen -t rsa -C email.com
 ```
+
 回车
 输入别名
 回车
@@ -1030,21 +1169,26 @@ Host github.com // 域名地址的别名
 ```
 
 测试
+
 ```cmd
 ssh -T git@github.com
 // git@ 加别名
 ```
+
 如果成功会提示 Hi xxx! You've successfully authenticated,
 
 使用
 原来的真实地址改为别名
 
 =d2--0803=
+
 ### bug: uniapp uni-popup 弹窗内无法滑动
+
 a: uni-popup组件中的滑动事件被禁止冒泡了，去掉@touchmove.prevent="clear" 即可
 update: 0804 一定要去掉， 在clear方法进行判断也不行
 
 ### bug: element 的 el-tree 使用@check-change事件多次触发
+
 a: 当点击选择框选中状态改变的时候，如果有多级子节点，那就会触发多次（因为子节点的选中状态也被改变）
 解决
 把 check-change 事件改为 check 事件，只有当点击复选框的时候才会触发
@@ -1052,24 +1196,30 @@ a: 当点击选择框选中状态改变的时候，如果有多级子节点，�
 =d3--0804=
 
 ### bug: 小程序在ios上的回弹问题
+
 a: 对于不需要滑动的页面
 在page.json中对应页面增加 disScroll: true
+
 ```json
 "style": {
   "disScroll": true
 }
 ```
+
 对于需要滑动的页面 滑动部分用scroll-view 等进行模拟，将这个页面固定高度
 在page.json中对应页面增加 disScroll: true
 
 =d4--0805=
 
 ### bug: uni小程序 在ios上 textarea的placeholder文字顶部有部分被遮挡
+
 a: 可能是 disableDefaultPadding="true" auto-height="true" 设置了最小高度
 把 disableDefaultPadding, auto-height min-height 去掉大概可以
 
 =d5--0806=
+
 ### tip：git常用命令
+
 添加到暂存区: git add .
 提交: git commit -m "提交信息"
 推送: git push origin master(git push 模块 分支名)
@@ -1080,16 +1230,21 @@ a: 可能是 disableDefaultPadding="true" auto-height="true" 设置了最小高�
 =d2--0810=
 
 ### bug: vue-cli@4.5.13 创建的vue3 + ts + element 在设置自定义主题时报错
+
 错误提示 Invalid CSS after "$--colors: map": expected expression (e.g. 1px, bold), was ".deep-merge("
 a: 已经下载node-sass sass-loader，需要下载sass
+
 ```cmd
 npm i sass -D
 ```
+
 =d4--0812=
 
 ### tip: svg-sprite-loader 实现icon组件
+
 1. 下载插件
 2. 写vue.config.js
+
 ```javascript
 {
   test: /\.svg$/,
@@ -1097,7 +1252,9 @@ npm i sass -D
   include: path.resolve(__dirname, './src/assets/icons') // 只带自己人玩
 }
 ```
+
 3. 写icon组件
+
 ```vue
 <template>
   <svg :class="svgClass">
@@ -1117,6 +1274,7 @@ export default {
 }
 </script>
 ```
+
 4. 引入组件
 
 ## w
@@ -1124,18 +1282,22 @@ export default {
 =d1--0816=
 
 ### bug: sass 报错 math.div(100, 2) undefined function
+
 a: math.div 在 sass@1.33.0 才有
 下载大于等于1.33.0版本的sass就可以了
 
 =d2--0817=
 
 ### bug: vue3 + ts 报错 cannot convert object to primitive value
+
 a: 变量名和 组件的ref 命名重复了
 
 =d3--0818=
-### bug: ts 使用js文件报错 Vue typeScript： Could not find a declaration file for module '***'. '***' implicitly has an 'any'...
+
+### bug: ts 使用js文件报错 Vue typeScript： Could not find a declaration file for module '***'. '***' implicitly has an 'any'
 
 tsconfig.json文件中在compilerOptions 中添加 "noImplicitAny": false
+
 ```json
 {
   "compilerOptions": {
@@ -1154,7 +1316,7 @@ a: 原因是 eslint 为了防止this变量和局部变量混淆（大概吧）
 
 =d4--0819=
 
-### bug: vue3 + ts 组件通信报警告 Vue warn]: Extraneous non-emits event listeners (comfirm) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the "emits" option.
+### bug: vue3 + ts 组件通信报警告 Vue warn]: Extraneous non-emits event listeners (comfirm) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the "emits" option
 
 a: 声明下自定义事件名称即可
 emits: ['comfirm']
@@ -1164,6 +1326,7 @@ emits: ['comfirm']
 ### bug: vue3+element-plus 设置中文无效
 
 在main.ts设置 无效
+
 ```ts
 // ! element-plus vue3.0
 import element from 'element-plus'
@@ -1176,6 +1339,7 @@ createApp(App).use(router).use(element, { locale }).mount('#app')
 ```
 
 在App.vue设置生效
+
 ```vue
 <template>
   <el-config-provider :locale="locale">
@@ -1215,6 +1379,7 @@ element-plus的版本在1.0.2-beta.59前的可以用第一种方式设置，之�
 
 vue2的 emit('input') 需要改成 emit('update:value')
 input 自定义事件
+
 ```vue
 // vue2
 <child
@@ -1233,6 +1398,7 @@ input 自定义事件
 h(标签名 | 组件名, { 属性 | props}, 文本 | h函数 | 数组 | 对象)
 
 h函数包含组件时
+
 ```vue
 h( Child, {}, {
   default: () => h(...),
@@ -1258,8 +1424,6 @@ proxy代理
 },
 请求 /lifetouch-cma-api/api/refresh-token 成功
 
-
-
 获取permission 结构 xxx：[]，
 存入permission 数组
 根据权限遍历route数组生成新的route数组
@@ -1270,6 +1434,7 @@ proxy代理
 =d5--0903=
 
 ### tip: vue-router4.x match与resolve合并为resolve
+
 vue-router3.x
 const newRouter = createRouter();
 router.matcher = newRouter.matcher;
@@ -1280,7 +1445,8 @@ router.matcher = newRouter.matcher;
 
 ### tip: vue项目对操作进行权限控制
 
-a: 
+a:
+
 1. 封装button组件, 根据传入的权限决定显示，提示，通过。
 优点：封装后只要传入参数即可判断，
 缺点：只能控制button的权限
@@ -1288,6 +1454,7 @@ a:
 只能修改状态
 
 ### tip: git commit message的一些规范
+
 格式示例：
 
 fix(DAO):用户查询缺少username属性
@@ -1344,9 +1511,11 @@ body(可选)
 commit的详细描述
 
 ### feat：rxjs nuxt | next react vite
+
 ### relearn：webpack vue3.0 ts
 
 ### sort： rxjs webpack vite+vue3+ts react + next
+
 rxjs 深入浅出rxjs
 
 =d2--0907=
@@ -1356,12 +1525,13 @@ rxjs 深入浅出rxjs
 Observable 可观察对象
 
 #### 创建数据流的api
+
 单值：of，empty
 多值：from
 事件：fromEvent
 定时：interval，timer
 
-#### 创建出来的数据流是一种可观察的序列，可以被订阅，也可以被用来做一些转换操作，比如：
+#### 创建出来的数据流是一种可观察的序列，可以被订阅，也可以被用来做一些转换操作，比如
 
 改变数据形态：map, mapTo, pluck
 过滤一些值：filter, skip, first, last, take
@@ -1371,13 +1541,14 @@ Observable 可观察对象
 条件执行：takeUntil, delayWhen, retryWhen, subscribeOn, ObserveOn
 转接：switch
 
-#### 也可以对若干个数据流进行组合：
+#### 也可以对若干个数据流进行组合
 
 race，预设条件为其中一个数据流完成
 forkJoin，预设条件为所有数据流都完成
 zip，取各来源数据流最后一个值合并为对象
 
 例子：返回按住按钮到松开的时间段
+
 ```javascript
 const btn = document.querySelector('#hold');
 // 获取事件触发时的时间戳timestamp
@@ -1393,7 +1564,9 @@ time.subscribe(data => {
 =d5--0910=
 
 ### tip: ts 函数声明重载
+
 函数声明可以多次定义, 这样函数可以根据定义的先后顺序进行匹配
+
 ```ts
 function reverse(x: number): number;
 function reverse(x: string): string;
@@ -1411,8 +1584,10 @@ function reverse(x: number | string): number | string | void {
 =d4--0916=
 
 ### tip: vscode 设置eslint格式化代码
+
 安装 eslint
 setting.json 增加
+
 ```json
 "eslint.nodeEnv": "true", //保存时候自动格式化，不建议设置。
 ```
@@ -1420,7 +1595,9 @@ setting.json 增加
 =d5--0917=
 
 ### tip: vued的 provide/inject
+
 a: 父组件修改依赖注入的值 子组件没有获取到更新后的值
+
 ```js
 data () {
   return {
@@ -1438,7 +1615,260 @@ provide: function() {
   };
 },
 //子
- inject: ["test"]
- ```
+inject: ["test"]
+```
 
- 如果还不行，直接用this.$data，或者注入的对象再嵌套一次
+如果还不行，直接用this.$data，或者注入的对象再嵌套一次
+
+w
+
+=d3-1013=
+
+### vue3定义全局变量
+
+```js
+import Vue from 'vue'
+const app = Vue.createApp({})
+app.config.globalProperties.$http = () => {}
+
+```
+
+使用全局变量
+
+```jsv  
+import { getCurrentInstance } from 'vue'
+let instance = getCurrentInstance()
+let _this = instance.appContext.config.globalProperties
+```
+
+### base64的优缺点
+
+base64编码: 一种将图片数据转化为文本数据的技术
+优点
+文本格式，占用内存较小，转换后大小约为原来的1/3，减少浏览器的消耗
+网页使用base64资源，减少了http请求
+base64适用的平台广泛
+编码解码方便
+
+缺点
+base64文本内容较长，储存在数据库压力较大
+base64文本内容较长，在页面上使用会使页面加载缓慢
+base64无法缓存
+8-12kb以下适用base64
+
+### 下载pdf
+
+#### node创建
+
+pdfkit绘制完成后，
+创建一个steam，将数据转成流，
+新建文件，将流存到文件中，
+再将文件转成数据流
+
+```js
+const getStream = async function (doc) {
+  try {
+      // const filePath = path.join(__dirname, '../', '_temp', Date.now().toString());
+      const filePath = path.join(__dirname, '../', '_temp', Date.now().toString() + '.pdf');
+      // 先将文档保存在临时目录下，后删除
+      const stream = fs.createWriteStream(filePath);
+      doc.pipe(stream);
+      doc.end();
+      await new Promise(resolve => {
+          stream.on('finish', resolve);
+      });
+      const readStream = fs.createReadStream(filePath);
+      // 读取完删除pdf
+      fs.unlink(filePath, (err) => {
+          console.error(err);
+      });
+      return readStream;
+  } catch (e) {
+      console.error(e);
+  }
+};
+```
+
+#### 前端下载
+
+前端接收到的是arrayBuffer
+
+```js
+{
+  responseType: 'arraybuffer',
+}
+```
+
+如果存在window.navigator.msSaveOrOpenBlob 方法，直接下载数据流，
+否则使用window.URL.createObjectURL创建一个临时uri
+
+Internet Explorer 10 的 msSaveBlob 和 msSaveOrOpenBlob 方法允许用户在客户端上保存文件，方法如同从 Internet 下载文件，这是此类文件保存到“下载”文件夹的原因。
+用法：
+1.msSaveBlob：只提供一个保存按钮
+2.msSaveOrOpenBlob：提供保存和打开按钮
+
+URL.createObjectURL() 静态方法会创建一个 DOMString，其中包含一个表示参数中给出的对象的URL。这个 URL 的生命周期和创建它的窗口中的 document 绑定。这个新的URL 对象表示指定的 File 对象或 Blob 对象。
+
+```js
+const blob = new Blob([stream], {
+  type: 'application/pdf;charset:UTF-8',
+});
+const newName = name.includes('.pdf') ? name : name + '.pdf';
+if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+  window.navigator.msSaveOrOpenBlob(blob, newName);
+  return;
+}
+const data = window.URL.createObjectURL(blob);
+window.open(data, '_blank');
+
+```
+
+可以创建a标签下载
+
+### vnode
+
+vue为什么不能用index 作为key
+会出现错误的复用
+以及错误复用后的调整渲染
+即出现2次render
+
+### Promise实现原理
+
+实现原理
+说到底，Promise 也还是使用回调函数，只不过是把回调封装在了内部，使用上一直通过 then 方法的链式调用，使得多层的回调嵌套看起来变成了同一层的，书写上以及理解上会更直观和简洁一些。
+
+大致逻辑
+调用 then 方法，将想要在 Promise 异步操作成功时执行的 onFulfilled 放入callbacks队列，其实也就是注册回调函数，可以向观察者模式方向思考；
+创建 Promise 实例时传入的函数会被赋予一个函数类型的参数，即 resolve，它接收一个参数 value，代表异步操作返回的结果，当异步操作执行成功后，会调用resolve方法，这时候其实真正执行的操作是将 callbacks 队列中的回调一一执行；
+
+## w
+
+=d2--1019=
+
+### webpack打包加速优化
+
+1. 提高热更新速度
+在.env.development环境变量中配置
+VUE_CLI_BABEL_TRANSPILE_MODULES: true
+
+原理
+利用插件，在开发环境中将异步组件变为同步引入，也就是import()转化为require())
+一般页面到达几十上百，热更新慢的情况下需要用到。
+webpack5 即将发布，大幅提高了打包和编译速度
+
+2. 分析打包时长
+webpack-bundle-analyzer 分析打包后的模块文件大小
+速度分析插件 speed-measure-webpack-plugin
+
+```cmd
+npm install --save-dev speed-measure-webpack-plugin
+```
+
+```js
+//vue.config.js
+//导入速度分析插件
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+//实例化插件
+const smp = new SpeedMeasurePlugin();
+
+module.exports = {
+  configureWebpack: smp.wrap({
+    plugins: [
+      // 这里是自己项目里需要使用到的其他插件
+      new yourOtherPlugin()
+    ]
+  })
+}
+```
+
+3. 较耗时：代码的编译或压缩（转化 AST树 -> 遍历AST树 -> 转回JS代码）
+编译 JS、CSS 的 Loader
+压缩 JS、CSS 的 Plugin
+
+4. 缓存：让二次构建时，不需要再去做重复的工作[没有变化的直接使用缓存，速度更快]
+
+a. 开启Loader、压缩插件的cache配置【如babel-loader的cacheDirectory：true】，uglifyjs-webpack-plugin【如cache: true】，构建完将缓存存放在node_modules/.cache/..。
+
+b. cache-loader：将 loader 的编译结果写入硬盘缓存，再次构建如果文件没有发生变化则会直接拉取缓存,添加在时间长的 loader 的最前面。
+
+```js
+module: {
+  rules: [
+    {
+      test: /\.ext$/,
+      use: ['cache-loader', ...loaders],
+      include: path.resolve('src'),
+    },
+  ],
+},
+```
+
+5. 多核：充分利用了硬件本身的优势
+
+a. happypack：开启系统CPU最大线程，通过插件将loader包装，暴露id，直接module.rules引用该id。
+
+```js
+//安装：npm install happypack -D
+//引入：
+const Happypack = require('happypack');
+exports.plugins = [
+  new Happypack({
+    id: 'jsx',
+    threads: 4,
+    loaders: [ 'babel-loader' ]
+  }),
+
+  new Happypack({
+    id: 'styles',
+    threads: 2,
+    loaders: [ 'style-loader', 'css-loader', 'less-loader' ]
+  })
+];
+
+exports.module.rules = [
+  {
+    test: /\.js$/,
+    use: 'Happypack/loader?id=jsx'
+  },
+
+  {
+    test: /\.less$/,
+    use: 'Happypack/loader?id=styles'
+  },
+]
+```
+
+b. thread-loader：添加在此loader后面的放入单独的 worker 池里运行，配置简单
+
+```js
+//安装：npm install thread-loader -D
+module.exports = {
+  module: {
+    //我的项目中,babel-loader耗时比较长，所以我给它配置 thread-loader
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: ['thread-loader', 'cache-loader', 'babel-loader']
+      }
+    ]
+  }
+}
+```
+
+6. cdn
+
+7. css 压缩: mini-css-extract-plugin
+
+8. Tree-Shaking：将代码中永远不会走到的片段删除掉。
+
+9. 代码分割
+
+10. loader 使用include，excludejians
+更精确的指定/排除目录，减少不必要的遍历
+
+11. webpack-parallel-uglify-plugin 插件来压缩代码
+
+a. 优化原理
+（1）默认情况下 webpack 使用 UglifyJS 插件进行代码压缩，但由于其采用单线程压缩，速度很慢。
+
+（2）我们可以改用 webpack-parallel-uglify-plugin 插件，它可以并行运行 UglifyJS 插件，从而更加充分、合理的使用 CPU 资源，从而大大减少构建时间。
