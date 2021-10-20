@@ -1635,7 +1635,7 @@ app.config.globalProperties.$http = () => {}
 
 使用全局变量
 
-```jsv  
+```js
 import { getCurrentInstance } from 'vue'
 let instance = getCurrentInstance()
 let _this = instance.appContext.config.globalProperties
@@ -1872,3 +1872,45 @@ a. 优化原理
 （1）默认情况下 webpack 使用 UglifyJS 插件进行代码压缩，但由于其采用单线程压缩，速度很慢。
 
 （2）我们可以改用 webpack-parallel-uglify-plugin 插件，它可以并行运行 UglifyJS 插件，从而更加充分、合理的使用 CPU 资源，从而大大减少构建时间。
+
+=d3--1020=
+
+### vue3的优势
+
+源码体积的优化
+重写了虚拟 dom
+
+响应式系统的升级
+用 Proxy 和 Reflect 来代替 vue2 中的 Object.defineproperty()方法来重写响应式
+vue3 中可以监听动态新增的属性
+vue3 中可以监听删除的属性
+vue3 中可以监听数组的索引和 length 属性
+
+代码编译优化
+使用了 组合 API 来代替 vue2 中的 Options API
+它是基于函数的 api，可以更灵活的组织组件的逻辑。
+解决options api在大型项目中，options api不好拆分和重用的问题。
+
+组件内不需要根节点了，使用 fragment(代码片段)代替了，fragment(代码片段)不会在页面显示
+
+vue3 中标记和提升所有的静态根节点，diff 的时候只需要对比动态节点内容
+
+### 一句话解析下什么是event loop
+
+主线程运行的时候会生成堆（heap）和栈（stack）；
+js 从上到下解析方法，将其中的同步任务按照执行顺序排列到执行栈中；当程序调用外部的 API 时（比如 ajax、setTimeout 等），会将此类异步任务挂起，继续执行执行栈中的任务。
+等异步任务返回结果后，再按照顺序排列到事件队列中；主线程先将执行栈中的同步任务清空，然后检查事件队列中是否有任务，如果有，就将第一个事件对应的回调推到执行栈中执行，若在执行过程中遇到异步任务，则继续将这个异步任务排列到事件队列中。
+主线程每次将执行栈清空后，就去事件队列中检查是否有任务，如果有，就每次取出一个推到执行栈中执行，这个循环往复的过程被称为"Event Loop 事件循环"
+
+#### 宏任务/微任务
+
+除了广义的同步任务和异步任务，我们对任务有更精细的定义：
+macro-task(宏任务)：当前调用栈中执行的任务称为宏任务。包括：script全部代码、setTimeout、setInterval、setImmediate（浏览器暂时不支持，只有IE10支持，具体可见MDN）、I/O、UI Rendering。
+micro-task(微任务)： 当前（此次事件循环中）宏任务执行完，在下一个宏任务开始之前需要执行的任务为微任务。包括：Process.nextTick（Node独有）、Promise、Object.observe(废弃)、MutationObserver不同类型的任务会进入对应的Event Queue，
+宏任务中的事件放在callback queue中，由事件触发线程维护；微任务的事件放在微任务队列中，由js引擎线程维护。
+
+### 原型链
+
+一句话解析什么是原型链
+
+遍历一个实列的属性时，先遍历实列对象上的属性，再遍历它的原型对象，一直遍历到Object

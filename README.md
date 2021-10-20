@@ -1,2 +1,2 @@
 # bug-note
-debug question
+记录一些平时遇到的知识点和bug
