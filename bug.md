@@ -350,8 +350,14 @@ element-plus的版本在1.0.2-beta.59前的可以用第一种方式设置，之�
 ```js
 {
   test: /\.js$/,
-    loader: "babel-loader",
-    include: [
-      resolve("node_modules/parse5"),
-    ]
+  loader: "babel-loader",
+  include: [
+    resolve("node_modules/parse5"),
+  ]
 }
+```
+
+### 父元素设置pointer-events: none; 子元素textarea 文字内容超过高度 无法滑动查看
+
+在textarea 加上 pointer-events:auto; 样式 再加上 disabled="true"
+吧 disabled的样式修改一下
