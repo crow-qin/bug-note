@@ -337,3 +337,21 @@ export default {
 
 element-plus的版本在1.0.2-beta.59前的可以用第一种方式设置，之后的需要用第二种
 本文使用的版本为1.0.2-beta.70
+
+# bcy
+
+## w
+
+=d2--1207=
+
+### 报错 ERROR in static/js/17.3fae6d307c54ea28dc4d.js from UglifyJs Unexpected token: name (OpenElementStack) [./~/parse5/lib/parser/open-element-stack.js:122,0][static/js/17.3fae6d307c54ea28dc4d.js:3235,6]
+
+在build文件夹中的webpack.base.conf.js中
+```js
+{
+  test: /\.js$/,
+    loader: "babel-loader",
+    include: [
+      resolve("node_modules/parse5"),
+    ]
+}
