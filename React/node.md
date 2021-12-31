@@ -1,3 +1,56 @@
+# 2021
+## w
+
+
+=d2--0720=
+
+### tip: react 的 slot
+
+在组件插入标签 组件内部通过this.props.children 来展示
+只有一个时 children为对象 当有多个时children为数组
+
+* 单个插槽
+
+```javascript
+// Child
+function Child(props) {
+  return
+  <div>{props.children}</div>
+}
+// parents
+function Parent() {
+  return
+  <>
+    <Child>
+      <div>first<div>
+    </Child>
+  </>
+}
+```
+
+* 多个插槽
+
+```javascript
+// Child
+function Child(props) {
+  return
+  <div>
+     {props.children[0]}
+     {props.children[1]}
+  </div>
+}
+// parents
+function Parent() {
+  return
+  <>
+    <Child>
+      <div>first<div>
+      <div>second</div>
+    </Child>
+  </>
+}
+```
+# 3c
 ## w
 
 =d5--1112=

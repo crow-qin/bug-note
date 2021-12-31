@@ -1,5 +1,48 @@
-
 # 2021
+
+## w
+=d3--0512=
+### tip: Nginx 代理本地打包项目
+
+打开 Nginx 安装路径下的 conf/nginx.conf
+
+```conf
+server {
+  listen       8100;
+  server_name  localhost;
+  location / {
+      root   /test/v3/vue3_demo/dist;
+      index  index.html index.htm;
+      proxy_pass 127.0.0.1:3000;
+  }
+}
+```
+
+按需求在 server 增加对应的端口 域名
+location root 在/路径时需要显示的项目路径
+index 需要显示的 html
+proxy_pass 代理转发 所有以 localhost 及 8100 端口发送的请求 都会转到 127.0.0.1:3000 出来
+即后台项目的地址
+
+修改后重启 Nginx 配置
+
+```cmd
+nginx -s reload
+```
+
+如果nginx服务没有启动 先启动再重启配置
+
+```cmd
+start nginx
+```
+
+在hosts文件添加上对应的IP和域名
+
+```hosts
+127.0.0.1 localhost
+127.0.0.1 www.testing.com
+```
+
 ## w
 
 =d4--1125=

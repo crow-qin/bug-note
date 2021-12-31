@@ -1,24 +1,25 @@
+# 2020
 ## w
 
-=d3-1202=
+=d3--1202=
 
 ### 阿里云的云效，第一次拉取代码，会提示输入账号密码
 
-账号是云效的 username ，密码是私人令牌
-第一次拉取没有私人令牌，需要忘记令牌，修改令牌，令牌格式全数字8位以上
+账号是云效的 username ，密码是私人令牌  
+第一次拉取没有私人令牌，需要忘记令牌，修改令牌，令牌格式全数字8位以上  
 accentrix 云效令牌：1-9
 
-# =2021=
+
+# 2021
 
 ## w
 
-=d1-0222=
+=d1--0222=
 
 ### tip: vue3.x 弃用了 $listeners
 
-1. vue2.x 语法
-
-  在 Vue2 中，你可以使用 this.$attrs 和 this.$listeners 分别访问传递给组件的 attribute 和事件监听器。结合 inheritAttrs: false，开发者可以将这些 attribute 和监听器应用到其它元素，而不是根元素：
+1. vue2.x 语法  
+  *在 Vue2 中，你可以使用 this.$attrs 和 this.$listeners 分别访问传递给组件的 attribute 和事件监听器。结合 inheritAttrs: false，开发者可以将这些 attribute 和监听器应用到其它元素，而不是根元素：*
 
 ```vue
 <template>
@@ -33,9 +34,8 @@ export default {
 </script>
 ```
 
-2. vue3.x语法
-
-  在 Vue 3 的虚拟 DOM 中，事件监听器现在只是以 on 为前缀的 attribute，这样就成了 $attrs 对象的一部分，因此 $listeners 被移除了。
+2. vue3.x语法  
+  *在 Vue 3 的虚拟 DOM 中，事件监听器现在只是以 on 为前缀的 attribute，这样就成了 $attrs 对象的一部分，因此 $listeners 被移除了。*
 
 ```vue
 <template>
@@ -54,15 +54,13 @@ export default {
 
 ### tip: nvm 下载
 
-1. 下载地址 <https://github.com/coreybutler/nvm-windows/releases>
-
+1. 下载地址 <https://github.com/coreybutler/nvm-windows/releases>  
   下载第三个 nvm-setup.zip
   按要求安装
 
 2. 测试 命令行输入 nvm 输出 nvm 相关命令即是成功
   
-3. 配置淘宝镜像
-
+3. 配置淘宝镜像  
   nvm 下载 node 版本使用的是外国的服务器 可能会比较慢
   配置方法：
   打开 nvm 的安装目录
@@ -76,28 +74,26 @@ node_mirror: http://npm.taobao.org/mirrors/node/
 npm_mirror: https://npm.taobao.org/mirrors/npm/
 ```
 
-4. 安装 node
-
+4. 安装 node  
   nvm install 版本号
 
 ```cmd
 nvm install v14.16.0 | nvm install 14.16.0
 ```
 
-tip: 一定要等到下载完再关闭
-Installation complete 代表nodejs安装完成
+**tip: 一定要等到下载完再关闭
+Installation complete 代表nodejs安装完成**
 
-5. 切换 node
+5. 切换 node  
+  nvm use 版本号  
+  nvm 部分命令  
 
-  nvm use 版本号
-  nvm 部分命令
-  查看已下载 node 版本
+查看已下载 node 版本  
 
 ```cmd
 nvm ls
 ```
-
-查看当前版本
+  查看当前版本
 
 ```cmd
 nvm list
@@ -203,7 +199,7 @@ const Demo = defineComponent({
 export default Demo
 ```
 
-使用 defineComponent()，可以获得代码提示
+使用 defineComponent()，可以获得代码提示   
 
 =d4--0304=
 
@@ -306,73 +302,8 @@ git add .  提交新文件(new)和被修改(modified)文件，不包括被删除
 
 =d3--0512=
 
-### tip: Nginx 代理本地打包项目
+### archive.js 用于文件压缩
 
-打开 Nginx 安装路径下的 conf/nginx.conf
-
-```conf
-server {
-  listen       8100;
-  server_name  localhost;
-  location / {
-      root   /test/v3/vue3_demo/dist;
-      index  index.html index.htm;
-      proxy_pass 127.0.0.1:3000;
-  }
-}
-```
-
-按需求在 server 增加对应的端口 域名
-location root 在/路径时需要显示的项目路径
-index 需要显示的 html
-proxy_pass 代理转发 所有以 localhost 及 8100 端口发送的请求 都会转到 127.0.0.1:3000 出来
-即后台项目的地址
-
-修改后重启 Nginx 配置
-
-```cmd
-nginx -s reload
-```
-
-如果nginx服务没有启动 先启动再重启配置
-
-```cmd
-start nginx
-```
-
-在hosts文件添加上对应的IP和域名
-
-```hosts
-127.0.0.1 localhost
-127.0.0.1 www.testing.com
-```
-
-archive.js 用于文件压缩
-
-### tip: node.js的 fs 常用函数
-
-1. 查询文件是否存在
-
-```javascript
-fs.access(${文件路径}, fs.constants.F_OK, (err) => {
-  if (err) return
-  // 文件存在
-})
-```
-
-2. 删除文件
-
-```javascript
-fs.unlink(${文件路径}, callback)
-```
-
-*mysql 常用账号密码*
-mysql
-acc: root
-pwd: root
-
-acc: root
-pwd: 123456
 
 =d5--0514=
 
@@ -433,64 +364,16 @@ rgb是整数，小数点计算可能会精度丢失
 
 无状态组件: 没有生命周期，没有状态，多用于展示数据，开销很小
 
-*0729 update*
-函数组件：返回一个函数作为组件
-类组件：返回一个类作为组件，可以存在生命周期，也可以作为无状态组件
+*0729 update*  
+函数组件：返回一个函数作为组件  
+类组件：返回一个类作为组件，可以存在生命周期，也可以作为无状态组件  
 HOC（高阶组件）：组件返回一个组件
 
 =d5--0716=
+
 protobufjs 是一种数据转换，序列化的工具
 
 ## w
-
-=d2--0720=
-
-### tip: react 的 slot
-
-在组件插入标签 组件内部通过this.props.children 来展示
-只有一个时 children为对象 当有多个时children为数组
-
-单个插槽
-
-```javascript
-// Child
-function Child(props) {
-  return
-  <div>{props.children}</div>
-}
-// parents
-function Parent() {
-  return
-  <>
-    <Child>
-      <div>first<div>
-    </Child>
-  </>
-}
-```
-
-多个插槽
-
-```javascript
-// Child
-function Child(props) {
-  return
-  <div>
-     {props.children[0]}
-     {props.children[1]}
-  </div>
-}
-// parents
-function Parent() {
-  return
-  <>
-    <Child>
-      <div>first<div>
-      <div>second</div>
-    </Child>
-  </>
-}
-```
 
 =d5--0723=
 
@@ -642,8 +525,9 @@ console.log(a)
 
 ### tip: React Hook
 
-适用于函数式组件
-**useState**: 初始化state，简化setState
+适用于函数式组件  
+**useState**  
+初始化state，简化setState
 
 ```javascript
 const [value, setValue] = useState(0)
@@ -652,7 +536,8 @@ console.log(value) // 0
 // 和setState一样在生命周期不会立即更新
 ```
 
-**useEffect**: useEffect(()=> { Async Action }, ?[dependencies])  // 第二参数可选
+**useEffect**  
+useEffect(()=> { Async Action }, ?[dependencies])  // 第二参数可选
 
 1. 多个 useEffect 的回调 按先后顺序执行
 
@@ -688,9 +573,9 @@ useEffect(() => {
 }, [])
 ```
 
-**useContext**
-跨组件共享数据的钩子函数
-const myContext = useContext(context)
+**useContext**  
+跨组件共享数据的钩子函数  
+const myContext = useContext(context)  
 *content是React.createContext() 返回的对象*
 
 ```javascript
@@ -710,7 +595,7 @@ function Child() {
 }
 ```
 
-**useReducer**
+**useReducer**  
 const [state, dispatch] = useReducer(reducer, initState)
 
 ```javascript
@@ -733,7 +618,7 @@ return (
 
 *0729 update*
 
-useMemo:
+**useMemo**  
 类似vue的computed 依赖项发生改变，会触发useMemo重新计算
 const memorizedValue = useMemo(()=> { return a + 1 }, [a])
 
@@ -742,7 +627,7 @@ useMemo 没有依赖项的，每次渲染都会执行
 
 =d4--0729=
 
-<span name="a0729_1">**webpack5 的 HMR**</span>
+### <span id="a0729_1">**webpack5 的 HMR**</span>
 下载 webpack-dev-server
 在webpack.config.js 增加
 
@@ -773,185 +658,29 @@ if(module.hot) {
 }
 ```
 
-markdown 的锚点写法
-[跳转](#test)
-<span name="test">目标位置</span>
-在typora编辑完需要按住ctrl再单击才会跳转
-
-### [关于三次握手和四次挥手](https://www.zhihu.com/question/271701044/answer/1935194322)
-
-希望大家能带着如下问题进行阅读，收获会更大。
-
-1. 请画出三次握手和四次挥手的示意图
-2. 为什么连接的时候是三次握手？
-3. 什么是半连接队列？
-4. ISN(Initial Sequence Number)是固定的吗？
-5. 三次握手过程中可以携带数据吗？
-6. 如果第三次握手丢失了，客户端服务端会如何处理？
-7. SYN攻击是什么？
-8. 挥手为什么需要四次？
-9. 四次挥手释放连接时，等待2MSL的意义?
-
-#### 1. 三次握手
-
-三次握手（Three-way Handshake）其实就是指建立一个TCP连接时，需要客户端和服务器总共发送3个包。进行三次握手的主要作用就是为了确认双方的接收能力和发送能力是否正常、指定自己的初始化序列号为后面的可靠性传送做准备。实质上其实就是连接服务器指定端口，建立TCP连接，并同步连接双方的序列号和确认号，交换TCP窗口大小信息。
-
-刚开始客户端处于 Closed 的状态，服务端处于 Listen 状态。
-
-进行三次握手：
-
-第一次握手：客户端给服务端发一个 SYN 报文，并指明客户端的初始化序列号 ISN©。此时客户端处于 SYN_SEND 状态。
-
-首部的同步位SYN=1，初始序号seq=x，SYN=1的报文段不能携带数据，但要消耗掉一个序号。
-
-第二次握手：服务器收到客户端的 SYN 报文之后，会以自己的 SYN 报文作为应答，并且也是指定了自己的初始化序列号 ISN(s)。同时会把客户端的 ISN + 1 作为ACK 的值，表示自己已经收到了客户端的 SYN，此时服务器处于 SYN_REVD 的状态。
-
-在确认报文段中SYN=1，ACK=1，确认号ack=x+1，初始序号seq=y。
-
-第三次握手：客户端收到 SYN 报文之后，会发送一个 ACK 报文，当然，也是一样把服务器的 ISN + 1 作为 ACK 的值，表示已经收到了服务端的 SYN 报文，此时客户端处于 ESTABLISHED 状态。服务器收到 ACK 报文之后，也处于 ESTABLISHED 状态，此时，双方已建立起了连接。
-
-确认报文段ACK=1，确认号ack=y+1，序号seq=x+1（初始为seq=x，第二个报文段所以要+1），ACK报文段可以携带数据，不携带数据则不消耗序号。
-
-发送第一个SYN的一端将执行主动打开（active open），接收这个SYN并发回下一个SYN的另一端执行被动打开（passive open）。
-
-在socket编程中，客户端执行connect()时，将触发三次握手。
-
-![img](https://pic3.zhimg.com/50/v2-2a54823bd63e16674874aa46a67c6c72_720w.jpg?source=1940ef5c)
-
-**1.1 为什么需要三次握手，两次不行吗？**
-
-弄清这个问题，我们需要先弄明白三次握手的目的是什么，能不能只用两次握手来达到同样的目的。
-
-第一次握手：客户端发送网络包，服务端收到了。
-
-这样服务端就能得出结论：客户端的发送能力、服务端的接收能力是正常的。
-
-第二次握手：服务端发包，客户端收到了。
-
-这样客户端就能得出结论：服务端的接收、发送能力，客户端的接收、发送能力是正常的。不过此时服务器并不能确认客户端的接收能力是否正常。
-
-第三次握手：客户端发包，服务端收到了。
-
-这样服务端就能得出结论：客户端的接收、发送能力正常，服务器自己的发送、接收能力也正常。
-
-因此，需要三次握手才能确认双方的接收与发送能力是否正常。
-
-试想如果是用两次握手，则会出现下面这种情况：
-
-> 如客户端发出连接请求，但因连接请求报文丢失而未收到确认，于是客户端再重传一次连接请求。后来收到了确认，建立了连接。数据传输完毕后，就释放了连接，客户端共发出了两个连接请求报文段，其中第一个丢失，第二个到达了服务端，但是第一个丢失的报文段只是在某些网络结点长时间滞留了，延误到连接释放以后的某个时间才到达服务端，此时服务端误认为客户端又发出一次新的连接请求，于是就向客户端发出确认报文段，同意建立连接，不采用三次握手，只要服务端发出确认，就建立新的连接了，此时客户端忽略服务端发来的确认，也不发送数据，则服务端一致等待客户端发送数据，浪费资源。
-
-**1.2 什么是半连接队列？**
-
-服务器第一次收到客户端的 SYN 之后，就会处于 SYN_RCVD 状态，此时双方还没有完全建立其连接，服务器会把此种状态下请求连接放在一个队列里，我们把这种队列称之为半连接队列。
-
-当然还有一个全连接队列，就是已经完成三次握手，建立起连接的就会放在全连接队列中。如果队列满了就有可能会出现丢包现象。
-
-这里在补充一点关于SYN-ACK 重传次数的问题：
-
-服务器发送完SYN-ACK包，如果未收到客户确认包，服务器进行首次重传，等待一段时间仍未收到客户确认包，进行第二次重传。如果重传次数超过系统规定的最大重传次数，系统将该连接信息从半连接队列中删除。
-
-注意，每次重传等待的时间不一定相同，一般会是指数增长，例如间隔时间为 1s，2s，4s，8s…
-
-**1.3 ISN(Initial Sequence Number)是固定的吗？**
-
-当一端为建立连接而发送它的SYN时，它为连接选择一个初始序号。ISN随时间而变化，因此每个连接都将具有不同的ISN。ISN可以看作是一个32比特的计数器，每4ms加1 。这样选择序号的目的在于防止在网络中被延迟的分组在以后又被传送，而导致某个连接的一方对它做错误的解释。
-
-三次握手的其中一个重要功能是客户端和服务端交换 ISN(Initial Sequence Number)，以便让对方知道接下来接收数据的时候如何按序列号组装数据。如果 ISN 是固定的，攻击者很容易猜出后续的确认号，因此 ISN 是动态生成的。
-
-**1.4 三次握手过程中可以携带数据吗？**
-
-其实第三次握手的时候，是可以携带数据的。但是，第一次、第二次握手不可以携带数据
-
-为什么这样呢?大家可以想一个问题，假如第一次握手可以携带数据的话，如果有人要恶意攻击服务器，那他每次都在第一次握手中的 SYN 报文中放入大量的数据。因为攻击者根本就不理服务器的接收、发送能力是否正常，然后疯狂着重复发 SYN 报文的话，这会让服务器花费很多时间、内存空间来接收这些报文。
-
-也就是说，第一次握手不可以放数据，其中一个简单的原因就是会让服务器更加容易受到攻击了。而对于第三次的话，此时客户端已经处于 ESTABLISHED 状态。对于客户端来说，他已经建立起连接了，并且也已经知道服务器的接收、发送能力是正常的了，所以能携带数据也没啥毛病。
-
-**1.5 SYN攻击是什么？**
-
-服务器端的资源分配是在二次握手时分配的，而客户端的资源是在完成三次握手时分配的，所以服务器容易受到SYN洪泛攻击。SYN攻击就是Client在短时间内伪造大量不存在的IP地址，并向Server不断地发送SYN包，Server则回复确认包，并等待Client确认，由于源地址不存在，因此Server需要不断重发直至超时，这些伪造的SYN包将长时间占用未连接队列，导致正常的SYN请求因为队列满而被丢弃，从而引起网络拥塞甚至系统瘫痪。SYN 攻击是一种典型的 DoS/DDoS 攻击。
-
-检测 SYN 攻击非常的方便，当你在服务器上看到大量的半连接状态时，特别是源IP地址是随机的，基本上可以断定这是一次SYN攻击。在 Linux/Unix 上可以使用系统自带的 netstats 命令来检测 SYN 攻击。
-
-```text
-netstat -n -p TCP | grep SYN_RECV
+### markdown 的锚点写法
+[跳转](#test)  
+```js
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
+// 占位
 ```
-
-常见的防御 SYN 攻击的方法有如下几种：
-
-- 缩短超时（SYN Timeout）时间
-- 增加最大半连接数
-- 过滤网关防护
-- SYN cookies技术
-
-#### 2. 四次挥手
-
-建立一个连接需要三次握手，而终止一个连接要经过四次挥手（也有将四次挥手叫做四次握手的）。这由TCP的半关闭（half-close）造成的。所谓的半关闭，其实就是TCP提供了连接的一端在结束它的发送后还能接收来自另一端数据的能力。
-
-TCP 的连接的拆除需要发送四个包，因此称为四次挥手(Four-way handshake)，客户端或服务器均可主动发起挥手动作。
-
-刚开始双方都处于 ESTABLISHED 状态，假如是客户端先发起关闭请求。四次挥手的过程如下：
-
-第一次挥手：客户端发送一个 FIN 报文，报文中会指定一个序列号。此时客户端处于 FIN_WAIT1 状态。
-
-即发出连接释放报文段（FIN=1，序号seq=u），并停止再发送数据，主动关闭TCP连接，进入FIN_WAIT1（终止等待1）状态，等待服务端的确认。
-
-第二次挥手：服务端收到 FIN 之后，会发送 ACK 报文，且把客户端的序列号值 +1 作为 ACK 报文的序列号值，表明已经收到客户端的报文了，此时服务端处于 CLOSE_WAIT 状态。
-
-即服务端收到连接释放报文段后即发出确认报文段（ACK=1，确认号ack=u+1，序号seq=v），服务端进入CLOSE_WAIT（关闭等待）状态，此时的TCP处于半关闭状态，客户端到服务端的连接释放。客户端收到服务端的确认后，进入FIN_WAIT2（终止等待2）状态，等待服务端发出的连接释放报文段。
-
-第三次挥手：如果服务端也想断开连接了，和客户端的第一次挥手一样，发给 FIN 报文，且指定一个序列号。此时服务端处于 LAST_ACK 的状态。
-
-即服务端没有要向客户端发出的数据，服务端发出连接释放报文段（FIN=1，ACK=1，序号seq=w，确认号ack=u+1），服务端进入LAST_ACK（最后确认）状态，等待客户端的确认。
-
-第四次挥手：客户端收到 FIN 之后，一样发送一个 ACK 报文作为应答，且把服务端的序列号值 +1 作为自己 ACK 报文的序列号值，此时客户端处于 TIME_WAIT 状态。需要过一阵子以确保服务端收到自己的 ACK 报文之后才会进入 CLOSED 状态，服务端收到 ACK 报文之后，就处于关闭连接了，处于 CLOSED 状态。
-
-即客户端收到服务端的连接释放报文段后，对此发出确认报文段（ACK=1，seq=u+1，ack=w+1），客户端进入TIME_WAIT（时间等待）状态。此时TCP未释放掉，需要经过时间等待计时器设置的时间2MSL后，客户端才进入CLOSED状态。
-
-收到一个FIN只意味着在这一方向上没有数据流动。客户端执行主动关闭并进入TIME_WAIT是正常的，服务端通常执行被动关闭，不会进入TIME_WAIT状态。
-
-在socket编程中，任何一方执行close()操作即可产生挥手操作。
-
-![img](https://pica.zhimg.com/50/v2-c7d4b5aca66560365593f57385ce9fa9_720w.jpg?source=1940ef5c)
-
-**2.1 挥手为什么需要四次？**
-
-因为当服务端收到客户端的SYN连接请求报文后，可以直接发送SYN+ACK报文。其中ACK报文是用来应答的，SYN报文是用来同步的。但是关闭连接时，当服务端收到FIN报文时，很可能并不会立即关闭SOCKET，所以只能先回复一个ACK报文，告诉客户端，“你发的FIN报文我收到了”。只有等到我服务端所有的报文都发送完了，我才能发送FIN报文，因此不能一起发送。故需要四次挥手。
-
-**2.2 2MSL等待状态**
-
-TIME_WAIT状态也成为2MSL等待状态。每个具体TCP实现必须选择一个报文段最大生存时间MSL（Maximum Segment Lifetime），它是任何报文段被丢弃前在网络内的最长时间。这个时间是有限的，因为TCP报文段以IP数据报在网络内传输，而IP数据报则有限制其生存时间的TTL字段。
-
-对一个具体实现所给定的MSL值，处理的原则是：当TCP执行一个主动关闭，并发回最后一个ACK，该连接必须在TIME_WAIT状态停留的时间为2倍的MSL。这样可让TCP再次发送最后的ACK以防这个ACK丢失（另一端超时并重发最后的FIN）。
-
-这种2MSL等待的另一个结果是这个TCP连接在2MSL等待期间，定义这个连接的插口（客户的IP地址和端口号，服务器的IP地址和端口号）不能再被使用。这个连接只能在2MSL结束后才能再被使用。
-
-**2.3 四次挥手释放连接时，等待2MSL的意义?**
-
-MSL是Maximum Segment Lifetime的英文缩写，可译为“最长报文段寿命”，它是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。
-
-为了保证客户端发送的最后一个ACK报文段能够到达服务器。因为这个ACK有可能丢失，从而导致处在LAST-ACK状态的服务器收不到对FIN-ACK的确认报文。服务器会超时重传这个FIN-ACK，接着客户端再重传一次确认，重新启动时间等待计时器。最后客户端和服务器都能正常的关闭。假设客户端不等待2MSL，而是在发送完ACK之后直接释放关闭，一但这个ACK丢失的话，服务器就无法正常的进入关闭连接状态。
-
-两个理由：
-
-- 保证客户端发送的最后一个ACK报文段能够到达服务端。
-
-这个ACK报文段有可能丢失，使得处于LAST-ACK状态的B收不到对已发送的FIN+ACK报文段的确认，服务端超时重传FIN+ACK报文段，而客户端能在2MSL时间内收到这个重传的FIN+ACK报文段，接着客户端重传一次确认，重新启动2MSL计时器，最后客户端和服务端都进入到CLOSED状态，若客户端在TIME-WAIT状态不等待一段时间，而是发送完ACK报文段后立即释放连接，则无法收到服务端重传的FIN+ACK报文段，所以不会再发送一次确认报文段，则服务端无法正常进入到CLOSED状态。
-
-- 防止“已失效的连接请求报文段”出现在本连接中。
-
-客户端在发送完最后一个ACK报文段后，再经过2MSL，就可以使本连接持续的时间内所产生的所有报文段都从网络中消失，使下一个新的连接中不会出现这种旧的连接请求报文段。
-
-**2.4 为什么TIME_WAIT状态需要经过2MSL才能返回到CLOSE状态？**
-
-理论上，四个报文都发送完毕，就可以直接进入CLOSE状态了，但是可能网络是不可靠的，有可能最后一个ACK丢失。所以TIME_WAIT状态就是用来重发可能丢失的ACK报文。
-
-#### 3. 总结
-
-《TCP/IP详解 卷1:协议》有一张TCP状态变迁图，很具有代表性，有助于大家理解三次握手和四次挥手的状态变化。如下图所示，粗的实线箭头表示正常的客户端状态变迁，粗的虚线箭头表示正常的服务器状态变迁。
-
-![img](https://pic1.zhimg.com/50/v2-7c402fde8210519feb8f65d41410c205_720w.jpg?source=1940ef5c)
-
-参考：《TCP/IP详解 卷1:协议》
+<span id="test">目标位置</span>  
+在typora编辑完需要按住ctrl再单击才会跳转
 
 =d5--0730=
 
@@ -1012,9 +741,9 @@ ssh -T git@github.com
 
 ### tip：git常用命令
 
-添加到暂存区: git add .
-提交: git commit -m "提交信息"
-推送: git push origin master(git push 模块 分支名)
+添加到暂存区: git add .  
+提交: git commit -m "提交信息"  
+推送: git push origin master(git push 模块 分支名)  
 拉取: git pull origin master
 
 ## w
@@ -1095,7 +824,8 @@ h( Child, {}, {
 
 =d7--0829
 
-proxy代理
+proxy代理  
+```js
 '/cma': {
   target: 'https://testing.hulasmart.com',
   changeOrigin: true
@@ -1103,17 +833,20 @@ proxy代理
     '^/cma': '/' // 需要rewrite重写的,
   }
 },
+```
 请求 /cma/lifetouch-cma-api/api/refresh-token 报404
 
+```js
 '/lifetouch-cma-api': {
   target: 'https://testing.hulasmart.com',
   changeOrigin: true
 },
+```
 请求 /lifetouch-cma-api/api/refresh-token 成功
 
-获取permission 结构 xxx：[]，
-存入permission 数组
-根据权限遍历route数组生成新的route数组
+获取permission 结构 xxx：[]，  
+存入permission 数组  
+根据权限遍历route数组生成新的route数组  
 对route数组进行计数，没有子模块的模块不需要显示
 
 ## w
@@ -1123,9 +856,10 @@ proxy代理
 ### tip: vue-router4.x match与resolve合并为resolve
 
 vue-router3.x
+```js
 const newRouter = createRouter();
 router.matcher = newRouter.matcher;
-
+```
 ## w
 
 =d1-0906=
@@ -1134,10 +868,10 @@ router.matcher = newRouter.matcher;
 
 a:
 
-1. 封装button组件, 根据传入的权限决定显示，提示，通过。
-优点：封装后只要传入参数即可判断，
-缺点：只能控制button的权限
-2. 使用自定义指令
+1. 封装button组件, 根据传入的权限决定显示，提示，通过。  
+优点：封装后只要传入参数即可判断，  
+缺点：只能控制button的权限  
+2. 使用自定义指令  
 只能修改状态
 
 ### tip: git commit message的一些规范
@@ -1240,24 +974,6 @@ time.subscribe(data => {
 });
 ```
 
-=d5--0910=
-
-### tip: ts 函数声明重载
-
-函数声明可以多次定义, 这样函数可以根据定义的先后顺序进行匹配
-
-```ts
-function reverse(x: number): number;
-function reverse(x: string): string;
-function reverse(x: number | string): number | string | void {
-    if (typeof x === 'number') {
-        return Number(x.toString().split('').reverse().join(''));
-    } else if (typeof x === 'string') {
-        return x.split('').reverse().join('');
-    }
-}
-```
-
 ## w
 
 =d4--0916=
@@ -1300,25 +1016,6 @@ inject: ["test"]
 如果还不行，直接用this.$data，或者注入的对象再嵌套一次
 
 ## w
-
-=d3-1013=
-
-### vue3定义全局变量
-
-```js
-import Vue from 'vue'
-const app = Vue.createApp({})
-app.config.globalProperties.$http = () => {}
-
-```
-
-使用全局变量
-
-```js
-import { getCurrentInstance } from 'vue'
-let instance = getCurrentInstance()
-let _this = instance.appContext.config.globalProperties
-```
 
 ### base64的优缺点
 
@@ -1378,7 +1075,7 @@ const getStream = async function (doc) {
 }
 ```
 
-如果存在window.navigator.msSaveOrOpenBlob 方法，直接下载数据流，
+如果存在window.navigator.msSaveOrOpenBlob 方法，直接下载数据流，  
 否则使用window.URL.createObjectURL创建一个临时uri
 
 Internet Explorer 10 的 msSaveBlob 和 msSaveOrOpenBlob 方法允许用户在客户端上保存文件，方法如同从 Internet 下载文件，这是此类文件保存到“下载”文件夹的原因。
@@ -1611,3 +1308,64 @@ micro-task(微任务)： 当前（此次事件循环中）宏任务执行完，�
 ⑥重复处理：作为IP数据报来传输的TCP分片会发生重复，TCP的接收端必须丢弃重复的数据；
 
 ⑦数据校验：TCP将保持它首部和数据的检验和，这是一个端到端的检验和，目的是检测数据在传输过程中的任何变化。如果收到分片的检验和有差错，TCP将丢弃这个分片，并不确认收到此报文段导致对端超时并重发。
+
+## w
+
+=d3--1229=
+
+### js获取设置css变量
+
+设置css变量
+```css
+:root {
+  --color: #333;
+}
+.app {
+  --textFs: 13px;
+  div {
+    font-size: var(--textFs);
+    /* 拼接变量 */
+    line-height: calc(var(--textFs) * 1.5)
+  }
+}
+```
+
+**获取css变量**
+
+```js
+document.documentElement.style.getPropertyValue('--testColor')
+```
+*上面语句只能获取到内联样式的css变量值*
+
+```js
+getComputedStyle(document.documentElement).getPropertyValue('--testColor')
+```
+
+*获取任意位置的CSS变量*
+
+```js
+
+var divEle=document.querySelector('div');
+var divSty=window.getComputedStyle(divEle);
+var diveleVal=divSty.getPropertyValue('---testColor');
+```
+*获取某一标签上的css变量*
+
+**setProperty()修改css变量**
+
+```html
+<template>
+  <div></div>
+</template>
+<style>
+body{
+  --testColor:red;
+}
+div{
+  --testColor:black;
+}
+</style>
+<script>
+  document.querySelector('div').style.setProperty('--testColor', yellow);
+</script>
+```

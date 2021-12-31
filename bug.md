@@ -361,3 +361,32 @@ element-plus的版本在1.0.2-beta.59前的可以用第一种方式设置，之�
 
 在textarea 加上 pointer-events:auto; 样式 再加上 disabled="true"
 把 disabled的样式修改一下
+
+
+## w
+
+=d5--1231=
+
+### window.pint() 问题
+
+1. 打印溢出  
+   设置css样式  
+   横向@page { size: landscape; }
+
+   纵向@page{ size: portrait; }
+
+   A3纸@page{ size: A3; }
+   ```stylus
+   @media print {
+     @page {
+       size: A4 landscape;
+       margin: 0mm;
+     }
+     >>>.page {
+       transform: scale(0.95, 0.95);
+     }
+   }
+   ```
+   还可以用scale缩小
+2. disabled 的元素出现边框  
+   用point-event: none; cursor: not-allowed; 代替
