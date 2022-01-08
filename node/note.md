@@ -73,7 +73,7 @@ console.log(process.env.npm_config_directive)
 
 npm run dev --directive=123
 ```js
-console.log(JSON.parse(process,env,npm_config_argv))
+console.log(JSON.parse(process.env.npm_config_argv))
 ```
 输出
 ```js
