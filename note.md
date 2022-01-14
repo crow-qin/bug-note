@@ -1369,3 +1369,15 @@ div{
   document.querySelector('div').style.setProperty('--testColor', yellow);
 </script>
 ```
+
+## w
+
+=d3--0112=
+
+### 实现文字竖直排列
+
+```css
+writing-mode: vertical-lr;
+text-orientation: upright;
+/* 解决字母数字he'xiang */
+```
