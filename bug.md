@@ -390,3 +390,22 @@ element-plus的版本在1.0.2-beta.59前的可以用第一种方式设置，之�
    还可以用scale缩小
 2. disabled 的元素出现边框  
    用point-event: none; cursor: not-allowed; 代替
+
+=d3--0316=
+
+### 谷歌火狐打印背景色丢失
+页面加上下面样式
+```css
+/* webkit 为Google Chrome、Safari等浏览器内核 */-webkit-print-color-adjust: exact;
+print-color-adjust: exact;
+color-adjust: exact;
+```
+
+### at-rule or selector expected css(css-rule or selector expected)
+在样式穿透>>>前面加上通配符*即
+*>>>
+
+## w
+
+=d2--0412=
+

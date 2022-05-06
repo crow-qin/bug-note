@@ -872,7 +872,9 @@ a:
 优点：封装后只要传入参数即可判断，  
 缺点：只能控制button的权限  
 2. 使用自定义指令  
-只能修改状态
+只能修改状态  
+
+<br/>
 
 ### tip: git commit message的一些规范
 
@@ -1381,3 +1383,72 @@ writing-mode: vertical-lr;
 text-orientation: upright;
 /* 解决字母数字he'xiang */
 ```
+
+## w
+
+=d2--0118=
+
+### el + vue 手动关闭el-date-picker
+
+有时候手动调用控件的关闭隐藏控件事件官网api中没有此事件，查看源码发现有一个handleClose
+
+```vue
+<template>
+  <el-date-picker ref="pickerRef"/>
+  <button @click="handleClose">
+</template>
+<script>
+export default {
+  ...
+  methods: {
+    handleClose() {
+      this.$refs.pickerRef.handleClose()
+    }
+  }
+}
+</script>
+```
+
+## w
+
+=d7--0424=
+
+### 使用background模拟下划线
+
+```html
+<!-- style -->
+<style>
+  .box {
+    position: relative;
+  }
+  .title {
+    position: absolute;
+    width: 30px;
+    line-height: 22px;
+    background: #fff;
+  }
+  textarea {
+      resize: none;
+      border: none;
+      width: 100%;
+      line-height: 20px;
+      padding: 0px;
+      text-indent: 35px;
+      outline: none;
+      background-image: linear-gradient(0deg, #000 1px, transparent 1px, transparent 18px);
+      background-size: 100% 20px;
+      background-repeat: repeat-y;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      color-adjust: exact;
+    }
+</style>
+<!-- html -->
+<div class="box">
+  <div class="title">title:</div>
+  <textarea rows="2"></textarea>
+</div>
+```
+
+如图：
+![img](asset/img/note/20220424-112034.png)

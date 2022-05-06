@@ -63,7 +63,11 @@ export default {
 }
 ```
 
-provide还可以提供方法 子组件通过inject使用该方法  
+*provide还可以提供方法 子组件通过inject使用该方法*  
+
+
+单元测试库 Jest Mocha  
+端到端测试 Cypress.io
 
 ## w
 
