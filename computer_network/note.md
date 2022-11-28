@@ -42,7 +42,7 @@
 
 在socket编程中，客户端执行connect()时，将触发三次握手。
 
-![img](../bug-note/asset/img/2021:07:15-tcp.jpeg)
+![img](../bug-note/asset/img/2021_07_15-tcp.jpeg)
 
 **1.1 为什么需要三次握手，两次不行吗？**
 
@@ -137,7 +137,7 @@ TCP 的连接的拆除需要发送四个包，因此称为四次挥手(Four-way 
 
 在socket编程中，任何一方执行close()操作即可产生挥手操作。
 
-![img](./asset/img/2021:07:15-tcp-close.jpeg)
+![img](./asset/img/2021_07_15-tcp-close.jpeg)
 
 **2.1 挥手为什么需要四次？**
 
@@ -175,6 +175,6 @@ MSL是Maximum Segment Lifetime的英文缩写，可译为“最长报文段寿�
 
 《TCP/IP详解 卷1:协议》有一张TCP状态变迁图，很具有代表性，有助于大家理解三次握手和四次挥手的状态变化。如下图所示，粗的实线箭头表示正常的客户端状态变迁，粗的虚线箭头表示正常的服务器状态变迁。
 
-![img](../bug-note/asset/img/2021:07:15-tcp.jpeg)
+![img](../bug-note/asset/img/2021_07_15-tcp.jpeg)
 
 参考：《TCP/IP详解 卷1:协议》
