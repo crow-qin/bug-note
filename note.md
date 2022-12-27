@@ -1452,3 +1452,18 @@ export default {
 
 如图：
 ![img](asset/img/note/20220424-112034.png)
+
+
+## w
+
+=d2--1227=
+
+### git 回退本地和远端仓库
+
+1、git本地版本回退
+
+git reset --hard commit_id(可用 git log查看)
+
+2、git 远程版本回退
+
+git push origin HEAD --force #远程提交回退

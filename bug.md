@@ -283,10 +283,10 @@ a: 原因是 eslint 为了防止this变量和局部变量混淆（大概吧）
 
 =d4--0819=
 
-### bug: vue3 + ts 组件通信报警告 Vue warn]: Extraneous non-emits event listeners (comfirm) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the "emits" option
+### bug: vue3 + ts 组件通信报警告 Vue warn]: Extraneous non-emits event listeners (confirm) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the "emits" option
 
 a: 声明下自定义事件名称即可
-emits: ['comfirm']
+emits: ['confirm']
 
 =d5--0820=
 
@@ -407,5 +407,23 @@ color-adjust: exact;
 
 ## w
 
-=d2--0412=
+=d2--0927=
 
+### printing 打印ant-table 会出现间隔过大的问题
+a:
+ant-table 在打印时 .ant-spin-nested-loading 的高度默认100%
+添加以下内容在css中
+.ant-spin-nested-loading {
+  height: auto !important;
+}
+```tsx
+printing(ref, {
+  injectGlobalCss: true,
+  scanStyles: false,
+  css: ` 
+    .ant-spin-nested-loading {
+      height: auto !important;
+    }
+  `
+}
+```
