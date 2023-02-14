@@ -1467,3 +1467,11 @@ git reset --hard commit_id(可用 git log查看)
 2、git 远程版本回退
 
 git push origin HEAD --force #远程提交回退
+
+# 2023
+## w
+
+=d2-0110=
+
+### 运行项目栈溢出
+"dev": "node --max_old_space_size=4096 build/dev-server.js",
