@@ -2,21 +2,21 @@
 
 =d4-0408=
 
-### bug: win7下载node-sass失败
+### bug: win7 下载 node-sass 失败
 
-安装python2.7
+安装 python2.7
 
-*0524 update*
+_0524 update_
 [新的失败](#a0524_1)
 
-### tip: file对象重命名
+### tip: file 对象重命名
 
-file是只读文件，重命名需要创建新的对象
+file 是只读文件，重命名需要创建新的对象
 
 ```javascript
 // file 原文件； newFileName 新文件名
-const renameReportFile = new File([ file ], newFileName, {
-  type: file.type
+const renameReportFile = new File([file], newFileName, {
+  type: file.type,
 });
 ```
 
@@ -26,10 +26,10 @@ const renameReportFile = new File([ file ], newFileName, {
 
 ### bug: vue-cli3 打包常见问题
 
-q: vue-cli3打包后报错
-a: 在vue.config.js 添加publicPath: './'
+q: vue-cli3 打包后报错
+a: 在 vue.config.js 添加 publicPath: './'
 
-q: vue-cli3打包后空白
+q: vue-cli3 打包后空白
 a: 在 route/index.js 修改
 将 history 模式改成 hash 模式
 
@@ -45,15 +45,15 @@ routes
 export default router
 ```
 
-history模式需要服务器将'404'(无法匹配路径)配置为你的index页面，所以自己做的话还是不要用history模式。
+history 模式需要服务器将'404'(无法匹配路径)配置为你的 index 页面，所以自己做的话还是不要用 history 模式。
 
 ## w
 
 =d3--0512=
 
-### bug: navicat5.7版本连接mysql8.0以上会报1251错误
+### bug: navicat5.7 版本连接 mysql8.0 以上会报 1251 错误
 
-q: navicat5.7版本连接mysql8.0以上会报1251错误
+q: navicat5.7 版本连接 mysql8.0 以上会报 1251 错误
 a: 链接加密方式已经改变 需要修改
 
 1. 进入账号
@@ -81,7 +81,7 @@ mysql> alter user 'root'@'localhost' identified with mysql_native_password by '�
 mysql> flush  privileges;
 ```
 
-mysql命令
+mysql 命令
 
 ```cmd
 net stop mysql
@@ -92,7 +92,7 @@ net start mysql
 
 =d5--0521=
 
-### bug: typeScript @types/webpack/index.d.ts报错
+### bug: typeScript @types/webpack/index.d.ts 报错
 
 a: tsconfig.json 设置
 
@@ -107,7 +107,7 @@ a: tsconfig.json 设置
 
 =d1--0524=
 
-### <div name="a0524_1">bug: node-sass下载失败</div>
+### <div name="a0524_1">bug: node-sass 下载失败</div>
 
 a: 这次是由于 node 版本与 node-sass 版本不兼容，本机 node13.9， 需要安装 node-sass4.13+
 具体版本兼容可以查看 github 上的 node-sass
@@ -116,15 +116,15 @@ a: 这次是由于 node 版本与 node-sass 版本不兼容，本机 node13.9，
 
 =d1--0705=
 
-### bug: 小程序的 textarea 设置 auto-height，再设置min-height，ios上的高度与设置的值不一致
+### bug: 小程序的 textarea 设置 auto-height，再设置 min-height，ios 上的高度与设置的值不一致
 
-a: textarea 设置 :disableDefaultPadding="true"，去掉 iOS 下的默认内边距，2.10.0版本支持了
+a: textarea 设置 :disableDefaultPadding="true"，去掉 iOS 下的默认内边距，2.10.0 版本支持了
 
 =d2--0707=
 
-### bug: ios小程序在scroll-view 上会出现抖动
+### bug: ios 小程序在 scroll-view 上会出现抖动
 
-a: 因为scroll-view 添加了scroll 事件，且直接将滚动条的位置赋值给了scrollTop的变量 目前去掉scroll事件就不会出现
+a: 因为 scroll-view 添加了 scroll 事件，且直接将滚动条的位置赋值给了 scrollTop 的变量 目前去掉 scroll 事件就不会出现
 
 ## w
 
@@ -132,12 +132,12 @@ a: 因为scroll-view 添加了scroll 事件，且直接将滚动条的位置赋�
 
 ### bug: vite + webworker + spark-md5 实现文件切片上传出现的一些问题
 
-1. webworker在引入时需要从根路径开始写
-不然就写在根路径上
+1. webworker 在引入时需要从根路径开始写
+   不然就写在根路径上
 
-2. worker文件引入第三方库无法使用import 导入
-直接导入会报错 找不到模块
-使用 self.importScripts()
+2. worker 文件引入第三方库无法使用 import 导入
+   直接导入会报错 找不到模块
+   使用 self.importScripts()
 
 ## w
 
@@ -145,12 +145,14 @@ a: 因为scroll-view 添加了scroll 事件，且直接将滚动条的位置赋�
 
 ### bug: webpack 搭建项目时报错
 
-q: in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance
-a: 入口文件大于244kb 影响项目性能
+q: in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance  
+a: 入口文件大于 244kb 影响项目性能
 webpack.config.js 增加
 
 ```javascript
-performance: { hints: false }
+performance: {
+  hints: false;
+}
 ```
 
 =d5--0723=
@@ -190,30 +192,29 @@ use: [
 把它放在需要缓存的 loader 前面就行
 
 ```javascript
-loader: ['cache-loader', 'bobel-loader'],
+loader: ['cache-loader', 'babel-loader'],
 ```
 
 ## w
 
 =d2--0803=
 
-### bug: uniapp uni-popup 弹窗内无法滑动
+### bug: uni-app uni-popup 弹窗内无法滑动
 
-a: uni-popup组件中的滑动事件被禁止冒泡了，去掉@touchmove.prevent="clear" 即可
-update: 0804 一定要去掉， 在clear方法进行判断也不行
+a: uni-popup 组件中的滑动事件被禁止冒泡了，去掉@touchmove.prevent="clear" 即可  
+update: 0804 一定要去掉， 在 clear 方法进行判断也不行
 
-### bug: element 的 el-tree 使用@check-change事件多次触发
+### bug: element 的 el-tree 使用@check-change 事件多次触发
 
-a: 当点击选择框选中状态改变的时候，如果有多级子节点，那就会触发多次（因为子节点的选中状态也被改变）
-解决
+a: 当点击选择框选中状态改变的时候，如果有多级子节点，那就会触发多次（因为子节点的选中状态也被改变）  
+**解决方法**  
 把 check-change 事件改为 check 事件，只有当点击复选框的时候才会触发
 
 =d3--0804=
 
-### bug: 小程序在ios上的回弹问题
+### bug: 小程序在 ios 上的回弹问题
 
-a: 对于不需要滑动的页面
-在page.json中对应页面增加 disScroll: true
+a: 对于不需要滑动的页面在 page.json 中对应页面添加 disScroll: true
 
 ```json
 "style": {
@@ -221,12 +222,12 @@ a: 对于不需要滑动的页面
 }
 ```
 
-对于需要滑动的页面 滑动部分用scroll-view 等进行模拟，将这个页面固定高度
-在page.json中对应页面增加 disScroll: true
+对于需要滑动的页面 滑动部分用 scroll-view 等进行模拟，将这个页面固定高度
+在 page.json 中对应页面增加 disScroll: true
 
 =d4--0805=
 
-### bug: uni小程序 在ios上 textarea的placeholder文字顶部有部分被遮挡
+### bug: uni 小程序 在 ios 上 textarea 的 placeholder 文字顶部有部分被遮挡
 
 a: 可能是 disableDefaultPadding="true" auto-height="true" 设置了最小高度
 把 disableDefaultPadding, auto-height min-height 去掉大概可以
@@ -235,10 +236,11 @@ a: 可能是 disableDefaultPadding="true" auto-height="true" 设置了最小高�
 
 =d2--0810=
 
-### bug: vue-cli@4.5.13 创建的vue3 + ts + element 在设置自定义主题时报错
+### bug: vue-cli@4.5.13 创建的 vue3 + ts + element 在设置自定义主题时报错
 
-错误提示 Invalid CSS after "$--colors: map": expected expression (e.g. 1px, bold), was ".deep-merge("
-a: 已经下载node-sass sass-loader，需要下载sass
+错误提示  
+Invalid CSS after "$--colors: map": expected expression (e.g. 1px, bold), was ".deep-merge("
+a: 已经下载 node-sass sass-loader，需要下载 sass
 
 ```cmd
 npm i sass -D
@@ -251,19 +253,19 @@ npm i sass -D
 ### bug: sass 报错 math.div(100, 2) undefined function
 
 a: math.div 在 sass@1.33.0 才有
-下载大于等于1.33.0版本的sass就可以了
+下载大于等于 1.33.0 版本的 sass 就可以了
 
 =d2--0817=
 
 ### bug: vue3 + ts 报错 cannot convert object to primitive value
 
-a: 变量名和 组件的ref 命名重复了
+a: 变量名和组件的 ref 命名重复了
 
 =d3--0818=
 
-### bug: ts 使用js文件报错 Vue typeScript： Could not find a declaration file for module '***'. '***' implicitly has an 'any'
+### bug: ts 使用 js 文件报错 Vue typeScript： Could not find a declaration file for module '**_'. '_**' implicitly has an 'any'
 
-tsconfig.json文件中在compilerOptions 中添加 "noImplicitAny": false
+tsconfig.json 文件中在 compilerOptions 中添加 "noImplicitAny": false
 
 ```json
 {
@@ -275,15 +277,15 @@ tsconfig.json文件中在compilerOptions 中添加 "noImplicitAny": false
 }
 ```
 
-### bug: 在vue中使用_this = this,报错Unexpected aliasing of 'this' to local variable @typescript-eslint/no-this-alias
+### bug: 在 vue 中使用\_this = this,报错 Unexpected aliasing of 'this' to local variable @typescript-eslint/no-this-alias
 
-a: 原因是 eslint 为了防止this变量和局部变量混淆（大概吧）
+a: 原因是 eslint 为了防止 this 变量和局部变量混淆（大概吧）
 
-解决方法：在.eslintrc.js中的rules添加 "@typescript-eslint/no-this-alias": ["off"]
+解决方法：在.eslintrc.js 中的 rules 添加 "@typescript-eslint/no-this-alias": ["off"]
 
 =d4--0819=
 
-### bug: vue3 + ts 组件通信报警告 Vue warn]: Extraneous non-emits event listeners (confirm) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the "emits" option
+### bug: vue3 + ts 组件通信报警告 [Vue warn]: Extraneous non-emits event listeners (confirm) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the "emits" option
 
 a: 声明下自定义事件名称即可
 emits: ['confirm']
@@ -292,20 +294,19 @@ emits: ['confirm']
 
 ### bug: vue3+element-plus 设置中文无效
 
-在main.ts设置 无效
+在 main.ts 设置无效
 
 ```ts
 // ! element-plus vue3.0
-import element from 'element-plus'
-import 'element-plus/lib/theme-chalk/index.css'
-import 'dayjs/locale/zh-cn' //中文
-import locale from 'element-plus/lib/locale/lang/zh-cn' //中文
+import element from "element-plus";
+import "element-plus/lib/theme-chalk/index.css";
+import "dayjs/locale/zh-cn"; //中文
+import locale from "element-plus/lib/locale/lang/zh-cn"; //中文
 
-createApp(App).use(router).use(element, { locale }).mount('#app')
-
+createApp(App).use(router).use(element, { locale }).mount("#app");
 ```
 
-在App.vue设置生效
+在 App.vue 设置生效
 
 ```vue
 <template>
@@ -315,28 +316,28 @@ createApp(App).use(router).use(element, { locale }).mount('#app')
 </template>
 <script>
 //引入vue方法
-import { ElConfigProvider } from 'element-plus'
+import { ElConfigProvider } from "element-plus";
 //中文包
-import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+import zhCn from "element-plus/lib/locale/lang/zh-cn";
 //引入自定义方法
 //引入自定义组件
 export default {
-  name: 'ZhProvider',
+  name: "ZhProvider",
   components: {
-    [ElConfigProvider.name]: ElConfigProvider
+    [ElConfigProvider.name]: ElConfigProvider,
   },
   setup() {
-    let locale = zhCn
+    let locale = zhCn;
     return {
-      locale
-    }
-  }
-}
+      locale,
+    };
+  },
+};
 </script>
 ```
 
-element-plus的版本在1.0.2-beta.59前的可以用第一种方式设置，之后的需要用第二种
-本文使用的版本为1.0.2-beta.70
+element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，之后的需要用第二种
+本文使用的版本为 1.0.2-beta.70
 
 # bcy
 
@@ -346,7 +347,8 @@ element-plus的版本在1.0.2-beta.59前的可以用第一种方式设置，之�
 
 ### 报错 ERROR in static/js/17.3fae6d307c54ea28dc4d.js from UglifyJs Unexpected token: name (OpenElementStack) [./~/parse5/lib/parser/open-element-stack.js:122,0][static/js/17.3fae6d307c54ea28dc4d.js:3235,6]
 
-在build文件夹中的webpack.base.conf.js中
+在 build 文件夹中的 webpack.base.conf.js 中
+
 ```js
 {
   test: /\.js$/,
@@ -357,11 +359,10 @@ element-plus的版本在1.0.2-beta.59前的可以用第一种方式设置，之�
 }
 ```
 
-### 父元素设置pointer-events: none; 子元素textarea 文字内容超过高度 无法滑动查看
+### 父元素设置 pointer-events: none; 子元素 textarea 文字内容超过高度 无法滑动查看
 
-在textarea 加上 pointer-events:auto; 样式 再加上 disabled="true"
-把 disabled的样式修改一下
-
+在 textarea 加上 pointer-events:auto; 样式 再加上 disabled="true"
+把 disabled 的样式修改一下
 
 ## w
 
@@ -370,12 +371,13 @@ element-plus的版本在1.0.2-beta.59前的可以用第一种方式设置，之�
 ### window.pint() 问题
 
 1. 打印溢出  
-   设置css样式  
+   设置 css 样式  
    横向@page { size: landscape; }
 
    纵向@page{ size: portrait; }
 
-   A3纸@page{ size: A3; }
+   A3 纸@page{ size: A3; }
+
    ```stylus
    @media print {
      @page {
@@ -387,21 +389,27 @@ element-plus的版本在1.0.2-beta.59前的可以用第一种方式设置，之�
      }
    }
    ```
-   还可以用scale缩小
+
+   还可以用 scale 缩小
+
 2. disabled 的元素出现边框  
-   用point-event: none; cursor: not-allowed; 代替
+   用 point-event: none; cursor: not-allowed; 代替
 
 =d3--0316=
 
 ### 谷歌火狐打印背景色丢失
+
 页面加上下面样式
+
 ```css
-/* webkit 为Google Chrome、Safari等浏览器内核 */-webkit-print-color-adjust: exact;
+/* webkit 为Google Chrome、Safari等浏览器内核 */
+-webkit-print-color-adjust: exact;
 print-color-adjust: exact;
 color-adjust: exact;
 ```
 
 ### at-rule or selector expected css(css-rule or selector expected)
+
 在样式穿透>>>前面加上通配符*即
 *>>>
 
@@ -409,21 +417,33 @@ color-adjust: exact;
 
 =d2--0927=
 
-### printing 打印ant-table 会出现间隔过大的问题
+### printing 打印 ant-table 会出现间隔过大的问题
+
 a:
-ant-table 在打印时 .ant-spin-nested-loading 的高度默认100%
-添加以下内容在css中
-.ant-spin-nested-loading {
-  height: auto !important;
-}
+ant-table 在打印时 .ant-spin-nested-loading 的高度默认 100%  
+设置 ant-spin-nested-loading 的 height 可以解决该问题
+
+关键代码
+
 ```tsx
 printing(ref, {
   injectGlobalCss: true,
   scanStyles: false,
-  css: ` 
+  css: `
     .ant-spin-nested-loading {
       height: auto !important;
     }
   `
 }
 ```
+
+# 2023
+
+## w
+
+=d5-0217=
+
+### table td 在低版本设置宽度无效
+
+前文： td 在低版本的浏览器里设置了宽度，但是没有起作用  
+a: 需要设置<colgroup>
