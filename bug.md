@@ -293,7 +293,7 @@ emits: ['confirm']
 =d5--0820=
 
 ### bug: vue3+element-plus 设置中文无效
-
+**简述：**
 在 main.ts 设置无效
 
 ```ts
@@ -339,7 +339,7 @@ export default {
 element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，之后的需要用第二种
 本文使用的版本为 1.0.2-beta.70
 
-# bcy
+## bcy
 
 ## w
 
@@ -347,6 +347,7 @@ element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，�
 
 ### 报错 ERROR in static/js/17.3fae6d307c54ea28dc4d.js from UglifyJs Unexpected token: name (OpenElementStack) [./~/parse5/lib/parser/open-element-stack.js:122,0][static/js/17.3fae6d307c54ea28dc4d.js:3235,6]
 
+报错的原因大概是报错的第三方库中有用到 es6 以上的语法 
 在 build 文件夹中的 webpack.base.conf.js 中
 
 ```js
@@ -372,11 +373,11 @@ element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，�
 
 1. 打印溢出  
    设置 css 样式  
-   横向@page { size: landscape; }
+   横向打印 @page { size: landscape; }
 
-   纵向@page{ size: portrait; }
+   纵向打印 @page { size: portrait; }
 
-   A3 纸@page{ size: A3; }
+   A3 规格打印 @page { size: A3; }
 
    ```stylus
    @media print {
@@ -399,7 +400,7 @@ element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，�
 
 ### 谷歌火狐打印背景色丢失
 
-页面加上下面样式
+css添加一下样式
 
 ```css
 /* webkit 为Google Chrome、Safari等浏览器内核 */
@@ -410,8 +411,9 @@ color-adjust: exact;
 
 ### at-rule or selector expected css(css-rule or selector expected)
 
-在样式穿透>>>前面加上通配符*即
-*>>>
+在样式穿透>>>前面加上通配符*即可
+
+> *>>>
 
 ## w
 
@@ -423,7 +425,7 @@ a:
 ant-table 在打印时 .ant-spin-nested-loading 的高度默认 100%  
 设置 ant-spin-nested-loading 的 height 可以解决该问题
 
-关键代码
+**关键代码**
 
 ```tsx
 printing(ref, {
@@ -444,6 +446,38 @@ printing(ref, {
 =d5-0217=
 
 ### table td 在低版本设置宽度无效
+**简述：**  
+td 在低版本的浏览器里设置了宽度，但是没有起作用  
+**方法：**  
+在 table 中设置 <colgroup>
+```html
+<table>
+  <colgroup>
+    <col width="10%" />
+    <col width="20%" />
+  </col>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+```
 
-前文： td 在低版本的浏览器里设置了宽度，但是没有起作用  
-a: 需要设置<colgroup>
+=d3-0222=
+
+### table 内容超过最大宽度导致出现横向滚动
+
+**简述：**  
+table 的内容过长，超出了可视窗口的宽度，table 被撑开导致出现了横向滚动
+
+**方法：**  
+在 table 中增加以下样式
+```css
+table {
+  width: 100%;
+  word-break: break-all;
+  table-layout: fixed;
+}
+```

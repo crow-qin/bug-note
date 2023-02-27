@@ -1381,12 +1381,12 @@ _获取某一标签上的 css 变量_
 
 =d3--0112=
 
-### 实现文字竖直排列  
+### 实现文字竖直排列
 
 ```css
 writing-mode: vertical-lr;
 text-orientation: upright;
-/* 解决字母数字he'xiang */
+/* 解决字母数字横向显示 */
 ```
 
 ## w
@@ -1414,11 +1414,14 @@ export default {
 </script>
 ```
 
+# 2022
 ## w
 
 =d7--0424=
 
 ### 使用 background 模拟下划线
+
+<span id="20210424">**关键代码**</span>
 
 ```html
 <!-- style -->
@@ -1447,7 +1450,7 @@ export default {
       transparent 18px
     );
     background-size: 100% 20px;
-    background-repeat: repeat-y;
+    background-clip: content-box;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     color-adjust: exact;
@@ -1460,7 +1463,7 @@ export default {
 </div>
 ```
 
-如图：
+如下图：  
 ![img](asset/img/note/20220424-112034.png)
 
 ## w
@@ -1487,29 +1490,91 @@ git push origin HEAD --force #远程提交回退
 
 "dev": "node --max_old_space_size=4096 build/dev-server.js",
 
-=d1-0220
+=d1-0220=
 
 ### div 模拟 textarea
-
+**简述：**  
 由于 textarea 无法自动根据文本内容增加高度  
-而 **contentEditable** 属性可以让元素可编辑，于是使用 **contentEditable** 属性模拟textarea
+而 **contentEditable** 属性可以让元素可编辑，于是使用 **contentEditable** 属性模拟 textarea
 
 react 中使用该属性可能会提示警告  
 增加 **suppressContentEditableWarning** 属性可以排除警告  
 获取数据可以用 **e.currentTarget.innerText** ，或者用 **ref.current.innerHTML**
 
-关键代码
-```jsx
+**实现 placeholder**  
+css 方式  
+使用伪类选择器模拟 placeholder  
+**:not(:focus):empty** 这个的触发场景为：  
+当元素不为聚焦状态且文本内容为空时  
+文本内容可以使用自定义属性 data-_  
+css 有获取属性的方法 attr(_)  
+ps: attr() 目前只在伪元素的 content 上有效
 
-const [data, setData] = useState()
+**关键代码**
+
+```jsx
+const [data, setData] = useState();
 const onChange = (e: any) => {
-  setData(e.currentTarget.innerText)
+  setData(e.currentTarget.innerText);
 };
-return (<div
-  contentEditable={true}
-  onBlur={(e) => onChange(e)}
-  suppressContentEditableWarning
->
-  {data}
-</div>);
+return (
+  <div
+    className="ipt"
+    data-placeholder="备注"
+    contentEditable={true}
+    onBlur={(e) => onChange(e)}
+    suppressContentEditableWarning
+  >
+    {data}
+  </div>
+);
+```
+
+```css
+.ipt:not(:focus):empty::before {
+  content: attr(data-placeholder);
+}
+```
+
+=d4-0223=
+
+### 模拟下划线打印时，顶部有多余的线段
+
+[模拟下划线](#20210424)
+
+**简述：**  
+使用线性渐变模拟下划线效果正常，但是在打印时发现顶部出现了一条实线，具体如下图。
+
+![bug](asset/img/20230223-155314.png)
+
+
+
+**方法：**  
+增加 css 属性： background-clip  
+background-clip 属性规定背景的绘制区域
+
+<table>
+<tbody><tr>
+<th style="width:25%;">值</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>border-box</td>
+<td>背景被裁剪到边框盒。</td>
+</tr>
+
+<tr>
+<td>padding-box</td>
+<td>背景被裁剪到内边距框。</td>
+</tr>
+
+<tr>
+<td>content-box</td>
+<td>背景被裁剪到内容框。</td>
+</tr>
+</tbody></table>
+
+**关键代码**   
+```css
+background-clip: content-box;
 ```

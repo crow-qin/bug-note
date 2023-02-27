@@ -11,7 +11,7 @@
 
 * 单个插槽
 
-```javascript
+```jsx
 // Child
 function Child(props) {
   return
@@ -50,7 +50,7 @@ function Parent() {
   </>
 }
 ```
-# 3c
+# 2023
 ## w
 
 =d5--1112=

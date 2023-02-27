@@ -456,3 +456,32 @@ type Omit<T, K extends string | number | symbol> = {
   [P in Exclude<keyof T, K>]: T[P]
 }
 ```
+
+# 2023
+
+## w
+
+=d4-0223=
+
+### 判断入参的类型
+
+基本类型的参数可以使用 **typeof**
+除了 null 都可以识别出来
+
+```ts
+const a: number = 1  
+typeof a === string  // string
+```
+
+引用数据类型的，如果有构造函数，类可以通过 instanceof 来判断
+
+没有的话可以用 *as* 辅助判断  
+```ts
+// 通过泛型定义通用类型保护函数
+function isOfType<T>(
+  target: unknown,
+  prop: keyof T
+): target is T {
+  return (target as T)[prop] !== undefined;
+}
+```

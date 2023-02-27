@@ -16,7 +16,7 @@ var { createProxyMiddleware } = require('http-proxy-middleware')
 
 ### 升级到 webpack4.46.0
 
-#### 图片不显示 src显示 "[object Module]"
+#### 图片不显示 src 显示 "[object Module]"
 
 在 url-loader的options上添加esModule: true
 ```javascript
