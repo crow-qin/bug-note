@@ -481,3 +481,14 @@ table {
   table-layout: fixed;
 }
 ```
+
+## w
+
+=d3-0315=
+
+### el-input 自动聚焦问题
+
+**简述**
+在弹框显示时自动聚焦到el-input上，使用focus方法，但是一直报错  
+<font color=red>this.$refs.ipt.focus is not a Function</font>  
+原代码如下
