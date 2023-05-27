@@ -1578,3 +1578,12 @@ background-clip 属性规定背景的绘制区域
 ```css
 background-clip: content-box;
 ```
+
+## w
+
+=d4-0309=
+
+### iframe 获取父页面的 localStorage
+
+**方法**
+> window.parent.localStorage
