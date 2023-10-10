@@ -4,15 +4,14 @@
 
 =d3--1222=
 
-### 使用jsx片段
-<br>
-安装  
+### 使用 jsx 片段
+
+安装以下插件  
 babel-helper-vue-jsx-merge-props  
 babel-plugin-transform-vue-jsx
 
-<br>
+.babelrc 文件
 
-.babelrc文件  
 ```
 {
   "plugins": [
@@ -22,6 +21,7 @@ babel-plugin-transform-vue-jsx
 ```
 
 父组件
+
 ```vue
 <template>
 ...
@@ -61,22 +61,22 @@ components: {
 
 =d7--1024=
 
-### vue scoped的原理
+### vue scoped 的原理
 
-在vue文件中的style标签上，有一个特殊的属性：scoped。当一个style标签拥有scoped属性时，它的CSS样式就只能作用于当前的组件，也就是说，该样式只能适用于当前组件元素。通过该属性，可以使得组件之间的样式不互相污染。如果一个项目中的所有style标签全部加上了scoped，相当于实现了样式的模块化。
+在 vue 文件中的 style 标签上，有一个特殊的属性：scoped。当一个 style 标签拥有 scoped 属性时，它的 CSS 样式就只能作用于当前的组件，也就是说，该样式只能适用于当前组件元素。通过该属性，可以使得组件之间的样式不互相污染。如果一个项目中的所有 style 标签全部加上了 scoped，相当于实现了样式的模块化。
 
-**scoped的实现原理**
+**scoped 的实现原理**
 
-vue中的scoped属性的效果主要通过PostCSS转译实现，如下是转译前的vue代码：
+vue 中的 scoped 属性的效果主要通过 PostCSS 转译实现，如下是转译前的 vue 代码：
 
 ```vue
 <style scoped>
 .example {
- color: red;
+  color: red;
 }
 </style>
 <template>
- <div class="example">hi</div>
+  <div class="example">hi</div>
 </template>
 ```
 
@@ -85,12 +85,12 @@ vue中的scoped属性的效果主要通过PostCSS转译实现，如下是转译�
 ```vue
 <style>
 .example[data-v-5558831a] {
- color: red;
+  color: red;
 }
 </style>
 <template>
- <div class="example" data-v-5558831a>hi</div>
+  <div class="example" data-v-5558831a>hi</div>
 </template>
 ```
 
-即：PostCSS给一个组件中的所有dom添加了一个独一无二的**动态属性**，然后，给CSS选择器额外添加一个对应的属性选择器来选择该组件中dom，这种做法使得样式只作用于含有该属性的dom——组件内部dom。
+即：PostCSS 给一个组件中的所有 dom 添加了一个独一无二的**动态属性**，然后，给 CSS 选择器额外添加一个对应的属性选择器来选择该组件中 dom，这种做法使得样式只作用于含有该属性的 dom——组件内部 dom。

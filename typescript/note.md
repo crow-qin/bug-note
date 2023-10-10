@@ -264,9 +264,9 @@ class ClassGS {
   }
 }
 
-const classgs = new ClassGS(1);
-classgs.age = 3;
-console.log(classgs.age);
+const classGS = new ClassGS(1);
+classGS.age = 3;
+console.log(classGS.age);
 ```
 属性装饰器
 验证类是否声明了某个属性
@@ -297,8 +297,8 @@ class ClassI {
     return prefix + ' ' + this[infoType];
   }
 }
-const classi = new ClassI();
-classi.getItem('new', 'age');
+const classI = new ClassI();
+classI.getItem('new', 'age');
 ```
 
 ## w
@@ -334,7 +334,7 @@ type Obj = Record<string, any>
 // }
 
 // 2. 搭配联合类型用法
-tpye RecordMethods = 'GET' | 'POST' | 'PUT'
+type RecordMethods = 'GET' | 'POST' | 'PUT'
 type MethodsAny = Record<RecordMethods, any>
 // 相当于
 // type MethodsAny = {

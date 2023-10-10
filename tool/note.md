@@ -1,7 +1,9 @@
 # 2021
 
 ## w
+
 =d3--0512=
+
 ### tip: Nginx 代理本地打包项目
 
 打开 Nginx 安装路径下的 conf/nginx.conf
@@ -18,11 +20,12 @@ server {
 }
 ```
 
-按需求在 server 增加对应的端口 域名
-location root 在/路径时需要显示的项目路径
-index 需要显示的 html
-proxy_pass 代理转发 所有以 localhost 及 8100 端口发送的请求 都会转到 127.0.0.1:3000 出来
-即后台项目的地址
+按需求在 server 中增加对应的端口，域名  
+location 配置参数
+
+- root 在/路径时需要显示的项目路径
+- index 需要显示的 html
+- proxy_pass 代理转发 所有以 localhost 及 8100 端口发送的请求 都会转到 127.0.0.1:3000 出来,即后台项目的地址
 
 修改后重启 Nginx 配置
 
@@ -30,13 +33,13 @@ proxy_pass 代理转发 所有以 localhost 及 8100 端口发送的请求 都�
 nginx -s reload
 ```
 
-如果nginx服务没有启动 先启动再重启配置
+如果 nginx 服务没有启动 先启动再重启配置
 
 ```cmd
 start nginx
 ```
 
-在hosts文件添加上对应的IP和域名
+在 hosts 文件添加上对应的 IP 和域名
 
 ```hosts
 127.0.0.1 localhost
@@ -49,12 +52,13 @@ start nginx
 
 ### nginx for mac 配置图片服务器
 
-先暂停nginx
+先暂停 nginx
+
 ```shell
 sudo nginx -s stop
 ```
 
-如果无法暂停，查看nginx进程，再杀掉进程
+如果无法暂停，查看 nginx 进程，再杀掉进程
 
 ```shell
 ps aux | grep nginx
@@ -81,14 +85,17 @@ server {
   }
 }
 ```
-这个的意思是可以输入img.com/statics查看到/Users/xxx/www/statics 文件夹中的内容
 
-然后重启nginx
+这里指可以输入 img.com/statics 查看 /Users/xxx/www/statics 文件夹中的内容
+
+然后重启 nginx
+
 ```shell
 sudo nginx -s reload
 ```
-可能会出现 .../logs/nginx.pid" failed (2: No such file or directory)
 
-在nginx的文件夹下的logs文件夹创建nginx.pid
+可能会出现报错 .../logs/nginx.pid" failed (2: No such file or directory)
+
+在 nginx 的文件夹下的 logs 文件夹创建 nginx.pid
 
 再次启动就可以了

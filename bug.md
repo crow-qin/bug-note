@@ -26,12 +26,12 @@ const renameReportFile = new File([file], newFileName, {
 
 ### bug: vue-cli3 打包常见问题
 
-q: vue-cli3 打包后报错
+q: vue-cli3 打包后报错  
 a: 在 vue.config.js 添加 publicPath: './'
 
-q: vue-cli3 打包后空白
-a: 在 route/index.js 修改
-将 history 模式改成 hash 模式
+q: vue-cli3 打包后空白  
+a: 在 route/index.js 修改  
+ 将 history 模式改成 hash 模式
 
 route/index.js
 
@@ -53,35 +53,35 @@ history 模式需要服务器将'404'(无法匹配路径)配置为你的 index �
 
 ### bug: navicat5.7 版本连接 mysql8.0 以上会报 1251 错误
 
-q: navicat5.7 版本连接 mysql8.0 以上会报 1251 错误
+q: navicat5.7 版本连接 mysql8.0 以上会报 1251 错误  
 a: 链接加密方式已经改变 需要修改
 
 1. 进入账号
 
-```javascript
-mysql -u root -p
-```
+   ```javascript
+   mysql -u root -p
+   ```
 
 2. 输入密码
 3. 修改加密方式
 
-```cmd
-mysql> alter user 'root'@'localhost' identified by 'password' password expire never;
-```
+   ```cmd
+   mysql> alter user 'root'@'localhost' identified by 'password' password expire never;
+   ```
 
 4. 修改密码
 
-```cmd
-mysql> alter user 'root'@'localhost' identified with mysql_native_password by '新密码';
-```
+   ```cmd
+   mysql> alter user 'root'@'localhost' identified with mysql_native_password by '新密码';
+   ```
 
 5. 刷新
 
-```cmd
-mysql> flush  privileges;
-```
+   ```cmd
+   mysql> flush  privileges;
+   ```
 
-mysql 命令
+_mysql 命令_
 
 ```cmd
 net stop mysql
@@ -98,7 +98,7 @@ a: tsconfig.json 设置
 
 ```json
 "compilerOptions": {
-"skipLibCheck":true
+  "skipLibCheck":true
 }
 // 忽略所有的声明文件（ *.d.ts）的类型检查
 ```
@@ -109,7 +109,7 @@ a: tsconfig.json 设置
 
 ### <div name="a0524_1">bug: node-sass 下载失败</div>
 
-a: 这次是由于 node 版本与 node-sass 版本不兼容，本机 node13.9， 需要安装 node-sass4.13+
+a: 这次是由于 node 版本与 node-sass 版本不兼容，本机 node13.9， 需要安装 node-sass4.13+  
 具体版本兼容可以查看 github 上的 node-sass
 
 ## w
@@ -130,9 +130,9 @@ a: 因为 scroll-view 添加了 scroll 事件，且直接将滚动条的位置�
 
 =d3--0714=
 
-### bug: vite + webworker + spark-md5 实现文件切片上传出现的一些问题
+### bug: vite + web worker + spark-md5 实现文件切片上传出现的一些问题
 
-1. webworker 在引入时需要从根路径开始写
+1. web worker 在引入时需要从根路径开始写
    不然就写在根路径上
 
 2. worker 文件引入第三方库无法使用 import 导入
@@ -146,8 +146,11 @@ a: 因为 scroll-view 添加了 scroll 事件，且直接将滚动条的位置�
 ### bug: webpack 搭建项目时报错
 
 q: in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance  
-a: 入口文件大于 244kb 影响项目性能
-webpack.config.js 增加
+a:  
+**原因：**
+入口文件大于 244kb 影响项目性能  
+**方法：**
+webpack.config.js 增加以下代码：
 
 ```javascript
 performance: {
@@ -159,8 +162,8 @@ performance: {
 
 ### bug: webpack5.x 使用 webpack-dev-server 无法使用 webpack-dev-server 命令启动服务
 
-webpack5 后不再以 webpack-dev-server 启动服务器
-新的启动命令
+webpack5 后不再以 webpack-dev-server 启动服务器  
+以下为新的启动命令
 
 ```text
 webpack server
@@ -170,30 +173,34 @@ webpack server
 
 ### bug: hard-source-webpack-plugin 在 webpack5 中无法使用
 
-a: webpack5 已经内置了模块缓存，不需要再使用此插件
-可以使用 webpack 的 cache
+a:  
+**原因：**
+webpack5 已经内置了模块缓存，不需要再使用此插件  
+**方法：**
 
-可以给一些 loader 开 cacheDirectory
-cacheDirectory：默认值为 false。当有设置时，指定的目录将用来缓存 loader 的执行结果。之后的 Webpack 构建，将会尝试读取缓存，来避免在每次执行时，可能产生的、高性能消耗的 Babel 重新编译过程。设置空值或者 true 的话，使用默认缓存目录
+1. 使用 webpack 的 cache
 
-```javascript
-...
-use: [
-  {
-    loader: 'bobel-loader',
-    options: {
-      cacheDirectory: true
+2. 给需要的 loader 开启 cacheDirectory  
+    cacheDirectory：默认值为 false。当有设置时，指定的目录将用来缓存 loader 的执行结果。之后的 Webpack 构建，将会尝试读取缓存，来避免在每次执行时，可能产生的、高性能消耗的 Babel 重新编译过程。设置空值或者 true 的话，使用默认缓存目录
+
+   ```javascript
+   ...
+   use: [
+    {
+      loader: 'bobel-loader',
+      options: {
+        cacheDirectory: true
+      }
     }
-  }
-]
-```
+   ]
+   ```
 
-或者使用 cache-loader
-把它放在需要缓存的 loader 前面就行
+3. 使用 cache-loader  
+   把它放在需要缓存的 loader 前面就行
 
-```javascript
-loader: ['cache-loader', 'babel-loader'],
-```
+   ```javascript
+   loader: ['cache-loader', 'babel-loader'],
+   ```
 
 ## w
 
@@ -204,30 +211,34 @@ loader: ['cache-loader', 'babel-loader'],
 a: uni-popup 组件中的滑动事件被禁止冒泡了，去掉@touchmove.prevent="clear" 即可  
 update: 0804 一定要去掉， 在 clear 方法进行判断也不行
 
-### bug: element 的 el-tree 使用@check-change 事件多次触发
+### bug: element 的 el-tree 使用 check-change 事件多次触发
 
-a: 当点击选择框选中状态改变的时候，如果有多级子节点，那就会触发多次（因为子节点的选中状态也被改变）  
-**解决方法**  
-把 check-change 事件改为 check 事件，只有当点击复选框的时候才会触发
+a:  
+**原因：**
+当点击选择框选中状态改变的时候，如果有多级子节点，就会触发多次（因为子节点的选中状态也被改变）  
+**方法：**  
+把 check-change 事件改为 check 事件，只有点击复选框的时候才会触发
 
 =d3--0804=
 
 ### bug: 小程序在 ios 上的回弹问题
 
-a: 对于不需要滑动的页面在 page.json 中对应页面添加 disScroll: true
+a:
 
-```json
-"style": {
-  "disScroll": true
-}
-```
+- 对于不需要滑动的页面在 page.json 中对应页面添加 disScroll: true
 
-对于需要滑动的页面 滑动部分用 scroll-view 等进行模拟，将这个页面固定高度
-在 page.json 中对应页面增加 disScroll: true
+  ```json
+  "style": {
+    "disScroll": true
+  }
+  ```
+
+- 对于需要滑动的页面 滑动部分用 scroll-view 等模拟，页面设置固定高度  
+  在 page.json 中给对应页面增加 disScroll: true
 
 =d4--0805=
 
-### bug: uni 小程序 在 ios 上 textarea 的 placeholder 文字顶部有部分被遮挡
+### bug: uni 小程序 在 ios 上， 会出现 textarea 的 placeholder 文字顶部部分被遮挡的情况
 
 a: 可能是 disableDefaultPadding="true" auto-height="true" 设置了最小高度
 把 disableDefaultPadding, auto-height min-height 去掉大概可以
@@ -238,8 +249,8 @@ a: 可能是 disableDefaultPadding="true" auto-height="true" 设置了最小高�
 
 ### bug: vue-cli@4.5.13 创建的 vue3 + ts + element 在设置自定义主题时报错
 
-错误提示  
-Invalid CSS after "$--colors: map": expected expression (e.g. 1px, bold), was ".deep-merge("
+**错误提示**  
+Invalid CSS after "$--colors: map": expected expression (e.g. 1px, bold), was ".deep-merge("  
 a: 已经下载 node-sass sass-loader，需要下载 sass
 
 ```cmd
@@ -252,18 +263,21 @@ npm i sass -D
 
 ### bug: sass 报错 math.div(100, 2) undefined function
 
-a: math.div 在 sass@1.33.0 才有
-下载大于等于 1.33.0 版本的 sass 就可以了
+a:
+**原因：**
+math.div 在 sass@1.33.0 才能使用  
+**方法：**
+下载大于等于 1.33.0 版本的 sass 可以解决
 
 =d2--0817=
 
-### bug: vue3 + ts 报错 cannot convert object to primitive value
+### bug: vue3 + ts 报错 <font color=#c66>cannot convert object to primitive value</font>
 
 a: 变量名和组件的 ref 命名重复了
 
 =d3--0818=
 
-### bug: ts 使用 js 文件报错 Vue typeScript： Could not find a declaration file for module '**_'. '_**' implicitly has an 'any'
+### bug: ts 使用 js 文件报错 <font color=#c66>Vue typeScript： Could not find a declaration file for module '**_'. '_**' implicitly has an 'any'</font>
 
 tsconfig.json 文件中在 compilerOptions 中添加 "noImplicitAny": false
 
@@ -293,6 +307,7 @@ emits: ['confirm']
 =d5--0820=
 
 ### bug: vue3+element-plus 设置中文无效
+
 **简述：**
 在 main.ts 设置无效
 
@@ -336,7 +351,8 @@ export default {
 </script>
 ```
 
-element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，之后的需要用第二种
+**原因：**  
+element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，之后的需要用第二种  
 本文使用的版本为 1.0.2-beta.70
 
 ## bcy
@@ -345,10 +361,10 @@ element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，�
 
 =d2--1207=
 
-### 报错 ERROR in static/js/17.3fae6d307c54ea28dc4d.js from UglifyJs Unexpected token: name (OpenElementStack) [./~/parse5/lib/parser/open-element-stack.js:122,0][static/js/17.3fae6d307c54ea28dc4d.js:3235,6]
+### 项目报错 ERROR in static/js/17.3fae6d307c54ea28dc4d.js from UglifyJs Unexpected token: name (OpenElementStack) [./~/parse5/lib/parser/open-element-stack.js:122,0][static/js/17.3fae6d307c54ea28dc4d.js:3235,6]
 
-报错的原因大概是报错的第三方库中有用到 es6 以上的语法 
-在 build 文件夹中的 webpack.base.conf.js 中
+报错的原因大概是报错的第三方库中有用到 es6 以上的语法  
+在 build 文件夹中的 webpack.base.conf.js 中增加以下代码
 
 ```js
 {
@@ -362,8 +378,8 @@ element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，�
 
 ### 父元素设置 pointer-events: none; 子元素 textarea 文字内容超过高度 无法滑动查看
 
-在 textarea 加上 pointer-events:auto; 样式 再加上 disabled="true"
-把 disabled 的样式修改一下
+- 在 textarea 加上 pointer-events:auto; 样式 再加上 disabled="true"
+- 把 disabled 的样式修改一下
 
 ## w
 
@@ -400,7 +416,7 @@ element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，�
 
 ### 谷歌火狐打印背景色丢失
 
-css添加一下样式
+css 添加一下样式
 
 ```css
 /* webkit 为Google Chrome、Safari等浏览器内核 */
@@ -411,9 +427,9 @@ color-adjust: exact;
 
 ### at-rule or selector expected css(css-rule or selector expected)
 
-在样式穿透>>>前面加上通配符*即可
+在样式穿透>>>前面加上通配符\*即可
 
-> *>>>
+> \*>>>
 
 ## w
 
@@ -446,10 +462,12 @@ printing(ref, {
 =d5-0217=
 
 ### table td 在低版本设置宽度无效
+
 **简述：**  
 td 在低版本的浏览器里设置了宽度，但是没有起作用  
 **方法：**  
 在 table 中设置 <colgroup>
+
 ```html
 <table>
   <colgroup>
@@ -474,6 +492,7 @@ table 的内容过长，超出了可视窗口的宽度，table 被撑开导致�
 
 **方法：**  
 在 table 中增加以下样式
+
 ```css
 table {
   width: 100%;
@@ -489,6 +508,6 @@ table {
 ### el-input 自动聚焦问题
 
 **简述**
-在弹框显示时自动聚焦到el-input上，使用focus方法，但是一直报错  
+在弹框显示时自动聚焦到 el-input 上，使用 focus 方法，但是一直报错  
 <font color=red>this.$refs.ipt.focus is not a Function</font>  
 原代码如下

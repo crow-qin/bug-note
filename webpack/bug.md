@@ -38,10 +38,13 @@ var { createProxyMiddleware } = require("http-proxy-middleware");
 ```
 
 #### new webpack.optimize.CommonsChunkPlugin 替换为 optimization 的 splitChunks
-分包替换
-  
+
+分包替换功能
+
 #### new webpack.optimize.UglifyJsPlugin 替换为 optimization 的 minimizer
-压缩替换
+
+压缩替换功能
+
 #### 简化控制台信息
 
 增加 stats 对象
@@ -163,13 +166,17 @@ sass版本 1.32.6 有效
 ```
 
 =d4-0309=
-### source-map 用 onerror 定位错误时，直接打开打包后的index.html 报错信息显示不完整
+
+### source-map 用 onerror 定位错误时，直接打开打包后的 index.html 报错信息显示不完整
+
 **简述**  
-source-map 用 onerror 定位错误时，直接打开打包后的index.html 报错信息显示不完整，msg 显示 Script error  
-*打开路径* 
+source-map 用 onerror 定位错误时，直接打开打包后的 index.html 报错信息显示不完整，msg 显示 Script error  
+_打开路径_
+
 > file:///Users/xx/codeSpace/sourcemap-front/dist/index.html
 
 当前显示的错误信息
+
 ```js
 {
   "msg": "Script error.",
@@ -177,13 +184,16 @@ source-map 用 onerror 定位错误时，直接打开打包后的index.html 报�
   "row": 0,
   "col": 0
 }
-```  
+```
+
 **方法**  
 把打包后的文件放到 nginx 上，用 nginx 配置地址去请求  
-正确地址  
+正确地址
+
 > http://localhost:8082/
 
-显示的错误信息  
+显示的错误信息
+
 ```js
 {
     "msg": "Uncaught ReferenceError: a is not defined",
@@ -192,10 +202,12 @@ source-map 用 onerror 定位错误时，直接打开打包后的index.html 报�
     "col": 229,
 }
 ```
+
 **原理**  
 onerror
-如果 A 网站使用 B（CDN） 域名下的js资源，但是JS执行报错了，浏览器只会给出 Script error 错误提示，不会有具体报错信息，原因是：浏览器的同源策略限制。
+如果 A 网站使用 B（CDN） 域名下的 js 资源，但是 JS 执行报错了，浏览器只会给出 Script error 错误提示，不会有具体报错信息，原因是：浏览器的同源策略限制。
 解决方案：
+
 1. script 增加 crossorigin,
-2. 服务端配置：Access-Control-Allow-Origin: b.com 
+2. 服务端配置：Access-Control-Allow-Origin: b.com
 3. 代码劫持后重写

@@ -1,15 +1,15 @@
 # 2021
-## w
 
+## w
 
 =d2--0720=
 
 ### tip: react 的 slot
 
-在组件插入标签 组件内部通过this.props.children 来展示
-只有一个时 children为对象 当有多个时children为数组
+在组件插入标签 组件内部通过 this.props.children 来展示  
+只有一个时 children 为对象 当有多个时 children 为数组
 
-* 单个插槽
+- 单个插槽
 
 ```jsx
 // Child
@@ -28,7 +28,7 @@ function Parent() {
 }
 ```
 
-* 多个插槽
+- 多个插槽
 
 ```javascript
 // Child
@@ -50,7 +50,9 @@ function Parent() {
   </>
 }
 ```
+
 # 2023
+
 ## w
 
 =d5--1112=
