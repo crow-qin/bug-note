@@ -117,51 +117,51 @@ Vue.component("renderComponent", {
 
 1. h 在 vue 中通常作为 createElement 的别称
 
-   **h 函数**
+   **h 函数：**  
    第一个参数 (String | Object | Function)  
-   第二个参数 (Object) 元素的属性
+   第二个参数 (Object) 元素的属性  
    第三个参数 (String | Array) 文本内容, 或者是子元素 render 函数组成的数组
 
 如果觉得太麻烦可以使用插件 通过 jsx 语法来书写
 
 2. 下载插件
 
-```cmd
-yarn add -D @vue/babel-plugin-jsx
-```
+   ```cmd
+   yarn add -D @vue/babel-plugin-jsx
+   ```
 
-在 babel.config.js 配置
+   在 babel.config.js 配置
 
-```javascript
-module.exports = {
-  // 这是原来的预设，cli 搭建项目就有的
-  presets: ["@vue/cli-plugin-babel/preset"],
-  // 需要配置的插件
-  plugins: ["@vue/babel-plugin-jsx"],
-};
-```
+   ```javascript
+   module.exports = {
+     // 这是原来的预设，cli 搭建项目就有的
+     presets: ["@vue/cli-plugin-babel/preset"],
+     // 需要配置的插件
+     plugins: ["@vue/babel-plugin-jsx"],
+   };
+   ```
 
 3. 编写代码
 
-```javascript
-Vue.component('render-component', {
-  render() {
-    return (
-      <div>h1</div>
-    )
-  }
-})
-// 或者
-components: {
-  renderComponent : {
+   ```javascript
+   Vue.component('render-component', {
     render() {
       return (
         <div>h1</div>
       )
     }
-  }
-}
-```
+   })
+   // 或者
+   components: {
+    renderComponent : {
+      render() {
+        return (
+          <div>h1</div>
+        )
+      }
+    }
+   }
+   ```
 
 构建一个 jsx 文件
 
@@ -220,7 +220,7 @@ doc.text("345", {});
 
 =d5--0319=
 
-### tip: 快速生成数组
+### tip: 快速生成数组的方法
 
 ```javascript
 //实现方法一：循环赋值
@@ -269,30 +269,12 @@ console.log(arr11);
 
 ## w
 
-=d2--0323=
-
-### tip: vue 使用 jsx
-
-安装@vue/perset-jsx
-可以使用冒号
-下划线连接修饰符
-ex: vOn:click_once
-
-## w
-
-=d2--0413=
-cross-env 是一个跨平台设置和使用环境变量的脚本
-
-npm-script
-
-## w
-
 =d2--0420=
 
 ### tip：git 暂存文件
 
-git add -A 提交所有变化
-git add -u 提交被修改(modified)和被删除(deleted)文件，不包括新文件(new)
+git add -A 提交所有变化  
+git add -u 提交被修改(modified)和被删除(deleted)文件，不包括新文件(new)  
 git add . 提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件
 
 ## w
@@ -307,19 +289,20 @@ git add . 提交新文件(new)和被修改(modified)文件，不包括被删除(
 
 1. 下载 nodemon
 
-```cmd
-npm i nodemon -S
-```
+   ```cmd
+   npm i nodemon -S
+   ```
 
 2. 修改 package.json
 
 ```json
 "script": {
-  "dev": "nodemon bin/www"
+ "dev": "nodemon bin/www"
 }
 ```
 
-下载 redis
+### 下载 redis
+
 菜鸟教程 <http://www.runoob.com/redis/redis-install.html>
 
 ## w
@@ -333,7 +316,7 @@ rgb 是整数，小数点计算可能会精度丢失
 使用位运算
 (R_ 38 + G _57 + B_ 15) >> 7
 
-### tip: vue3 getCurrentInstance 方法只在开发环境中使用
+### tip: vue3 的 getCurrentInstance 方法只在开发环境中使用
 
 ## w
 
@@ -341,29 +324,18 @@ rgb 是整数，小数点计算可能会精度丢失
 
 ### tip: 1000 桶水，一桶有毒，猪喝水 15 分钟后有结果，一小时检查完需要多少头猪
 
-00000 - 12444
-5
-00 10 20 30 40
-01 11 21 31 41
-02 12 22 32 03
+00000 - 12444  
+5  
+00 10 20 30 40  
+01 11 21 31 41  
+02 12 22 32 03  
 04 13 23 14 24
 
-00 0----
-41 0---1
+00 0----  
+41 0---1  
 22 0-2-1
 
 ## w
-
-=d3--0715=
-
-### tip：react 组件
-
-无状态组件: 没有生命周期，没有状态，多用于展示数据，开销很小
-
-_0729 update_  
-函数组件：返回一个函数作为组件  
-类组件：返回一个类作为组件，可以存在生命周期，也可以作为无状态组件  
-HOC（高阶组件）：组件返回一个组件
 
 =d5--0716=
 
@@ -378,23 +350,23 @@ _0729 update_
 
 ### tip: webpack1.x ->2.x 中的更改
 
-module.loaders 改成了 module.rules
-旧的 loader 配置被更强大的 rules 系统取代，后者允许配置 loader 以及其他更多项。
-为了兼容旧版，module.loaders 语法被保留，旧的属性名依然可以被解析。
+module.loaders 改成了 module.rules  
+旧的 loader 配置被更强大的 rules 系统取代，后者允许配置 loader 以及其他更多项。  
+为了兼容旧版，module.loaders 语法被保留，旧的属性名依然可以被解析。  
 新的命名约定更易于理解并且是升级配置使用 module.rules 的好理由。
 
 ### tip: 了解 webpack 的 module
 
-mudule 是对于不同的模块的处理规则。
-module 的 rules 属性代表不同的处理规则。rules 是一个对象。
-对象的属性有 test、use、exclude、include。
+module 是对于不同的模块的处理规则。  
+module 的 rules 属性代表不同的处理规则。rules 是一个对象。  
+对象的属性有 test、use、exclude、include。  
 use 属性是对象数组。数组的话，是从后往前解析。
 
 对象的参数为 loader/options。
 
 1 是 2 的简写形式。3 是 4 的简写形式。
 
-1.
+写法 1
 
 ```javascript
 module:{
@@ -409,7 +381,7 @@ module:{
 },
 ```
 
-2.
+写法 2
 
 ```javascript
 module: {
@@ -422,7 +394,7 @@ module: {
 }
 ```
 
-3.
+写法 3
 
 ```javascript
 {
@@ -432,7 +404,7 @@ module: {
 },
 ```
 
-4.
+写法 4
 
 ```javascript
 {
@@ -443,8 +415,8 @@ module: {
 ```
 
 总结：
-Rule.loader 是 Rule.use[ {loader} ]简写
-Rule.options 是 Rule.use[ {options} ]缩写
+Rule.loader 是 Rule.use[ {loader} ]简写，  
+Rule.options 是 Rule.use[ {options} ]缩写。
 
 完整写法
 
@@ -461,21 +433,6 @@ module: {
   ];
 }
 ```
-
-### tip: React 执行 setState 后无法获取最新 state 数据，增加回调函数
-
-```javascript
-setState({}, () => {
-  // 获取最新数据
-});
-```
-
-_0727-update_
-React 的 setState 函数并不是异步，只是在某些操作中没有立即更新
-合成事件: React 为解决跨平台，兼容性问题， 将原生事件重新封装进行代理，如 onClick
-总结: setState 只在合成事件和钩子函数中是“异步”的，在原生事件和 setTimeout 中都是同步的。setState 的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形成了所谓的“异步”，当然可以通过第二个参数 setState(partialState, callback) 中的 callback 拿到更新后的结果。setState 的批量更新优化也是建立在“异步”（合成事件、钩子函数）之上的，在原生事件和 setTimeout 中不会批量更新，在“异步”中如果对同一个值进行多次 setState，setState 的批量更新策略会对其进行覆盖，取最后一次的执行，如果是同时 setState 多个不同的值，在更新时会对其进行合并批量更新。
-
-链接：<https://zhuanlan.zhihu.com/p/39512941>
 
 ## w
 
@@ -513,119 +470,15 @@ import { a, b } from "lib.js";
 console.log(a);
 ```
 
-对于字面量，单 class，function，变量 可以使用 export default 进行导出，对于复合对象字面量包括数组，对象禁止使用
-
-=d3-0728=
-
-### tip: React Hook
-
-适用于函数式组件  
-**useState**  
-初始化 state，简化 setState
-
-```javascript
-const [value, setValue] = useState(0);
-setValue(value + 1);
-console.log(value); // 0
-// 和setState一样在生命周期不会立即更新
-```
-
-**useEffect**  
-useEffect(()=> { Async Action }, ?[dependencies]) // 第二参数可选
-
-1. 多个 useEffect 的回调 按先后顺序执行
-
-2. useEffect 不带第二参数， 会在每次 render 后执行
-
-3. useEffect 第二参数为空数组，只会在第一次 render 后执行
-
-```javascript
-useEffect(() => {
-  console.log("mount");
-}, []);
-```
-
-4. useEffect 的第二个参数有依赖项，函数会在在依赖项发生变化时触发
-
-```javascript
-const [value, setValue] = useState(0);
-useEffect(() => {
-  console.log(value);
-}, [value]);
-useEffect(() => {
-  setValue(2);
-}, []);
-```
-
-5. useEffect 第一个参数返回一个匿名函数， 相当于 componentUnMount 在组件卸载时触发
-
-```javascript
-useEffect(() => {
-  return () => {
-    consle.log("组件卸载");
-  };
-}, []);
-```
-
-**useContext**  
-跨组件共享数据的钩子函数  
-const myContext = useContext(context)  
-_content 是 React.createContext() 返回的对象_
-
-```javascript
-const MyContext = React.createContext()
-// 父
-function Parents() {
-  return (
-    <MyContext.Provider value={{name: '哈哈'}}>
-      <Child/>
-    </MyContext.Provider>
-  )
-}
-
-function Child() {
-  const { name } = useContext(MyContext)
-  reurn <div>{name}</div>
-}
-```
-
-**useReducer**  
-const [state, dispatch] = useReducer(reducer, initState)
-
-```javascript
-function reducer(state, action) {
-  if (action.flag) {
-    return { count: state.count + 1 };
-  }
-  return { count: state.count - 1 };
-}
-function DEMO() {
-  const initState = { count: 1 };
-  const [state, dispatch] = useReducer(reducer, initState);
-  return (
-    <div>
-      <div>Count: {state.count}</div>
-      <button onClick={dispatch(state, { flag: true })}>+</button>
-    </div>
-  );
-}
-```
-
-_0729 update_
-
-**useMemo**  
-类似 vue 的 computed 依赖项发生改变，会触发 useMemo 重新计算
-const memorizedValue = useMemo(()=> { return a + 1 }, [a])
-
-useMemo 会在 render 前执行
-useMemo 没有依赖项的，每次渲染都会执行
+对于字面量，单 class，function，变量可以使用 export default 进行导出，对于复合对象字面量包括数组，对象禁止使用
 
 =d4--0729=
 
 ### <span id="a0729_1">**webpack5 的 HMR**</span>
 
-下载 webpack-dev-server
-在 webpack.config.js 增加
+下载 webpack-dev-server。
+
+在 webpack.config.js 增加以下代码：
 
 ```javascript
 module.exports = {
@@ -644,9 +497,9 @@ module.exports = {
 }
 ```
 
-那个模块需要热重载就在那个模块写
-一般在入口文件中写，不用考虑太多
-index.js
+哪个模块需要热重载就在哪个模块写，  
+一般在入口文件中写，不用考虑太多。  
+index.js 增加以下代码：
 
 ```javascript
 if (module.hot) {
@@ -681,25 +534,11 @@ if (module.hot) {
 <span id="test">目标位置</span>  
 在 typora 编辑完需要按住 ctrl 再单击才会跳转
 
-=d5--0730=
-
-### tip: react hook
-
-**useCallback**
-把回调函数和依赖数组作为参数传入 useCallback
-会返回该函数的 memorized 值，该函数仅在依赖数组发生变化才会改变
-
-```javascript
-const usecallback = useCallback(() => {
-  //
-}, []);
-```
-
 ## w
 
 =d1--0802=
 
-### tip: 创建多个 git sshkey
+### tip: 创建多个 git ssh key
 
 创建 key
 
@@ -707,11 +546,11 @@ const usecallback = useCallback(() => {
 ssh-keygen -t rsa -C email.com
 ```
 
-回车
-输入别名
-回车
-输入密码
-回车
+回车  
+输入别名  
+回车  
+输入密码  
+回车  
 再次输入密码
 
 在~/.ssh 文件夹下创建 config 文件
@@ -731,9 +570,11 @@ ssh -T git@github.com
 // git@ 加别名
 ```
 
-如果成功会提示 Hi xxx! You've successfully authenticated,
+如果成功会有以下提示
 
-使用
+> Hi xxx! You've successfully authenticated,
+
+使用：  
 原来的真实地址改为别名
 
 =d5--0806=
@@ -751,56 +592,42 @@ ssh -T git@github.com
 
 ### tip: svg-sprite-loader 实现 icon 组件
 
-1. 下载插件
-2. 写 vue.config.js
+1. 下载插件 svg-sprite-loader
+2. vue.config.js 增加以下代码：
 
-```javascript
-{
-  test: /\.svg$/,
-  loader: 'svg-sprite-loader',
-  include: path.resolve(__dirname, './src/assets/icons') // 只带自己人玩
-}
-```
+   ```javascript
+   {
+    test: /\.svg$/,
+    loader: 'svg-sprite-loader',
+    include: path.resolve(__dirname, './src/assets/icons') // 只带自己人玩
+   }
+   ```
 
 3. 写 icon 组件
 
-```vue
-<template>
-  <svg :class="svgClass">
-    <use :xlink:href="`#${name}`"></use>
-  </svg>
-</template>
+   ```vue
+   <template>
+     <svg :class="svgClass">
+       <use :xlink:href="`#${name}`"></use>
+     </svg>
+   </template>
 
-<script>
-export default {
-  name: "icon",
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
-  },
-};
-</script>
-```
+   <script>
+   export default {
+     name: "icon",
+     props: {
+       name: {
+         type: String,
+         required: true,
+       },
+     },
+   };
+   </script>
+   ```
 
 4. 引入组件
 
 ## w
-
-=d4--0826=
-
-### tip: vue3 的一些小改变
-
-vue2 的 emit('input') 需要改成 emit('update:value')
-input 自定义事件
-
-```vue
-// vue2
-<child @input="handleInput" />
-// vue3
-<child @update:value="value" />
-```
 
 =d5--0827=
 
@@ -818,7 +645,7 @@ h( Child, {}, { default: () => h(...), slotName: () => h(...) })
 
 =d7--0829
 
-proxy 代理
+### webpack 的 proxy 代理
 
 ```js
 '/cma': {
@@ -830,7 +657,11 @@ proxy 代理
 },
 ```
 
+以上为报错代码
+
 请求 /cma/lifetouch-cma-api/api/refresh-token 报 404
+
+修改代码为以下内容；
 
 ```js
 '/lifetouch-cma-api': {
@@ -841,10 +672,12 @@ proxy 代理
 
 请求 /lifetouch-cma-api/api/refresh-token 成功
 
-获取 permission 结构 xxx：[]，  
-存入 permission 数组  
-根据权限遍历 route 数组生成新的 route 数组  
-对 route 数组进行计数，没有子模块的模块不需要显示
+### cma 动态路由思路
+
+获取 permission 结构 xxx：[]；  
+存入 permission 数组；  
+根据权限遍历 route 数组生成新的 route 数组；  
+对 route 数组进行计数，没有子模块的模块不需要显示。
 
 ## w
 
@@ -865,7 +698,7 @@ router.matcher = newRouter.matcher;
 
 ### tip: vue 项目对操作进行权限控制
 
-a:
+**方法：**
 
 1. 封装 button 组件, 根据传入的权限决定显示，提示，通过。  
    优点：封装后只要传入参数即可判断，  
@@ -873,7 +706,6 @@ a:
 2. 使用自定义指令  
    只能修改状态
 
-<br/>
 
 ### tip: git commit message 的一些规范
 
@@ -947,18 +779,18 @@ Observable 可观察对象
 
 #### 创建出来的数据流是一种可观察的序列，可以被订阅，也可以被用来做一些转换操作，比如
 
-改变数据形态：map, mapTo, pluck
-过滤一些值：filter, skip, first, last, take
-时间轴上的操作：delay, timeout, throttle, debounce, audit, bufferTime
-累加：reduce, scan
-异常处理：throw, catch, retry, finally
-条件执行：takeUntil, delayWhen, retryWhen, subscribeOn, ObserveOn
+改变数据形态：map, mapTo, pluck  
+过滤一些值：filter, skip, first, last, take  
+时间轴上的操作：delay, timeout, throttle, debounce, audit, bufferTime  
+累加：reduce, scan  
+异常处理：throw, catch, retry, finally  
+条件执行：takeUntil, delayWhen, retryWhen, subscribeOn, ObserveOn  
 转接：switch
 
 #### 也可以对若干个数据流进行组合
 
-race，预设条件为其中一个数据流完成
-forkJoin，预设条件为所有数据流都完成
+race，预设条件为其中一个数据流完成  
+forkJoin，预设条件为所有数据流都完成  
 zip，取各来源数据流最后一个值合并为对象
 
 例子：返回按住按钮到松开的时间段
@@ -981,8 +813,8 @@ time.subscribe((data) => {
 
 ### tip: vscode 设置 eslint 格式化代码
 
-安装 eslint
-setting.json 增加
+安装 eslint  
+setting.json 增加以下内容
 
 ```json
 "eslint.nodeEnv": "true", //保存时候自动格式化，不建议设置。
@@ -992,7 +824,8 @@ setting.json 增加
 
 ### tip: vue 的 provide/inject
 
-a: 父组件修改依赖注入的值 子组件没有获取到更新后的值
+**简述：**  
+父组件修改依赖注入的值 子组件没有获取到更新后的值
 
 ```js
 data () {
@@ -1020,27 +853,27 @@ inject: ["test"]
 
 ### base64 的优缺点
 
-base64 编码: 一种将图片数据转化为文本数据的技术
-**优点**
-文本格式，占用内存较小，转换后大小约为原来的 1/3，减少浏览器的消耗
-网页使用 base64 资源，减少了 http 请求
-base64 适用的平台广泛
-编码解码方便
+base64 编码: 一种将图片数据转化为文本数据的技术。  
+**优点：** 
+文本格式，占用内存较小，转换后大小约为原来的 1/3，减少浏览器的消耗；  
+网页使用 base64 资源，减少了 http 请求；  
+base64 适用的平台广泛；  
+编码解码方便。
 
-**缺点**
-base64 文本内容较长，储存在数据库压力较大
-base64 文本内容较长，在页面上使用会使页面加载缓慢
-base64 无法缓存
-8-12kb 以下适用 base64
+**缺点：**  
+base64 文本内容较长，储存在数据库压力较大；  
+base64 文本内容较长，在页面上使用会使页面加载缓慢；  
+base64 无法缓存；  
+8-12kb 以下适用 base64。  
 
 ### 下载 pdf
 
 #### node 创建
 
-pdfkit 绘制完成后，
-创建一个 steam，将数据转成流，
-新建文件，将流存到文件中，
-再将文件转成数据流
+pdfkit 绘制完成后，  
+创建一个 steam，将数据转成流，  
+新建文件，将流存到文件中，  
+再将文件转成数据流。
 
 ```js
 const getStream = async function (doc) {
@@ -1081,12 +914,12 @@ const getStream = async function (doc) {
 }
 ```
 
-如果存在 window.navigator.msSaveOrOpenBlob 方法，直接下载数据流，  
-否则使用 window.URL.createObjectURL 创建一个临时 uri
+如果存在 window.navigator.msSaveOrOpenBlob 方法，直接下载数据流；  
+否则使用 window.URL.createObjectURL 创建一个临时 uri。
 
-Internet Explorer 10 的 msSaveBlob 和 msSaveOrOpenBlob 方法允许用户在客户端上保存文件，方法如同从 Internet 下载文件，这是此类文件保存到“下载”文件夹的原因。
-用法：
-1.msSaveBlob：只提供一个保存按钮
+Internet Explorer 10 的 msSaveBlob 和 msSaveOrOpenBlob 方法允许用户在客户端上保存文件，方法如同从 Internet 下载文件，这是此类文件保存到“下载”文件夹的原因。  
+用法：  
+1.msSaveBlob：只提供一个保存按钮  
 2.msSaveOrOpenBlob：提供保存和打开按钮
 
 URL.createObjectURL() 静态方法会创建一个 DOMString，其中包含一个表示参数中给出的对象的 URL。这个 URL 的生命周期和创建它的窗口中的 document 绑定。这个新的 URL 对象表示指定的 File 对象或 Blob 对象。
@@ -1106,11 +939,11 @@ window.open(data, "_blank");
 
 可以创建 a 标签下载
 
-### vnode
+### vNode
 
-vue 为什么不能用 index 作为 key
-会出现错误的复用
-以及错误复用后的调整渲染
+vue 为什么不能用 index 作为 key  
+会出现错误的复用  
+以及错误复用后的调整渲染  
 即出现 2 次 render
 
 ### Promise 实现原理
@@ -1119,7 +952,7 @@ vue 为什么不能用 index 作为 key
 说到底，Promise 也还是使用回调函数，只不过是把回调封装在了内部，使用上一直通过 then 方法的链式调用，使得多层的回调嵌套看起来变成了同一层的，书写上以及理解上会更直观和简洁一些。
 
 大致逻辑
-调用 then 方法，将想要在 Promise 异步操作成功时执行的 onFulfilled 放入 callbacks 队列，其实也就是注册回调函数，可以向观察者模式方向思考；
+调用 then 方法，将想要在 Promise 异步操作成功时执行的 onFulfilled 放入 callbacks 队列，其实也就是注册回调函数，可以向观察者模式方向思考；  
 创建 Promise 实例时传入的函数会被赋予一个函数类型的参数，即 resolve，它接收一个参数 value，代表异步操作返回的结果，当异步操作执行成功后，会调用 resolve 方法，这时候其实真正执行的操作是将 callbacks 队列中的回调一一执行；
 
 ## w
@@ -1128,39 +961,39 @@ vue 为什么不能用 index 作为 key
 
 ### webpack 打包加速优化
 
-1. 提高热更新速度
+1. 提高热更新速度  
    在.env.development 环境变量中配置
-   VUE_CLI_BABEL_TRANSPILE_MODULES: true
+   > VUE_CLI_BABEL_TRANSPILE_MODULES: true
 
-原理
-利用插件，在开发环境中将异步组件变为同步引入，也就是 import()转化为 require())
-一般页面到达几十上百，热更新慢的情况下需要用到。
-webpack5 即将发布，大幅提高了打包和编译速度
+   **原理：**  
+   利用插件，在开发环境中将异步组件变为同步引入，也就是将 import()转化为 require()。  
+   一般页面到达几十上百，热更新慢的情况下需要用到。  
+   webpack5 即将发布，大幅提高了打包和编译速度。
 
-2. 分析打包时长
-   webpack-bundle-analyzer 分析打包后的模块文件大小
-   速度分析插件 speed-measure-webpack-plugin
+2. 分析打包时长  
+   webpack-bundle-analyzer 分析打包后的模块文件大小；  
+   speed-measure-webpack-plugin 速度分析插件。
 
-```cmd
-npm install --save-dev speed-measure-webpack-plugin
-```
+   ```cmd
+   npm install --save-dev speed-measure-webpack-plugin
+   ```
 
-```js
-//vue.config.js
-//导入速度分析插件
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-//实例化插件
-const smp = new SpeedMeasurePlugin();
+   ```js
+   //vue.config.js
+   //导入速度分析插件
+   const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+   //实例化插件
+   const smp = new SpeedMeasurePlugin();
 
-module.exports = {
-  configureWebpack: smp.wrap({
-    plugins: [
-      // 这里是自己项目里需要使用到的其他插件
-      new yourOtherPlugin(),
-    ],
-  }),
-};
-```
+   module.exports = {
+     configureWebpack: smp.wrap({
+       plugins: [
+         // 这里是自己项目里需要使用到的其他插件
+         new yourOtherPlugin(),
+       ],
+     }),
+   };
+   ```
 
 3. 较耗时：代码的编译或压缩（转化 AST 树 -> 遍历 AST 树 -> 转回 JS 代码）
    编译 JS、CSS 的 Loader
@@ -1168,73 +1001,77 @@ module.exports = {
 
 4. 缓存：让二次构建时，不需要再去做重复的工作[没有变化的直接使用缓存，速度更快]
 
-a. 开启 Loader、压缩插件的 cache 配置【如 babel-loader 的 cacheDirectory：true】，uglifyjs-webpack-plugin【如 cache: true】，构建完将缓存存放在 node_modules/.cache/..。
+   a. 开启 Loader、压缩插件的 cache 配置  
+   如 babel-loader 的 cacheDirectory：true，  
+   uglifyjs-webpack-plugin【如 cache: true，  
+   构建完缓存会存放在 node_modules/.cache/..。
 
-b. cache-loader：将 loader 的编译结果写入硬盘缓存，再次构建如果文件没有发生变化则会直接拉取缓存,添加在时间长的 loader 的最前面。
+   b. 使用 cache-loader  
+   cache-loader 会将 loader 的编译结果写入硬盘缓存，再次构建如果文件没有发生变化则会直接拉取缓存,添加在时间长的 loader 的最前面。
 
-```js
-module: {
-  rules: [
-    {
-      test: /\.ext$/,
-      use: ['cache-loader', ...loaders],
-      include: path.resolve('src'),
-    },
-  ],
-},
-```
+   ```js
+   module: {
+     rules: [
+       {
+         test: /\.ext$/,
+         use: ['cache-loader', ...loaders],
+         include: path.resolve('src'),
+       },
+     ],
+   },
+   ```
 
 5. 多核：充分利用了硬件本身的优势
 
-a. happypack：开启系统 CPU 最大线程，通过插件将 loader 包装，暴露 id，直接 module.rules 引用该 id。
+   a. happypack：开启系统 CPU 最大线程，通过插件将 loader 包装，暴露 id，直接 module.rules 引用该 id。
 
-```js
-//安装：npm install happypack -D
-//引入：
-const Happypack = require("happypack");
-exports.plugins = [
-  new Happypack({
-    id: "jsx",
-    threads: 4,
-    loaders: ["babel-loader"],
-  }),
+   ```js
+   //安装：npm install happypack -D
+   //引入：
+   const Happypack = require("happypack");
+   exports.plugins = [
+     new Happypack({
+       id: "jsx",
+       threads: 4,
+       loaders: ["babel-loader"],
+     }),
 
-  new Happypack({
-    id: "styles",
-    threads: 2,
-    loaders: ["style-loader", "css-loader", "less-loader"],
-  }),
-];
+     new Happypack({
+       id: "styles",
+       threads: 2,
+       loaders: ["style-loader", "css-loader", "less-loader"],
+     }),
+   ];
 
-exports.module.rules = [
-  {
-    test: /\.js$/,
-    use: "Happypack/loader?id=jsx",
-  },
+   exports.module.rules = [
+     {
+       test: /\.js$/,
+       use: "Happypack/loader?id=jsx",
+     },
 
-  {
-    test: /\.less$/,
-    use: "Happypack/loader?id=styles",
-  },
-];
-```
+     {
+       test: /\.less$/,
+       use: "Happypack/loader?id=styles",
+     },
+   ];
+   ```
 
-b. thread-loader：添加在此 loader 后面的放入单独的 worker 池里运行，配置简单
+   b. thread-loader：添加在 thread-loader 后面的loader将放入单独的 worker 池里运行，配置简单
 
-```js
-//安装：npm install thread-loader -D
-module.exports = {
-  module: {
-    //我的项目中,babel-loader耗时比较长，所以我给它配置 thread-loader
-    rules: [
-      {
-        test: /\.jsx?$/,
-        use: ["thread-loader", "cache-loader", "babel-loader"],
-      },
-    ],
-  },
-};
-```
+   ```js
+   //安装：npm install thread-loader -D
+   module.exports = {
+     module: {
+       //我的项目中,babel-loader耗时比较长，所以我给它配置 thread-loader
+       rules: [
+         {
+           test: /\.jsx?$/,
+           use: ["thread-loader", "cache-loader", "babel-loader"],
+         },
+       ],
+     },
+   };
+   ```
 
 6. cdn
 
@@ -1244,32 +1081,32 @@ module.exports = {
 
 9. 代码分割
 
-10. loader 使用 include，excludejians
-    更精确的指定/排除目录，减少不必要的遍历
+10. loader 使用 include，exclude，  
+    更精确的指定/排除目录，减少不必要的遍历。
 
 11. webpack-parallel-uglify-plugin 插件来压缩代码
 
-a. 优化原理
-（1）默认情况下 webpack 使用 UglifyJS 插件进行代码压缩，但由于其采用单线程压缩，速度很慢。
+    a. 优化原理  
+    （1）默认情况下 webpack 使用 UglifyJS 插件进行代码压缩，但由于其采用单线程压缩，速度很慢。
 
-（2）我们可以改用 webpack-parallel-uglify-plugin 插件，它可以并行运行 UglifyJS 插件，从而更加充分、合理的使用 CPU 资源，从而大大减少构建时间。
+    （2）我们可以改用 webpack-parallel-uglify-plugin 插件，它可以并行运行 UglifyJS 插件，从而更加充分、合理的使用 CPU 资源，从而大大减少构建时间。
 
 =d3--1020=
 
 ### vue3 的优势
 
-源码体积的优化
+源码体积的优化  
 重写了虚拟 dom
 
 响应式系统的升级
-用 Proxy 和 Reflect 来代替 vue2 中的 Object.defineproperty()方法来重写响应式
-vue3 中可以监听动态新增的属性
-vue3 中可以监听删除的属性
-vue3 中可以监听数组的索引和 length 属性
+用 Proxy 和 Reflect 来代替 vue2 中的 Object.defineProperty()方法来重写响应式，  
+vue3 中可以监听动态新增的属性，  
+vue3 中可以监听删除的属性，  
+vue3 中可以监听数组的索引和 length 属性。
 
-代码编译优化
-使用了 组合 API 来代替 vue2 中的 Options API
-它是基于函数的 api，可以更灵活的组织组件的逻辑。
+代码编译优化  
+使用了 组合 API 来代替 vue2 中的 Options API，  
+它是基于函数的 api，可以更灵活的组织组件的逻辑。  
 解决 options api 在大型项目中，options api 不好拆分和重用的问题。
 
 组件内不需要根节点了，使用 fragment(代码片段)代替了，fragment(代码片段)不会在页面显示
@@ -1353,7 +1190,7 @@ _获取任意位置的 CSS 变量_
 ```js
 var divEle = document.querySelector("div");
 var divSty = window.getComputedStyle(divEle);
-var diveleVal = divSty.getPropertyValue("---testColor");
+var divEleVal = divSty.getPropertyValue("---testColor");
 ```
 
 _获取某一标签上的 css 变量_
@@ -1395,7 +1232,7 @@ text-orientation: upright;
 
 ### el + vue 手动关闭 el-date-picker
 
-有时候手动调用控件的关闭隐藏控件事件官网 api 中没有此事件，查看源码发现有一个 handleClose
+有手动调用控件的关闭隐藏控件事件的需求，但是官网 api 中没有此事件，查看源码发现有一个 handleClose
 
 ```vue
 <template>
@@ -1415,6 +1252,7 @@ export default {
 ```
 
 # 2022
+
 ## w
 
 =d7--0424=
@@ -1493,6 +1331,7 @@ git push origin HEAD --force #远程提交回退
 =d1-0220=
 
 ### div 模拟 textarea
+
 **简述：**  
 由于 textarea 无法自动根据文本内容增加高度  
 而 **contentEditable** 属性可以让元素可编辑，于是使用 **contentEditable** 属性模拟 textarea
@@ -1547,8 +1386,6 @@ return (
 
 ![bug](asset/img/20230223-155314.png)
 
-
-
 **方法：**  
 增加 css 属性： background-clip  
 background-clip 属性规定背景的绘制区域
@@ -1574,7 +1411,8 @@ background-clip 属性规定背景的绘制区域
 </tr>
 </tbody></table>
 
-**关键代码**   
+**关键代码：**
+
 ```css
 background-clip: content-box;
 ```
@@ -1585,5 +1423,6 @@ background-clip: content-box;
 
 ### iframe 获取父页面的 localStorage
 
-**方法**
+**方法：**
+
 > window.parent.localStorage

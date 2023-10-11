@@ -77,9 +77,6 @@ envPrefix: 'ENV_'
 
 环境变量以 ENV\_ 开头才可以注入
 
-绑定 contentMenu 为排班增加右键功能，增强排班编辑的功能  
-使用 react-router + react-router-dom 构建项目路由表，统一配置路由
-
 =d1-0227=
 
 ### css 模块化

@@ -1,3 +1,5 @@
+# 2021
+
 ## w
 
 =d4-0408=
@@ -31,7 +33,7 @@ a: 在 vue.config.js 添加 publicPath: './'
 
 q: vue-cli3 打包后空白  
 a: 在 route/index.js 修改  
- 将 history 模式改成 hash 模式
+将 history 模式改成 hash 模式
 
 route/index.js
 
@@ -53,8 +55,11 @@ history 模式需要服务器将'404'(无法匹配路径)配置为你的 index �
 
 ### bug: navicat5.7 版本连接 mysql8.0 以上会报 1251 错误
 
-q: navicat5.7 版本连接 mysql8.0 以上会报 1251 错误  
-a: 链接加密方式已经改变 需要修改
+**原因：**  
+navicat5.7 版本连接 mysql8.0 以上会报 1251 错误
+
+**方法：**  
+链接加密方式已经改变，需要修改
 
 1. 进入账号
 
@@ -92,7 +97,7 @@ net start mysql
 
 =d5--0521=
 
-### bug: typeScript @types/webpack/index.d.ts 报错
+### bug: typescript @types/webpack/index.d.ts 报错
 
 a: tsconfig.json 设置
 
@@ -109,7 +114,7 @@ a: tsconfig.json 设置
 
 ### <div name="a0524_1">bug: node-sass 下载失败</div>
 
-a: 这次是由于 node 版本与 node-sass 版本不兼容，本机 node13.9， 需要安装 node-sass4.13+  
+a: 这次是由于 node 版本与 node-sass 版本不兼容，本机 node版本为13.9， 需要安装 node-sass4.13+  
 具体版本兼容可以查看 github 上的 node-sass
 
 ## w
@@ -132,12 +137,12 @@ a: 因为 scroll-view 添加了 scroll 事件，且直接将滚动条的位置�
 
 ### bug: vite + web worker + spark-md5 实现文件切片上传出现的一些问题
 
-1. web worker 在引入时需要从根路径开始写
-   不然就写在根路径上
+1. web worker 在引入时文件时需要从根路径开始写，  
+   不然就把 web worker 文件写在根路径上。
 
-2. worker 文件引入第三方库无法使用 import 导入
-   直接导入会报错 找不到模块
-   使用 self.importScripts()
+2. worker 文件引入第三方库无法使用 import 导入，  
+   直接导入会报错，找不到模块，  
+   使用 self.importScripts()。
 
 ## w
 
@@ -173,9 +178,9 @@ webpack server
 
 ### bug: hard-source-webpack-plugin 在 webpack5 中无法使用
 
-a:  
-**原因：**
+**原因：**  
 webpack5 已经内置了模块缓存，不需要再使用此插件  
+
 **方法：**
 
 1. 使用 webpack 的 cache
@@ -213,8 +218,7 @@ update: 0804 一定要去掉， 在 clear 方法进行判断也不行
 
 ### bug: element 的 el-tree 使用 check-change 事件多次触发
 
-a:  
-**原因：**
+**原因：**  
 当点击选择框选中状态改变的时候，如果有多级子节点，就会触发多次（因为子节点的选中状态也被改变）  
 **方法：**  
 把 check-change 事件改为 check 事件，只有点击复选框的时候才会触发
@@ -250,7 +254,8 @@ a: 可能是 disableDefaultPadding="true" auto-height="true" 设置了最小高�
 ### bug: vue-cli@4.5.13 创建的 vue3 + ts + element 在设置自定义主题时报错
 
 **错误提示**  
-Invalid CSS after "$--colors: map": expected expression (e.g. 1px, bold), was ".deep-merge("  
+Invalid CSS after "$--colors: map": expected expression (e.g. 1px, bold), was ".deep-merge("
+
 a: 已经下载 node-sass sass-loader，需要下载 sass
 
 ```cmd
@@ -263,10 +268,9 @@ npm i sass -D
 
 ### bug: sass 报错 math.div(100, 2) undefined function
 
-a:
-**原因：**
+**原因：**  
 math.div 在 sass@1.33.0 才能使用  
-**方法：**
+**方法：**  
 下载大于等于 1.33.0 版本的 sass 可以解决
 
 =d2--0817=
@@ -277,7 +281,7 @@ a: 变量名和组件的 ref 命名重复了
 
 =d3--0818=
 
-### bug: ts 使用 js 文件报错 <font color=#c66>Vue typeScript： Could not find a declaration file for module '**_'. '_**' implicitly has an 'any'</font>
+### bug: ts 使用 js 文件报错 <font color=#c66>Vue typeScript： Could not find a declaration file for module 'xxx' implicitly has an 'any'</font>
 
 tsconfig.json 文件中在 compilerOptions 中添加 "noImplicitAny": false
 
@@ -293,9 +297,15 @@ tsconfig.json 文件中在 compilerOptions 中添加 "noImplicitAny": false
 
 ### bug: 在 vue 中使用\_this = this,报错 Unexpected aliasing of 'this' to local variable @typescript-eslint/no-this-alias
 
-a: 原因是 eslint 为了防止 this 变量和局部变量混淆（大概吧）
+**原因：**  
+eslint 为了防止 this 变量和局部变量混淆（大概吧）
 
-解决方法：在.eslintrc.js 中的 rules 添加 "@typescript-eslint/no-this-alias": ["off"]
+**方法：**  
+在.eslintrc.js 中的 rules 添加以下内容
+
+```js
+ "@typescript-eslint/no-this-alias": ["off"]
+```
 
 =d4--0819=
 
@@ -352,7 +362,7 @@ export default {
 ```
 
 **原因：**  
-element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，之后的需要用第二种  
+element-plus 在 1.0.2-beta.59 前的版本可以用第一种方式设置，之后的版本需要用第二种  
 本文使用的版本为 1.0.2-beta.70
 
 ## bcy
@@ -416,7 +426,7 @@ element-plus 的版本在 1.0.2-beta.59 前的可以用第一种方式设置，�
 
 ### 谷歌火狐打印背景色丢失
 
-css 添加一下样式
+css 添加以下样式：
 
 ```css
 /* webkit 为Google Chrome、Safari等浏览器内核 */
@@ -425,7 +435,7 @@ print-color-adjust: exact;
 color-adjust: exact;
 ```
 
-### at-rule or selector expected css(css-rule or selector expected)
+### 项目报错 at-rule or selector expected css(css-rule or selector expected)
 
 在样式穿透>>>前面加上通配符\*即可
 
@@ -437,8 +447,10 @@ color-adjust: exact;
 
 ### printing 打印 ant-table 会出现间隔过大的问题
 
-a:
-ant-table 在打印时 .ant-spin-nested-loading 的高度默认 100%  
+**原因；**  
+ant-table 在打印时 .ant-spin-nested-loading 的高度默认 100%
+
+**方法：**  
 设置 ant-spin-nested-loading 的 height 可以解决该问题
 
 **关键代码**

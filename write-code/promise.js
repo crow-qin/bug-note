@@ -1,3 +1,6 @@
+/**
+ * 手写promise
+ */
 // 声明状态
 const PENDING = 'pending'
 const FULFILLED = 'fulfilled'

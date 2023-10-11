@@ -18,9 +18,9 @@ var proxy = require("http-proxy-middleware");
 var { createProxyMiddleware } = require("http-proxy-middleware");
 ```
 
-### 升级到 webpack4.46.0
+### 升级到 webpack4.46.0 出现的一些问题和解决方法
 
-#### 图片不显示 src 显示 "[object Module]"
+#### 图片不显示，src 显示 "[object Module]"
 
 在 url-loader 的 options 上添加 esModule: false
 
@@ -37,13 +37,15 @@ var { createProxyMiddleware } = require("http-proxy-middleware");
 },
 ```
 
-#### new webpack.optimize.CommonsChunkPlugin 替换为 optimization 的 splitChunks
+#### 分包替换功能
 
-分包替换功能
+**方法：**
+new webpack.optimize.CommonsChunkPlugin 替换为 optimization 的 splitChunks
 
-#### new webpack.optimize.UglifyJsPlugin 替换为 optimization 的 minimizer
+#### 压缩替换功能
 
-压缩替换功能
+**方法：**
+new webpack.optimize.UglifyJsPlugin 替换为 optimization 的 minimizer
 
 #### 简化控制台信息
 
@@ -68,109 +70,111 @@ stats: {
 
 ### sass-loader 识别不了/deep/
 
-**简述**  
+**简述：**  
 启动项目后，控制台报错，显示以下提示：  
-<font color=red>SassError: expected selector. /deep/ ...</font>  
-**方法**  
+<font color=red>SassError: expected selector. /deep/ ...</font>
+
+**方法：**  
 检查是否下载了”sass“依赖, 如果存在依赖
 
 1. 可以指定 sass-loader 的语法为 <font color=red>node-sass</font>
 
-```js
-// 配置文件
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /.s[ac]ss$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              implementation: require("node-sass"),
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
+   ```js
+   // 配置文件
+   module.exports = {
+     module: {
+       rules: [
+         {
+           test: /.s[ac]ss$/i,
+           use: [
+             "style-loader",
+             "css-loader",
+             {
+               loader: "sass-loader",
+               options: {
+                 implementation: require("node-sass"),
+               },
+             },
+           ],
+         },
+       ],
+     },
+   };
+   ```
 
 2. 将 <font color=red>/deep/</font> 改成 <font color=red>::v-deep</font>
 
-**原因**  
-sass 只能识别 <font color=red>::v-deep</font>  
-node-sass 可以识别 <font color=red>/deep/</font> 和 <font color=red>::v-deep</font>
+   **原因：**  
+   sass 只能识别 <font color=red>::v-deep</font>  
+   node-sass 可以识别 <font color=red>/deep/</font> 和 <font color=red>::v-deep</font>
 
-查看源码 sass-loader 的入口文件调用了 **getSassImplementation** 方法
+   查看源码 sass-loader 的入口文件调用了 **getSassImplementation** 方法
 
-```js
-// /index.js
-async function loader(content) {
-  const options = (0, _loaderUtils.getOptions)(this);
-  (0, _schemaUtils.validate)(_options.default, options, {
-    name: "Sass Loader",
-    baseDataPath: "options"
-  });
-  const callback = this.async();
-  const implementation = (0, _utils.getSassImplementation)(this, options.implementation);
-...
-}
-```
+   ```js
+   // /index.js
+   async function loader(content) {
+     const options = (0, _loaderUtils.getOptions)(this);
+     (0, _schemaUtils.validate)(_options.default, options, {
+       name: "Sass Loader",
+       baseDataPath: "options"
+     });
+     const callback = this.async();
+     const implementation = (0, _utils.getSassImplementation)(this, options.implementation);
+   ...
+   }
+   ```
 
-**getSassImplementation**在 options 中没有 implementation 时会调用**getDefaultImplementation**
+   **getSassImplementation**在 options 中没有 implementation 时会调用**getDefaultImplementation**
 
-```js
-// /utils.js
-function getSassImplementation(loaderContext, implementation) {
-  let resolvedImplementation = implementation;
+   ```js
+   // /utils.js
+   function getSassImplementation(loaderContext, implementation) {
+     let resolvedImplementation = implementation;
 
-  if (!resolvedImplementation) {
-    try {
-      resolvedImplementation = getDefaultSassImplementation();
-    } catch (error) {
-      loaderContext.emitError(error);
-      return;
-    }
-  }
-  ...
-}
-```
+     if (!resolvedImplementation) {
+       try {
+         resolvedImplementation = getDefaultSassImplementation();
+       } catch (error) {
+         loaderContext.emitError(error);
+         return;
+       }
+     }
+     ...
+   }
+   ```
 
-getDefaultImplementation 默认先使用 sass，查找不到后才使用 node-sass
+   getDefaultImplementation 默认先使用 sass，查找不到后才使用 node-sass
 
-```js
-function getDefaultSassImplementation() {
-  let sassImplPkg = "sass";
+   ```js
+   function getDefaultSassImplementation() {
+     let sassImplPkg = "sass";
 
-  try {
-    require.resolve("sass");
-  } catch (error) {
-    try {
-      require.resolve("node-sass");
+     try {
+       require.resolve("sass");
+     } catch (error) {
+       try {
+         require.resolve("node-sass");
 
-      sassImplPkg = "node-sass";
-    } catch (ignoreError) {
-      sassImplPkg = "sass";
-    }
-  } // eslint-disable-next-line import/no-dynamic-require, global-require
+         sassImplPkg = "node-sass";
+       } catch (ignoreError) {
+         sassImplPkg = "sass";
+       }
+     } // eslint-disable-next-line import/no-dynamic-require, global-require
 
+     return require(sassImplPkg);
+   }
+   ```
 
-  return require(sassImplPkg);
-}
-sass版本 1.32.6 有效
-如果是版本 1.58.3 会提示 >>> 深度选择器警告
-```
+   sass 版本 1.32.6 有效  
+   如果是版本 1.58.3 会提示 >>> 深度选择器警告
 
 =d4-0309=
 
 ### source-map 用 onerror 定位错误时，直接打开打包后的 index.html 报错信息显示不完整
 
-**简述**  
-source-map 用 onerror 定位错误时，直接打开打包后的 index.html 报错信息显示不完整，msg 显示 Script error  
+**简述：**  
+source-map 用 onerror 定位错误时，直接打开打包后的 index.html 报错信息显示不完整，msg 显示 Script error
+
 _打开路径_
 
 > file:///Users/xx/codeSpace/sourcemap-front/dist/index.html
@@ -186,8 +190,9 @@ _打开路径_
 }
 ```
 
-**方法**  
-把打包后的文件放到 nginx 上，用 nginx 配置地址去请求  
+**方法：**  
+把打包后的文件放到 nginx 上，用 nginx 配置地址去请求
+
 正确地址
 
 > http://localhost:8082/
@@ -203,10 +208,10 @@ _打开路径_
 }
 ```
 
-**原理**  
-onerror
-如果 A 网站使用 B（CDN） 域名下的 js 资源，但是 JS 执行报错了，浏览器只会给出 Script error 错误提示，不会有具体报错信息，原因是：浏览器的同源策略限制。
-解决方案：
+**原因：**  
+如果 A 网站使用 B（CDN） 域名下的 js 资源，但是 JS 执行报错了，onError 捕获错误，浏览器只会给出 Script error 错误提示，不会有具体报错信息，原因是：浏览器的同源策略限制。
+
+**方法：**
 
 1. script 增加 crossorigin,
 2. 服务端配置：Access-Control-Allow-Origin: b.com
