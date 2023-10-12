@@ -36,50 +36,57 @@ package.json的脚本
   "start": "npm run dev",
 }
 ```
-运行脚本 npm run dev
+运行命令
+> npm run dev
 
-打印 process.argv
-
-输出字符串数组
-
-第一个是nodejs的绝对路径
-
-第二个是dev对应文件的绝对路径
-
+打印结果
+```js
+console.log(process.argv)
+/**
+ * 
 [
   '/Users/qinan/.nvm/versions/node/v12.13.0/bin/node',
   '/Users/qinan/workspace/niswhite/build/dev-server.js'
 ]
+ */
+```
+第一个是nodejs的绝对路径
+
+第二个是dev对应文件的绝对路径
 
 **process.env**
 
-*npm_config_可以直接获取参数*
+*使用npm_config_可以直接获取参数*
 
-npm run dev --directive
+> npm run dev --directive
 
+打印结果
 ```js
-console.log(process.env.npm_config_directive)
-```
-输出true
-
-npm run dev --directive=123
-```js
-console.log(process.env.npm_config_directive)
+console.log(process.env.npm_config_directive) // true
 ```
 
-输出123
+>npm run dev --directive=123
+
+打印结果
+```js
+console.log(process.env.npm_config_directive) // 123
+```
+
 
 **process.env.npm_config_argv获取多个参数**
 
-npm run dev --directive=123
+> npm run dev --directive=123
+
+打印结果
+
 ```js
 console.log(JSON.parse(process.env.npm_config_argv))
-```
-输出
-```js
+/**
+ * 
 {
   remain: [],
   cooked: [ 'run', 'dev', '--directive', '123' ],
   original: [ 'run', 'dev', '--directive', '123' ]
 }
+*/
 ```

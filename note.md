@@ -706,7 +706,6 @@ router.matcher = newRouter.matcher;
 2. 使用自定义指令  
    只能修改状态
 
-
 ### tip: git commit message 的一些规范
 
 格式示例：
@@ -854,7 +853,7 @@ inject: ["test"]
 ### base64 的优缺点
 
 base64 编码: 一种将图片数据转化为文本数据的技术。  
-**优点：** 
+**优点：**
 文本格式，占用内存较小，转换后大小约为原来的 1/3，减少浏览器的消耗；  
 网页使用 base64 资源，减少了 http 请求；  
 base64 适用的平台广泛；  
@@ -864,7 +863,7 @@ base64 适用的平台广泛；
 base64 文本内容较长，储存在数据库压力较大；  
 base64 文本内容较长，在页面上使用会使页面加载缓慢；  
 base64 无法缓存；  
-8-12kb 以下适用 base64。  
+8-12kb 以下适用 base64。
 
 ### 下载 pdf
 
@@ -963,6 +962,7 @@ vue 为什么不能用 index 作为 key
 
 1. 提高热更新速度  
    在.env.development 环境变量中配置
+
    > VUE_CLI_BABEL_TRANSPILE_MODULES: true
 
    **原理：**  
@@ -1056,7 +1056,7 @@ vue 为什么不能用 index 作为 key
    ];
    ```
 
-   b. thread-loader：添加在 thread-loader 后面的loader将放入单独的 worker 池里运行，配置简单
+   b. thread-loader：添加在 thread-loader 后面的 loader 将放入单独的 worker 池里运行，配置简单
 
    ```js
    //安装：npm install thread-loader -D
@@ -1426,3 +1426,27 @@ background-clip: content-box;
 **方法：**
 
 > window.parent.localStorage
+
+## w
+
+=d4--1012=
+
+### 浏览器的跨标签通信
+
+**简述：**  
+公司存在有一个新需求，项目 A 的 A，B 页面都在开启的情况下，A 页面在进行导入文件的操作后，B 页面的数据也需要刷新，  
+由于两个页面已经打开了，且该项目是用 iframe 嵌入父页面，在父页面点击不同的功能按钮会生成多个 iframe，展示对应功能的页面。
+
+**方法：**  
+同个页面的通信无法实现这个功能，父页面的修改需要的沟通成本较高也不考虑，因此想到了 localStorage 在修改时有对应的监听器，可以使用'storage'事件监听来实现这个功能。
+导入操作完成时，设置 key 值
+
+B 页面监听 storage，指定 key 有值就做刷新操作，之后再清空 key 值
+
+```js
+window.addEventListener("storage", (e) => {
+  console.log("被修改的键: ", e.key);
+  console.log("旧值: ", e.oldValue);
+  console.log("新值: ", e.newValue);
+});
+```
