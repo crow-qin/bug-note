@@ -1438,10 +1438,7 @@ background-clip: content-box;
 由于两个页面已经打开了，且该项目是用 iframe 嵌入父页面，在父页面点击不同的功能按钮会生成多个 iframe，展示对应功能的页面。
 
 **方法：**  
-同个页面的通信无法实现这个功能，父页面的修改需要的沟通成本较高也不考虑，因此想到了 localStorage 在修改时有对应的监听器，可以使用'storage'事件监听来实现这个功能。
-导入操作完成时，设置 key 值
-
-B 页面监听 storage，指定 key 有值就做刷新操作，之后再清空 key 值
+同个项目的通信无法实现这个功能，父页面修改可以通过 postMessage 作为中间通信，但是父页面是其他团队写的，需要的沟通成本较高也不考虑，因此想到了 localStorage 在修改时有对应的监听器，可以使用'storage'事件监听来实现这个功能。
 
 ```js
 window.addEventListener("storage", (e) => {
@@ -1449,4 +1446,227 @@ window.addEventListener("storage", (e) => {
   console.log("旧值: ", e.oldValue);
   console.log("新值: ", e.newValue);
 });
+```
+
+**具体过程：**  
+ A 页面在导入操作完成后，设置 key 值
+
+```js
+const onImport = () => {
+  api().then(() => {
+    // 其他操作
+    localStorage.setItem("isImport", true);
+  });
+};
+```
+
+B 页面监听 storage，指定 key 有值就做刷新操作，之后再清空 key 值
+
+```js
+// 省略代码
+const key = "isImport";
+// 更新操作
+const getData = () => {};
+const storageFn = (e) => {
+  if (e.key === key && e.newValue) {
+    getData();
+    localStorage.setItem("isImport", null);
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("storage", storageFn);
+});
+onUnmounted(() => {
+  window.removeEventListener("storage", storageFn);
+});
+```
+
+=d5--1013=
+
+### 构建组件文档生成器
+
+**简述：**  
+在开发公共组件的过程，为了开发能够更快了解项目上的公共组件的功能参数，模仿 ui 文档，在本地生成组件文档查看网站。使用 VitePress 进行开发。
+
+**VitePress**  
+VitePress 是一个以 Markdown 为中心的静态网站生成器。你可以使用 Markdown 来书写内容（如文档、博客等），然后 VitePress 会帮助你生成一个静态网站来展示它们。
+
+**方法：**
+
+- 步骤 1: 没有项目就创建并进入一个目录，有项目就直接跳转到步骤 3
+
+  > $ mkdir docs && cd docs
+
+- 步骤 2: 初始化
+
+  > $ yarn init
+
+- 步骤 3: 本地安装 VitePress
+
+  > $ yarn add --dev vitepress
+
+- 步骤 4: 创建你第一篇文档
+
+  > $ mkdir docs && echo '# Hello VitePress' > docs/index.md
+
+- 步骤 5: 在 package.json.添加一些 script
+
+  ```json
+  {
+    "scripts": {
+      "docs:dev": "vitepress dev docs",
+      "docs:build": "vitepress build docs",
+      "docs:serve": "vitepress serve docs"
+    }
+  }
+  ```
+
+- 步骤 6: 在本地服务器上启动文档站点
+
+  > $ yarn docs:dev
+
+VitePress 会在 http://localhost:[端口号] 启动一个热重载的开发服务器。
+
+基本目录结构如下：
+
+```
+.
+├─ docs
+│  ├─ .vitepress
+│  │  └─ config.js
+│  └─ index.md
+└─ package.json
+```
+
+**配置：**  
+一个 VuePress 站点必要的配置文件是 .vitepress/config.js，它应当导出一个 JavaScript 对象：
+
+```js
+// .vitepress/config.js
+import { defineConfig } from "vitepress";
+const config = {
+  title: "组件文档",
+  siteTitle: false,
+  themeConfig: {
+    nav: [{ text: "组件", link: "/components/Button" }],
+    sidebar: {
+      "/": [
+        {
+          text: "通用",
+          link: "/",
+        },
+      ],
+      "/components/": [
+        {
+          text: "基础类",
+          items: [
+            {
+              text: "Button",
+              link: "/docs/components/Button.md",
+            },
+          ],
+        },
+      ],
+    },
+  },
+};
+export default defineConfig(config);
+```
+
+_nav_ 用于配置导航栏  
+_sidebar_ 用于配置侧边栏
+
+具体的文件 /docs/components/Button.md 还没有配置，会显示 404  
+在 docs 文件夹下添加 components 文件夹，并新建 Button.md 文件
+
+由于 docs 在项目根目录，和 src 文件夹同级，因此需要配置别名来引入 src 的公共组件
+
+docs 文件夹下新建 vite.config.js
+
+```js
+import { defineConfig } from "vite";
+import path from "path";
+export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.join(__dirname, "../src"),
+    },
+  },
+});
+```
+
+Button.md 可以增加代码片段来展示组件了
+
+```md
+# Button
+
+## 用法
+
+<x-button type="success">成功</x-button>
+<x-button type="danger">失败</x-button>
+
+<script setup>
+import XButton from '@/components/XButton.vue'
+</script>
+
+### 属性
+
+| 属性 |     用途     |      默认 |
+| ---- | :----------: | --------: |
+| type | 展示按钮状态 | undefined |
+```
+
+index.md 可以美化样式
+
+```md
+---
+layout: home
+
+title: XX ui
+titleTemplate: XX 项目的公共组件库
+
+hero:
+  name: XX ui
+  text: 一个Vue3组件库
+
+features:
+  - icon: 💡
+    title: 文档
+    details: 快速了解组件功能
+  - icon: 📦
+    title: 仅供学习使用
+    details: 倾向于Vue3组件库的学习，请勿用于实际生产项目
+  - icon: 🛠️
+    title: 按需引入
+    details: 直接支持按需引入无需配置任何插件。
+---
+```
+
+#### 效果展示：
+
+**首页**
+
+![Alt text](image.png)
+
+**Button 文档：**  
+文档从导航栏的组件按钮进入
+
+![Alt text](image-1.png)
+
+docs 目录的最终结构如下
+
+```
+.
+├─ docs
+│  ├─ .vitepress
+│  │  └─ config.js
+│  ├─ components
+│  │  └─ Button.md
+│  ├─ index.md
+│  └─ vite.config.js
+├─ src
+│  └─ components
+│     └─ XButton.vue
+└─ package.json
 ```
