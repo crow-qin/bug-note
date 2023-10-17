@@ -8,7 +8,6 @@
 
 账号是云效的 username ，密码是私人令牌  
 第一次拉取没有私人令牌，需要忘记令牌，修改令牌，令牌格式全数字 8 位以上  
-accentrix 云效令牌：1-9
 
 # 2021
 
@@ -1670,3 +1669,21 @@ docs 目录的最终结构如下
 │     └─ XButton.vue
 └─ package.json
 ```
+
+## w
+
+=d1--1016=
+
+### js 的 for 循环方式间的差别
+
+#### for...in
+
+MDN：for...in 语句以任意顺序迭代一个对象的除 Symbol 以外的可枚举属性，包括继承的可枚举属性。
+
+for...in 遍历的是<font color=#c66>属性</font>
+
+### for...of
+
+for...of 适用遍历数/数组对象/字符串/map/set 等拥有迭代器对象（iterator）的集合，但是<font color=#c66>不能遍历对象</font>，因为没有迭代器对象
+
+for...of 遍历的是<font color=#c66>值</font>

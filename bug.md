@@ -519,7 +519,7 @@ table {
 
 ### el-input 自动聚焦问题
 
-**简述**
+**简述：**  
 在弹框显示时自动聚焦到 el-input 上，使用 focus 方法，但是一直报错  
-<font color=red>this.$refs.ipt.focus is not a Function</font>  
+<font color=#c66>this.$refs.ipt.focus is not a Function</font>  
 原代码如下
