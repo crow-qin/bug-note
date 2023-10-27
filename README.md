@@ -21,3 +21,4 @@
 - [typescript 笔记](typescript/note.md)
 - [vite 笔记](vite/note.md)
 - [webpack 笔记](webpack/note.md)
+- [angular 笔记](ng/note.md)
