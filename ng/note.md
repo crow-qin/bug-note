@@ -55,6 +55,12 @@ ng 的选择器， ng 能够识别到在应用的位置
 比如 ngIf, ngFor
 
 \*ng-if
+if else
+
+```html
+<div *ngIf="flag; else noFlag">flag true</div>
+<ng-template #noFlag>flag false</ng-template>
+```
 
 \*ngFor="let val of arr;let i = index"  
 val 为数据  
@@ -63,16 +69,18 @@ i 为索引
 [ngStyle]="{}"  
 [ngClass] ="{}"
 
-### ng 指令创建组件
+### cli 指令创建组件
 
-> ng g c list --spec false  
-> 在 app 文件夹下创建 list 组件文件夹
+> ng g c list --skip-tests  
 
-**--spec false**
+在 app 文件夹下创建 list 组件文件夹
+
+**--skip-tests**  
 不生成测试文件
 
-> ng g c list/detail --spec false  
-> 在 list 文件夹下创建 detail 组件文件夹
+> ng g c list/detail --skip-tests  
+
+在 list 文件夹下创建 detail 组件文件夹
 
 ### model
 
@@ -82,15 +90,16 @@ xx.model.ts
 ### 组件传值
 
 - 子组件  
-  给自定义属性加上装饰器
+  **@Input**  
+  自定义属性装饰器
 
 ```ts
 // app-child
 import {Input} from '@angular/core'
-//
+// ...
 @Input()
 age: number;
-//
+// ...
 ```
 
 - 父组件
@@ -106,8 +115,10 @@ age: number;
 - 子组件
 
 ```ts
+// ...
 @Input('stuAge')
 age: number;
+// ...
 ```
 
 - 父组件
@@ -117,25 +128,27 @@ age: number;
 ```
 
 ### 自定义事件绑定
+**@Output**
 
 - 子组件
 
 ```ts
 // app-child
 import { EventEmitter, Output } from '@angular/core'
-//
+// ...
 @Output()
 customFn = new EventEmitter<{name: string, age: number}>()
 
 onClick() {
   this.customFn.emit({name: 'jack', age: 16})
 }
+// ...
 ```
 
 - 父组件
 
 ```html
-<!--  -->
+<!-- ... -->
 <app-child (customFn)="fn" />
 ```
 
@@ -154,10 +167,10 @@ encapsulation 属于默认行为，如果需要关闭，在装饰器加上以下
 import { ViewEncapsulation } from '@angular/core'
 
 @Component({
-  //
+  // ...
   encapsulation: ViewEncapsulation.None
 })
-//
+// ...
 ```
 
 ### 本地引用 （local references）
@@ -167,14 +180,16 @@ import { ViewEncapsulation } from '@angular/core'
 在 element 上使用#声明模版引用变量，其他位置可以使用这个变量，得到这个属性对于的 element 元素
 
 ```html
-<input #iptRef /> <button (click)="onSubmit(iptRef)">提交</button>
+<input #iptRef />
+<button (click)="onSubmit(iptRef)">提交</button>
 ```
 
 ```ts
-//
+// ...
 onSubmit(val: any) {
   console.log(val) // <input />
 }
+// ...
 ```
 
 #### ViewChild
@@ -198,14 +213,272 @@ onSubmit(val: any) {
 ```ts
 import { ViewChild } from '@angular/core'
 import ChildComponent from '/child/child.component'
-//
+// ...
 @ViewChild('iptRef')
 iptRef;
+// 组件上使用模版引用变量
 @ViewChild('appChild')
 child1;
+// 直接引入组件
 @ViewChild(ChildComponent)
-child1
+child1;
 onSubmit() {
-  console.log(this.iptRef)
+  console.log(this.iptRef);
 }
+// ...
+```
+
+## w
+
+=d1--1030=
+
+### 插槽
+
+**ng-content:**   
+ng 标记自定义内容放在 html 的位置
+
+### 生命周期
+
+**ngOnChanges:**  
+@Input 修饰的变量改变时触发，即 properties  
+参数：与修改变量相关的数据对象
+
+**ngOnInit:**  
+ng 组件初始化后触发，在 constructor 方法执行后
+
+**ngDoCheck:**
+1. 在状态发生变化，Angular 自己本身不能捕获这个变化时会触发 NgDoCheck。  
+   在以下情况会触发  
+   1.1 组件的 @Input() 引用发生变化。  
+   1.2 组件的 DOM 事件，包括它子组件的 DOM 事件，比如 click、submit、mouse down 等事件。  
+   1.3 Observable 订阅事件，同时设置 Async pipe。  
+   1.4ChangeDetectorRef.detectChanges()、ChangeDetectorRef.markForCheck()、ApplicationRef.tick()，手动调用这三种方式触发变化检测。
+
+2. 每次变化检测以后，都会触发 ngDoCheck 钩子函数，紧跟在 ngOnChanges 和 ngOnInit 之后运行。
+
+**AfterViewInit:**  
+模版还初始化完成后触发，在该方法之前的钩子函数，无法获取到 ref
+
+### @ContentChild
+
+获取 ng-content 中的元素，使用方法和 ViewChild 一致
+
+子组件
+
+```html
+<ng-content></ng-content>
+```
+
+```ts
+import { ContentChild } from '@angular/core'
+// ...
+@ContentChild('iptRef')
+iptRef;
+// ...
+```
+
+父组件
+
+```html
+<app-child>
+  <input #iptRef />
+</app-child>
+```
+
+=d2--1031=
+
+### 自定义 ng 指令
+
+ng 允许自定义指令扩展指令功能
+
+**方法：**
+
+1. 创建文件  
+   1.1 手动创建带 .directive.ts 的文件  
+   文件需要在 .module.ts 文件上声明，ng才能识别
+
+   ```ts
+   // app.module.ts
+   import { BtHighlightDirective } from './directive/bt-highlight.directive';
+   @NgModule({
+     declarations: [
+       BtHighlightDirective
+     ]
+     // ...
+   })
+   // ...
+   ```
+
+   1.2 cli 指令生成
+
+   > ng g d [文件名] --skip-tests
+
+   指令执行后，会自动在 module 中声明指令
+
+2. 编写
+
+   2.1 直接在元素上进行修改  
+   ps: 不建议该方法，在其他平台可能不通用
+
+   ```ts
+   // click.directive.ts
+   // ...
+   @Directive({
+     selector: "[appClick]",
+   })
+   export class ClickDirective implements OnInit {
+     constructor(private elRef: ElementRef) {}
+     ngOnInit(): void {
+       this.elRef.nativeElement.style.color = "blue";
+     }
+   }
+   ```
+
+   2.2 通过调用 renderer 方法修改
+
+   ```ts
+   // ...
+   export class ClickDirective implements OnInit {
+     constructor(private elRef: ElementRef, private renderer: Renderer2) {}
+     ngOnInit(): void {
+       this.renderer.setStyle(this.elRef.nativeElement, "color", "blue");
+     }
+   }
+   ```
+
+3. 使用
+   在元素写上该自定义指令的 selector 名称
+   自定义指令
+
+   ```ts
+   // ...
+   selector: "[appClick]";
+   // ...
+   ```
+
+   ```html
+   <div appClick></div>
+   ```
+
+4. 触发节点  
+   **@HostListener:**  
+   通过该装饰器，传入对应事件名，实现在对应事件触发时执行方法
+
+   ```ts
+   // ...
+   // 点击后触发
+   @HostListener('click') onClick(e: Event) {
+    alert('clicked')
+   }
+   // ...
+   ```
+
+5. 属性装饰器  
+    **@HostBinding:**  
+    用于把一个 DOM 属性标记为绑定到宿主的属性，并提供配置元数据
+
+   ```ts
+   @Directive({
+     selector: "[appBtHighlight]",
+   })
+   export class BtHighlightDirective implements OnInit {
+     constructor(private elRef: ElementRef, private renderer: Renderer2) {}
+     ngOnInit(): void {}
+
+     @HostBinding("style.color") color: string = "black";
+     @HostListener("mouseenter") mouseover(e: Event) {
+       this.color = "blue";
+       // 鼠标移入字体颜色变为蓝色
+     }
+   }
+   ```
+
+6. 指令增加变量  
+   允许元素输入变量   
+   
+   完整事例
+
+   ```ts
+   import {
+     Directive,
+     ElementRef,
+     HostBinding,
+     HostListener,
+     Input,
+     OnInit,
+     Renderer2,
+   } from "@angular/core";
+
+   @Directive({
+     selector: "[appBtHighlight]",
+   })
+   export class BtHighlightDirective implements OnInit {
+     constructor(private elRef: ElementRef, private renderer: Renderer2) {}
+     ngOnInit(): void {}
+     @Input() defColor: string = "black";
+     @Input() actColor: string = "blue";
+     @HostBinding("style.color") color: string = "black";
+     @HostListener("mouseenter") mouseover(e: Event) {
+       this.color = this.actColor;
+     }
+     @HostListener("mouseleave") mouseleave(e: Event) {
+       this.color = this.defColor;
+     }
+   }
+   ```
+
+   使用
+
+   ```html
+   <h1 appBtHighlight [defColor]="'#ccc'" [actColor]="red">高亮</h1>
+   ```
+
+### 自定义结构指令
+结构指令指需要使用*来修饰的指令  
+比如ngIf，ngFor
+
+和自定义指令相同，
+
+定义
+```ts
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+
+@Directive({
+  selector: '[appUnless]'
+})
+export class UnlessDirective {
+  @Input()
+  set appUnless(flag: boolean) {
+    if (!flag) {
+      this.vcRef.createEmbeddedView(this.tempRef)
+    } else {
+      this.vcRef.clear()
+    }
+  }
+  /**
+   *
+   * @param tempRef 模版
+   * @param vcRef 视图容器
+   */
+  constructor(private tempRef: TemplateRef<any>, private vcRef: ViewContainerRef) { }
+
+}
+```
+使用
+```html
+<!-- 只显示第一个 -->
+<div *appUnless="false">false显示</div>
+<div *appUnless="true">true不显示</div>
+```
+
+### ngSwitch
+
+```html
+<div [ngSwitch]="4">
+  <p *ngSwitchCase="1"></p>
+  <p *ngSwitchCase="2"></p>
+  <p *ngSwitchCase="3"></p>
+  <p *ngSwitchCase="4"></p>
+  <p ngSwitchDefault></p>
+</div>
 ```
