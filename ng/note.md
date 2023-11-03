@@ -71,21 +71,22 @@ i 为索引
 
 ### cli 指令创建组件
 
-> ng g c list --skip-tests  
+> ng g c list --skip-tests
 
 在 app 文件夹下创建 list 组件文件夹
 
 **--skip-tests**  
 不生成测试文件
 
-> ng g c list/detail --skip-tests  
+> ng g c list/detail --skip-tests
 
 在 list 文件夹下创建 detail 组件文件夹
 
 ### model
 
 xx.model.ts
-创建一个公共类
+创建一个实体类
+没有特殊意义
 
 ### 组件传值
 
@@ -128,6 +129,7 @@ age: number;
 ```
 
 ### 自定义事件绑定
+
 **@Output**
 
 - 子组件
@@ -180,8 +182,7 @@ import { ViewEncapsulation } from '@angular/core'
 在 element 上使用#声明模版引用变量，其他位置可以使用这个变量，得到这个属性对于的 element 元素
 
 ```html
-<input #iptRef />
-<button (click)="onSubmit(iptRef)">提交</button>
+<input #iptRef /> <button (click)="onSubmit(iptRef)">提交</button>
 ```
 
 ```ts
@@ -234,7 +235,7 @@ onSubmit() {
 
 ### 插槽
 
-**ng-content:**   
+**ng-content:**  
 ng 标记自定义内容放在 html 的位置
 
 ### 生命周期
@@ -247,6 +248,7 @@ ng 标记自定义内容放在 html 的位置
 ng 组件初始化后触发，在 constructor 方法执行后
 
 **ngDoCheck:**
+
 1. 在状态发生变化，Angular 自己本身不能捕获这个变化时会触发 NgDoCheck。  
    在以下情况会触发  
    1.1 组件的 @Input() 引用发生变化。  
@@ -295,7 +297,7 @@ ng 允许自定义指令扩展指令功能
 
 1. 创建文件  
    1.1 手动创建带 .directive.ts 的文件  
-   文件需要在 .module.ts 文件上声明，ng才能识别
+   文件需要在 .module.ts 文件上声明，ng 才能识别
 
    ```ts
    // app.module.ts
@@ -394,8 +396,8 @@ ng 允许自定义指令扩展指令功能
    ```
 
 6. 指令增加变量  
-   允许元素输入变量   
-   
+   允许元素输入变量
+
    完整事例
 
    ```ts
@@ -433,26 +435,54 @@ ng 允许自定义指令扩展指令功能
    <h1 appBtHighlight [defColor]="'#ccc'" [actColor]="red">高亮</h1>
    ```
 
+7. **指令扩展**
+   HostListener 判断点击节点
+
+```ts
+import {
+  Directive,
+  ElementRef,
+  HostBinding,
+  HostListener,
+} from "@angular/core";
+
+@Directive({
+  selector: "[appDropdown]",
+})
+export class DropdownDirective {
+  @HostBinding("class.open") isOpen = false;
+
+  @HostListener("document:click", ["$event"]) toggleOpen(event: Event) {
+    this.isOpen = this.elRef.nativeElement.contains(event.target)
+      ? !this.isOpen
+      : false;
+  }
+  constructor(private elRef: ElementRef) {}
+}
+```
+
 ### 自定义结构指令
-结构指令指需要使用*来修饰的指令  
-比如ngIf，ngFor
+
+结构指令指需要使用\*来修饰的指令  
+比如 ngIf，ngFor
 
 和自定义指令相同，
 
 定义
+
 ```ts
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, Input, TemplateRef, ViewContainerRef } from "@angular/core";
 
 @Directive({
-  selector: '[appUnless]'
+  selector: "[appUnless]",
 })
 export class UnlessDirective {
   @Input()
   set appUnless(flag: boolean) {
     if (!flag) {
-      this.vcRef.createEmbeddedView(this.tempRef)
+      this.vcRef.createEmbeddedView(this.tempRef);
     } else {
-      this.vcRef.clear()
+      this.vcRef.clear();
     }
   }
   /**
@@ -460,11 +490,15 @@ export class UnlessDirective {
    * @param tempRef 模版
    * @param vcRef 视图容器
    */
-  constructor(private tempRef: TemplateRef<any>, private vcRef: ViewContainerRef) { }
-
+  constructor(
+    private tempRef: TemplateRef<any>,
+    private vcRef: ViewContainerRef
+  ) {}
 }
 ```
+
 使用
+
 ```html
 <!-- 只显示第一个 -->
 <div *appUnless="false">false显示</div>
@@ -475,10 +509,240 @@ export class UnlessDirective {
 
 ```html
 <div [ngSwitch]="4">
-  <p *ngSwitchCase="1"></p>
-  <p *ngSwitchCase="2"></p>
-  <p *ngSwitchCase="3"></p>
-  <p *ngSwitchCase="4"></p>
-  <p ngSwitchDefault></p>
+  <p *ngSwitchCase="1">1</p>
+  <p *ngSwitchCase="2">2</p>
+  <p *ngSwitchCase="3">3</p>
+  <p *ngSwitchCase="4">4</p>
+  <p ngSwitchDefault>default</p>
 </div>
 ```
+
+=d3--1101=
+
+### service
+
+父组件注入 service 后，**子组件也可以使用到该 service 的实例**，只要声明好变量即可  
+如果子组件不想要用父组件的实例，可以给再次注入一个同名实例，新实例会**覆盖**掉继承的实例
+
+1. 创建 class
+
+   ```ts
+   // log.service.ts
+   export default LogService {
+    log(text) {
+      console.log('output', text)
+    }
+   }
+   ```
+
+2. 使用
+
+   ```ts
+   // ...
+   @Component({
+    // ...
+    providers: [LogService]
+   })
+   // ...
+   constructor(private logService: LogService) {}
+   ngOnInit() {
+    this.log(111)
+   }
+   // ...
+   ```
+
+   或者使用 inject 方法注入
+
+   ```ts
+   import { Component, Input, Output, inject } from '@angular/core';
+   // ...
+   private logService: LogService
+
+   constructor() {
+    this.logService = inject(LogService)
+   }
+   // ...
+   ```
+
+#### service 注入 service
+
+给需要注入的 service 加上 **@Injectable**
+
+```ts
+import BService from './b.service.ts'
+@Injectable()
+export AService {
+  constructor(private bService: BService) {}
+  onClick() {
+    this.bService.b()
+  }
+}
+```
+
+此时 aService 可以使用 bService 的方法
+
+#### 利用 service 进行跨组件通信
+
+在 2 个组件的共同父组件注入 service  
+service 使用 EventEmitter 实例化一个对象
+发送组件执行 emit()方法  
+接收组件实现 subscribe()方法
+
+```ts
+// emit.service.ts
+export class EmitService {
+  myEmit = new EventEmitter<string>();
+}
+```
+
+发送组件
+
+```ts
+// ...
+onClick() {
+  this.emitService.myEmit.emit('12')
+}
+// ...
+```
+
+接收组件
+
+```ts
+// ...
+constructor(private emitService: EmitService) {
+  this.emitService.myService.subscribe((val: string) => {
+    console.log(val)
+  })
+}
+// ...
+```
+
+### 路由
+
+```ts
+// app.module.ts
+// ...
+const routes: Routes = [
+  {path: '', component: 'xxx'}
+]
+@Module({
+  // ...
+  imports: [
+    // ...
+    Routers.forRoot(routes)
+  ]
+})
+```
+
+```html
+<root-outlet />
+```
+
+#### routerLink 指令
+
+添加 routerLink 指令后，点击会跳转到路由定义页面
+
+```html
+<a routerLink="/page"></a>
+```
+
+路由可以是相对路径和绝对路径，绝对路径不会有
+问题，  
+相对路径是基于当前路径  
+以下是例子
+
+```html
+<!-- /page -->
+<a routerLink="page"></a>
+```
+
+点击后，会跳转到/page/page，而不是/page
+
+可以使用.,/字符
+
+```html
+<!-- /page -->
+<a routerLink="../page"></a>
+<!-- 跳转到/page -->
+<a routerLink="./page"></a>
+<!-- 跳转到/page/page -->
+```
+
+#### routerLinkActive
+
+激活类  
+处于对应页面上，参数 class 会激活
+
+#### routerLinkActiveOptions
+
+入参类型：对象
+
+#### 编程式路由
+
+```ts
+// 路由对象，当前路由信息
+import { Router, ActiveRoute } from '@angular/router'
+constructor(private router: Router, private route: ActiveRoute) {
+
+}
+openPage() {
+  this.router.navigate(['/newPage'])
+}
+```
+
+使用相对路径
+
+> this.router.navigate(['new-page'], {relativeTo: this.route})
+
+#### 动态路由
+
+获取动态路由参数
+
+```ts
+// /user/:id/:name
+this.route.snapshot.params.id;
+this.route.snapshot.params.name;
+```
+
+订阅 路由 params 的变化
+
+> this.route.params.subscribe((params) => {})
+
+#### query
+
+标签式  
+增加 queryParams 入参类型为对象
+
+跳转到 /list/1?age=2
+
+```html
+<div [routerLink]="['/list', '1']" [queryParams]="{age: 2}"></div>
+```
+
+编程式
+
+```ts
+this.router.navigate(["/list", "1"], { queryParams: { age: 2 } });
+```
+
+=d5--1103=
+
+'\*\*': 匹配所有路由，一般用于 404
+redirectTo: 路由重定向
+
+> { path: '\*\*', redirectTo: '/404'}
+
+**queryParamsHandling**  
+指定在路由时应如何处理查询参数  
+类型  
+'merge': 默认值，新query会和已有的query**合并**  
+'preserve': **保留**已有的query，并且不会增加新的参数  
+'': 空值，用新query**替换**已有的query
+
+```ts
+// 当前路由/list/1?age=2
+this.router.navigate(['edit'], { redirectTo: this.route, queryParamsHandling: 'preserve'})
+// 跳转到/list/1/edit?age=2
+```
+
+### 路由守卫

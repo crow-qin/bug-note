@@ -55,7 +55,7 @@ Cannot find module ... or its corresponding type declarations.（ts2307）
 
 ##### 优先查看自己 vscode 的工作的 ts 位置及版本
 
-首先，mac: command + shift + P （windows 应该也是类似案件 cmmand 换成 Alt 或者 Ctrl）打开搜索 type 就会显示如下：
+首先，mac: command + shift + P （windows 应该也是类似案件 command 换成 Alt 或者 Ctrl）打开搜索 type 就会显示如下：
 ![Alt text](image.png)
 
 点击 volar 选择版本
