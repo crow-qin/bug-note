@@ -151,7 +151,7 @@ onClick() {
 
 ```html
 <!-- ... -->
-<app-child (customFn)="fn" />
+<app-child (customFn)="fn($event)" />
 ```
 
 #### 事件别名
