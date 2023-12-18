@@ -64,3 +64,124 @@ export class ExampleComponent implements OnInit {
   }
 }
 ```
+
+## w
+
+=d5-1208=
+
+## 在加入拦截器后，报错
+
+**错误**  
+ERROR Error: NG0200: Circular dependency in DI detected for InjectionToken HTTP_INTERCEPTORS.  
+
+**原因**  
+httpClient 相互依赖了
+
+**方法**
+拦截器的constructor不要引入userService  
+
+```ts
+constructor(private injector: Injector) {
+  }    
+  intercept(req: HttpRequest, next: HttpHandler): Observable> {
+   // try to call the service here.
+    language: string = 'en';
+    // 关键点
+    const lanaguageInj= this.injector.get(CrossDomainService);
+    const globalLanguage= auth.globalLanguage.subscribe((language) => {
+      this.language = language;
+    });
+    const request = req.headers.has('Accept-Language') ?
+      req :      
+      req.clone({ setHeaders: { 'Accept-Language': this.language } });
+    return next.handle(request);
+  }
+}
+```
+
+### input 获取不了焦点
+
+**简述**  
+版本：ng16 + ng-zorro  
+点击按钮弹出弹窗，并且聚焦到弹窗的输入框上
+
+**方法**
+
+1. 直接在modal打开的回调方法调用输入框的focus方法，没有生效  
+2. 使用事件监听的方法，在afterViewInit 订阅，  
+open的回调方法上钓鱼事件监听，  
+具体代码如下
+
+```html
+<nz-modal
+  (nzAfterOpen)="onOpen()"
+>
+  <ng-container *nzModalContent>
+    <nz-input-number
+      #ipt
+    />
+  </ng-container>
+</nz-modal>
+```
+
+```ts
+export class ModalEditComponent implements AfterViewInit {
+  focusEvt = new EventEmitter()
+
+  @ViewChild('ipt')
+  iptRef: any = null;
+
+  ngAfterViewInit(): void {
+    this.focusEvt.subscribe((() => {
+      setTimeout(() => {
+        this.iptRef.focus()
+      })
+    }))
+  }
+  onOpen() {
+    this.focusEvt.emit()
+  }
+}
+
+```
+
+## w
+
+=d1-1218=
+
+### ng 报错 ngx Translate inside Library throws Circular Dependency error when used in HTTP_INTERCEPTOR
+
+**场景**
+angular: 16.2.0  
+ngx-translate: 15.0.0  
+ngx-translate/http-loader: 8.0.0
+
+**简述**  
+编写http拦截器，引入app.module.ts,ng报错
+
+**原因**  
+在拦截器的constructor注入了api类  
+该api类是constructor实例了一个http封装类  
+该http类，拦截器类都使用了 httpCLient  
+可能引起了循环引用  
+不能在constructor使用该api类  
+
+**方法**  
+拦截器类不在constructor赋值api类  
+在使用到该api类的方法内部，使用Injector注入后使用
+
+### ng 在设置iframe src是报错 unsafe value used in a resource URL context
+
+**原因**  
+ng对于外部链接资源做了安全限制  
+
+**方法**  
+可以通过引入DomSanitizer类包装url  
+
+```ts
+// ...
+constructor(private sanitizer: DomSanitizer) {}
+// ...
+let safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url)
+// ...
+```

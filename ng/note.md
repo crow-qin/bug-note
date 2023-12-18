@@ -31,6 +31,7 @@ ng 的选择器， ng 能够识别到在应用的位置
 
 3. 按类选择器声明  
    selector: '.app-con'
+
    ```html
    <div class="app-con"></div>
    ```
@@ -746,3 +747,60 @@ this.router.navigate(['edit'], { redirectTo: this.route, queryParamsHandling: 'p
 ```
 
 ### 路由守卫
+
+## w
+
+=d5-1215=
+
+### ng 环境变量配置
+
+**场景**  
+angular：16
+
+- 创建环境变量文件
+
+src/environments/environment.ts  
+src/environments/environment.prod.ts
+
+```ts
+
+export const environment = {
+  production: false,
+  loginUrl: `https://sit.app.com`
+}
+
+```
+
+属性：  
+production: 是否需要压缩  
+其他自定义属性  
+
+- 应用
+
+```ts
+import { environment } from '@/environments/environment';
+console.log(environment.loginUrl)
+```
+
+文件替换
+在angular.json 文件需要对环境变量文件进行替换
+
+```json
+// ...
+"configurations": {
+  "development": {
+    "fileReplacements": [
+        {
+          "replace": "src/environments/environment.ts",
+          "with": "src/environments/environment.development.ts"
+        }
+      ],
+// ...
+```
+
+这意味着在使用development配置打开时，  
+environment.ts文件会替换成environment.development.ts
+可以根据需要配置不同的环境变量进行替换  
+
+执行脚本命令
+> ng build --configuration development

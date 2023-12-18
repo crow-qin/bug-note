@@ -523,3 +523,31 @@ table {
 在弹框显示时自动聚焦到 el-input 上，使用 focus 方法，但是一直报错  
 <font color=#c66>this.$refs.ipt.focus is not a Function</font>  
 原代码如下
+
+## w
+
+=d3-1206=
+
+### ipad scrollbar被遮住
+
+**简述**  
+ng16 + ng-zorro 开发 ipad 端 H5  
+使用 nz-collapse scrollbar 被 nz-collapse-panel 挡住  
+![Alt text](image-2.png)
+
+**方法**  
+在 nz-collapse-panel 加上 margin-right: 8px
+
+## w
+
+=d5-1215=
+
+### ipad H5 fixed 布局在进入后不显示，需要在滑动或出现弹窗才能显示
+
+**简述**  
+版本: ng16 + ng-zorro
+环境：ipad
+导航栏使用fixed 布局，进入页面后不显示显示，需要滑动或者出现弹窗才能显示出来
+
+**方法**  
+使用flex布局实现  
