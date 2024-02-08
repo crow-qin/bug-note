@@ -185,3 +185,48 @@ constructor(private sanitizer: DomSanitizer) {}
 let safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url)
 // ...
 ```
+
+## w
+
+=d4-1228=
+
+### unit test 报错 Cannot match any routes. URL Segment: 'story'
+
+**场景**  
+angular: 16.2.0  
+
+**简述**  
+unit test有跳转的方法，执行方法时就开始报错
+
+**方法**  
+
+.ts
+
+```ts
+openPage() {
+  this.routerSvc.navigate(
+    '/story',
+    {},
+    {
+      queryParams: { type: this._bannerItem.type },
+    }
+  );
+}
+```
+
+需要在TestBed.configureTestingModule 的import加上模拟router
+
+.spec.ts
+
+```ts
+// ...
+beforeEach(() => {
+  TestBed.configureTestingModule({
+    imports: [
+      RouterTestingModule.withRoutes(
+        [{path: 'story', component: StoryComponent}]
+      ),
+    ]
+  }).compileComponents();
+})
+```

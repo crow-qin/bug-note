@@ -804,3 +804,65 @@ environment.ts文件会替换成environment.development.ts
 
 执行脚本命令
 > ng build --configuration development
+
+## w
+
+=d4-1228=
+
+### unit test 如何测试 subscribe的方法
+
+**场景**  
+angular: 16.2.0
+
+.ts
+
+```ts
+// ...
+logout(): void {
+    this.userSvc.logout().subscribe({
+      next: (res) => {
+        this.cleanStorage();
+      },
+      error: (err) => {
+        console.log(err);
+        this.cleanStorage();
+      },
+    });
+  }
+// ...
+```
+
+.spec.ts
+
+```ts
+describe('custom', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let userSvc: UserService
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [UserService],
+    }).compileComponents();
+    // ...
+    userSvc = TestBed.inject(UserService)
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  })
+  it('logout', () => {
+    spyOn(userSvc, 'logout').and.returnValue(of({}));
+    component.logout()
+    expect(component).toBeTruthy()
+  })
+})
+```
+
+#### 补充测试error的方法
+
+以下是关键代码，返回一个throwError对象
+
+```ts
+spyOn(userSvc, 'logout').and.returnValue(throwError(() => new Error()));
+
+```

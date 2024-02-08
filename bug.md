@@ -551,3 +551,7 @@ ng16 + ng-zorro 开发 ipad 端 H5
 
 **方法**  
 使用flex布局实现  
+
+### patch-package 修改package.json执行命令不能创建命令
+
+npx patch-package some-package --exclude 'nothing'
