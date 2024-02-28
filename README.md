@@ -4,12 +4,12 @@
 
 ## 目录
 
-- [bug](bug.md)
+- [bug](common/bug.md)
 - [React bug](React/bug.md)
 - [typescript bug](typescript/bug.md)
 - [webpack bug](webpack/bug.md)
 
-- [笔记（eg: js、项目）](note.md)
+- [笔记（eg: js、项目）](common/note.md)
 - [计算机网络 笔记](computed-network/note.md)
 - [nodeJS 笔记](node/note.md)
 - [React 笔记](React/node.md)

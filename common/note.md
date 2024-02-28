@@ -1687,3 +1687,27 @@ for...in 遍历的是<font color=#c66>属性</font>
 for...of 适用遍历数/数组对象/字符串/map/set 等拥有迭代器对象（iterator）的集合，但是<font color=#c66>不能遍历对象</font>，因为没有迭代器对象
 
 for...of 遍历的是<font color=#c66>值</font>
+
+# 2024
+
+## w
+
+=d3-0228=
+
+### nuxt2 部署到服务器上，static资源404
+
+**方法**  
+由于nuxt.config.js 配置了 **srcDir: 'src/'**  
+目录结构如下
+![alt text](image-3.png)
+
+nuxt部署需要将 .nuxt, package.json, nuxt.config.js, static 文件夹一起部署到服务器上  
+目录结构如下
+```
+.
+├─ src
+│  └─ static
+├─ nuxt.config.js
+├─ .nuxt
+└─ package.json
+```
