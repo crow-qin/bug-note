@@ -1525,11 +1525,11 @@ VitePress 是一个以 Markdown 为中心的静态网站生成器。你可以使
 
   > $ yarn docs:dev
 
-VitePress 会在 http://localhost:[端口号] 启动一个热重载的开发服务器。
+VitePress 会在 <http://localhost:[端口号>] 启动一个热重载的开发服务器。
 
 基本目录结构如下：
 
-```
+```file
 .
 ├─ docs
 │  ├─ .vitepress
@@ -1642,7 +1642,7 @@ features:
 ---
 ```
 
-#### 效果展示：
+#### 效果展示
 
 **首页**
 
@@ -1655,7 +1655,7 @@ features:
 
 docs 目录的最终结构如下
 
-```
+```file
 .
 ├─ docs
 │  ├─ .vitepress
@@ -1690,7 +1690,7 @@ for...of 遍历的是<font color=#c66>值</font>
 
 # 2024
 
-## w
+## w1
 
 =d3-0228=
 
@@ -1703,7 +1703,9 @@ for...of 遍历的是<font color=#c66>值</font>
 
 nuxt部署需要将 .nuxt, package.json, nuxt.config.js, static 文件夹一起部署到服务器上  
 目录结构如下
-```
+
+```file
+
 .
 ├─ src
 │  └─ static
@@ -1711,3 +1713,46 @@ nuxt部署需要将 .nuxt, package.json, nuxt.config.js, static 文件夹一起�
 ├─ .nuxt
 └─ package.json
 ```
+
+## w2
+
+=d1-0408=
+
+### mac 配置 aws
+
+查看python, pip3是否存在，一般mac默认安装  
+不存在就网上查找教程进行安装
+
+安装 awscli
+> pip3 install awscli --upgrade --user
+
+验证安装。在终端输入以下命令进行验证
+>aws --version
+
+如果出现以下错误 `zsh: command not found: aws`  
+且输入以下命令也出现报错
+>which python
+
+报错 `python not found`
+
+_方法_
+在 ～/.zshrc 文件加上以下内容
+
+```cmd
+#-------------------
+# Python for AWS settings
+#-------------------
+alias python=python3
+MY_PYTHON="/Users/Lex/Library/Python/3.9/bin"
+PATH=$MY_PYTHON:$PATH
+```
+
+保存后执行以下命令
+> source .zshrc
+
+再次执行校验命令可以通过
+
+配置
+> aws configure
+
+您将被要求输入AWS Access Key ID、AWS Secret Access Key、默认AWS Region和输出格式。按照提示输入相应的值并按回车键
