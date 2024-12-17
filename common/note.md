@@ -1756,3 +1756,51 @@ PATH=$MY_PYTHON:$PATH
 > aws configure
 
 您将被要求输入AWS Access Key ID、AWS Secret Access Key、默认AWS Region和输出格式。按照提示输入相应的值并按回车键
+
+## w3
+
+=d1-0515=
+
+### sse 单向推送数据
+
+http 的 text/event-stream 可以实现单向数据推送
+
+在连接存在时，服务器可以一直发送数据到客户端
+
+常见的使用场景如，chatGPT返回的回答是一段一段的返回的
+
+下面是简单的代码实现：  
+后端使用 nestJs
+
+在app.controller.ts 文件下增加
+
+```ts
+@Sse('stream')
+stream() {
+  return  new Observable((observer) => {
+    observer.next({data: {msg: 'first data'}})
+    setTimeout(() => {
+      observer.next({data: {msg: 'second data'}})
+    }, 2000)
+  })
+}
+```
+
+结果：先返回 'first data', 2s后返回'second data'
+
+前端获取数据
+
+```ts
+// nest 端口默认3000
+const eventSource = new EventSource({'http://localhost:3000/stream'})
+eventSource.onmessage = ({data}) => {
+  console.log(JSON.parse(data))
+}
+```
+
+注意  
+当不通过 HTTP/2 使用时，SSE (server-sent events)会受到最大连接数的限制，这在打开多个选项卡时特别麻烦，因为该限制是针对每个浏览器的，并且被设置为一个非常低的数字(6)
+
+```ts
+eventSource.close()
+```
